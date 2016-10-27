@@ -1,0 +1,10 @@
+{
+  "presets": [
+    [
+      "latest",
+      {
+        "modules": false
+      }
+    ]
+  ]
+}

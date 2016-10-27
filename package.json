@@ -1,0 +1,29 @@
+{
+  "name": "UiComponent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "example-dev": "webpack-dev-server --env.dev --config build/webpack.conf.babel.js --inline --hot",
+    "build": "webpack --env.dev --config build/webpack.conf.babel.js -p"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.18.0",
+    "babel-loader": "^6.2.6",
+    "babel-preset-latest": "^6.16.0",
+    "classnames": "^2.2.5",
+    "css-loader": "^0.25.0",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.24.0",
+    "postcss-loader": "^1.0.0",
+    "style-loader": "^0.13.1",
+    "vue": "^2.0.3",
+    "vue-loader": "^9.7.0",
+    "webpack": "^2.1.0-beta.25"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^2.1.0-beta.9"
+  }
+}
