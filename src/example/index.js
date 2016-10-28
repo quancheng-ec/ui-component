@@ -1,7 +1,9 @@
 import Vue from "vue";
-import Demo from "./Demo";
+import Demo from "./DemoApp";
 
 const DemoApp = Vue.extend(Demo);
 
-new DemoApp().$mount(document.getElementById("example"))
+new DemoApp({
+  el: "#example"
+});
 

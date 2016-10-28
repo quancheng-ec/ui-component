@@ -6,7 +6,7 @@
 </template>
 
 <script type="text/babel">
-  import UiButton from "components/Button"
+  import UiButton from "components/UiButton"
 
   export default {
     components:{

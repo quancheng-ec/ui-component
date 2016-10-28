@@ -17,6 +17,10 @@
         type: String,
         default: "Button"
       },
+      icon: {
+        type: String,
+        default: null
+      },
       loading: {
         type: Boolean,
         default: false
@@ -25,20 +29,12 @@
   }
 </script>
 
-<style>
-  .button {
-    padding: 5px 10px;
-    border-width: 1px;
-    border-style: solid;
-    cursor: pointer;
-  }
+<style lang="stylus" rel="stylesheet/stylus">
+  @import "./../styles/variable.styl"
 
-  .button.normal {
-    border-color: #000;
-  }
-
-  .button.danger {
-    border-color: red;
-  }
+  .button
+    font-family basefont
+    &--danger
+      background danger
 </style>
 

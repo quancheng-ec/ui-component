@@ -32,6 +32,10 @@ export default function (options) {
         {
           test: /\.html$/,
           loader: 'html'
+        },
+        {
+          test: /\.styl$/,
+          loader: 'stylus'
         }
       ]
     },
