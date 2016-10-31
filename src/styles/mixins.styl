@@ -1,0 +1,13 @@
+setBasicElementType()
+  for key,value in basicTypes
+    &--{key}
+      background value
+      border-color value
+      &:hover
+        opacity .8
+        &:active
+          background lighten(value,3)
+          border-color lighten(value,3)
+      &:active
+        background darken(value,10)
+        border-color darken(value,10)

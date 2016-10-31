@@ -1,5 +1,7 @@
+import webpack from "webpack";
 import { resolve } from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import autoprefixer from "autoprefixer";
 
 export default function (options) {
   "use strict";
@@ -43,11 +45,17 @@ export default function (options) {
       new HtmlWebpackPlugin({
         title: "UI Demo Example",
         template: "./src/example/example.html"
+      }),
+      new webpack.LoaderOptionsPlugin({
+        vue: {
+          postcss: [autoprefixer("last 3 versions", "> 1%")]
+        }
       })
     ],
     devServer: {
       contentBase: "./src",
-      historyApiFallback: true
+      historyApiFallback: true,
+      port: 4441
     },
     devtool: options.dev ? "cheap-module-eval-source-map" : "hidden-source-map"
   }
