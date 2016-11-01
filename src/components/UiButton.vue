@@ -11,15 +11,11 @@
     props: {
       type: {
         type: [String, Array],
-        default: "normal"
+        default: "default"
       },
       text: {
         type: String,
         default: "Button"
-      },
-      round: {
-        type: Boolean,
-        default: false
       },
       icon: {
         type: String,
@@ -36,7 +32,7 @@
     },
     computed: {
       btnClass(){
-        let btnClasses = "string" === typeof this.type ? this.type.split(" ") : this.type;
+        const btnClasses = "string" === typeof this.type ? this.type.split(" ") : this.type;
         return classNames('button', btnClasses.map(cls => 'button--' + cls));
       }
     }
@@ -62,9 +58,11 @@
     outline none
     setBasicElementType()
     &:active
-      box-shadow inset 0 3px 5px rgba(0,0,0,.125)
+      box-shadow inset 0 3px 5px rgba(0, 0, 0, .125)
     &--block
       display block
       width 100%
+    &--rounded
+      border-radius 5px
 </style>
 

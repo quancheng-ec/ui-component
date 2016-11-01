@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "example-dev": "webpack-dev-server --env.dev --config build/webpack.conf.babel.js --inline --hot",
-    "build": "webpack --config build/webpack.conf.babel.js -p"
+    "example-dev": "webpack-dev-server --env.dev --config config/webpack.conf.babel.js --inline --hot",
+    "build": "webpack --config config/webpack.conf.babel.js -p"
   },
   "author": "",
   "license": "ISC",
