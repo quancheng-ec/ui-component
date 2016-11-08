@@ -6,6 +6,8 @@ import autoprefixer from 'autoprefixer'
 export default function(options) {
   'use strict'
 
+  console.log(options)
+
   return {
     entry: './src/example/index',
     output: {
