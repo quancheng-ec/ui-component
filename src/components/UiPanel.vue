@@ -1,17 +1,17 @@
 <template>
-  <div class="panel">
-    <slot name="header">Panel Header</slot>
-    <div class="panel__body">
-      <slot>Panel Body</slot>
-    </div>
-    <slot name="footer"></slot>
+<div class="panel">
+  <slot name="header">Panel Header</slot>
+  <div class="panel__body">
+    <slot>Panel Body</slot>
   </div>
+  <slot name="footer"></slot>
+</div>
 </template>
 
 <script type="text/babel">
-  export default {
-    props: {}
-  }
+export default {
+  props: {}
+}
 </script>
 
 <style rel="stylesheet/stylus" lang="stylus">

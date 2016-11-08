@@ -1,18 +1,18 @@
 <template>
-  <div class="grid__group grid__group--gutter">
-    <slot></slot>
-  </div>
+<div class="grid__group grid__group--gutter">
+  <slot></slot>
+</div>
 </template>
 
 <script>
-  export default {
-    props: {
-      gutter: {
-        type: Boolean,
-        default: true
-      }
+export default {
+  props: {
+    gutter: {
+      type: Boolean,
+      default: true
     }
   }
+}
 </script>
 
 <style rel="stylesheet/stylus" lang="stylus">

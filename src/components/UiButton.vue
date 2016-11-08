@@ -1,46 +1,45 @@
 <template>
-  <button :class="btnClass">
-    <slot>{{text}}</slot>
-  </button>
+<button :class='btnClass'>
+  <slot>{{text}}</slot>
+</button>
 </template>
 
-<script type="text/babel">
-  import classNames from "classnames"
-
-  export default {
-    props: {
-      type: {
-        type: [String, Array],
-        default: "default"
-      },
-      text: {
-        type: String,
-        default: "Button"
-      },
-      icon: {
-        type: String,
-        default: null
-      },
-      iconPosition: {
-        type: String,
-        default: 'left'
-      },
-      loading: {
-        type: Boolean,
-        default: false
-      }
+<script type='text/babel'>
+import classNames from 'classnames'
+export default {
+  props: {
+    type: {
+      type: [String, Array],
+      default: 'default'
     },
-    computed: {
-      btnClass(){
-        const btnClasses = "string" === typeof this.type ? this.type.split(" ") : this.type;
-        return classNames('button', btnClasses.map(cls => 'button--' + cls));
-      }
+    text: {
+      type: String,
+      default: 'Button'
+    },
+    icon: {
+      type: String,
+      default: null
+    },
+    iconPosition: {
+      type: String,
+      default: 'left'
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    btnClass() {
+      const btnClasses = (typeof this.type === 'string' ? this.type.split(' ') : this.type)
+      return classNames('button', btnClasses.map(cls => 'button--' + cls))
     }
   }
+}
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
-  @import "./../styles/index.styl"
+<style lang='stylus' rel='stylesheet/stylus'>
+  @import './../styles/index.styl'
 
   .button
     font-family basefont
@@ -65,4 +64,3 @@
     &--rounded
       border-radius 5px
 </style>
-

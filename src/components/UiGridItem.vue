@@ -1,11 +1,11 @@
 <template>
-  <div class="grid__item">
-    <slot></slot>
-  </div>
+<div class="grid__item">
+  <slot></slot>
+</div>
 </template>
 
 <script>
-  export default {}
+export default {}
 </script>
 
 <style rel="stylesheet/stylus" lang="stylus">

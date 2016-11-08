@@ -28,27 +28,6 @@
 </template>
 
 <script type="text/babel">
-import UiButton from 'components/UiButton'
-import UiPanel from 'components/UiPanel'
-import UiGridGroup from 'components/UiGridGroup'
-import UiGridItem from 'components/UiGridItem'
-import UiHeading from 'components/UiHeading'
 export default {
-  components: {
-    UiButton,
-    UiPanel,
-    UiGridGroup,
-    UiGridItem,
-    UiHeading
-  }
 }
 </script>
-
-<style rel="stylesheet/stylus" lang="stylus">
-  body
-    margin 0
-    padding 0
-    background #ededed
-  .demo-page
-    padding 25px
-</style>

@@ -2,12 +2,12 @@
   "name": "UiComponent",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "example-dev": "webpack-dev-server --env.dev --config config/webpack.conf.babel.js --inline --hot",
     "build": "webpack --config config/webpack.conf.babel.js -p"
   },
-  "author": "",
+  "author": "zephyr",
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^6.5.1",
@@ -24,10 +24,17 @@
     "stylus-loader": "^2.3.1",
     "vue": "^2.0.3",
     "vue-loader": "^9.7.0",
+    "vue-router": "^2.0.1",
     "webpack": "^2.1.0-beta.25"
   },
   "devDependencies": {
-    "eslint": "^3.8.1",
+    "eslint": "^3.9.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-config-vue": "^2.0.0",
+    "eslint-plugin-html": "^1.6.0",
+    "eslint-plugin-promise": "^3.3.1",
+    "eslint-plugin-standard": "^2.0.1",
+    "eslint-plugin-vue": "^1.0.0",
     "webpack-dev-server": "^2.1.0-beta.9"
   }
 }
