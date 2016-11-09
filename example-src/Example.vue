@@ -12,10 +12,13 @@
 </template>
 
 <script>
+import {
+  pages
+} from './pages'
 export default {
   data() {
     return {
-      navList: ['button', 'panel']
+      navList: pages
     }
   }
 }
@@ -28,7 +31,7 @@ export default {
     height 100%
     &-sidebar
       height 100%
-      flex 0 1 240px
+      flex 0 0 200px
       flex-direction column
       display flex
       background #4c5667

@@ -18,7 +18,6 @@ export default {
 <style rel="stylesheet/stylus" lang="stylus">
   .grid__group
     display flex
-    padding 5px 0
     &--gutter
       .grid__item:not(:last-child)
         margin-right 8px

@@ -1,10 +1,11 @@
 <template>
 <div class="demo-page">
+  <ui-heading :level="1">UIButton</ui-heading>
   <ui-panel>
     <div class="panel__heading" slot="header">
-      按钮组件
+      Button
     </div>
-    <ui-heading :level="3">常规按钮</ui-heading>
+    常规按钮
     <ui-grid-group>
       <ui-grid-item v-for="type in ['primary','success','danger','warning','info']">
         <ui-button :type="[type,'block']">
@@ -12,7 +13,7 @@
         </ui-button>
       </ui-grid-item>
     </ui-grid-group>
-    <ui-heading :level="3">圆角按钮</ui-heading>
+    圆角按钮
     <ui-grid-group>
       <ui-grid-item v-for="type in ['primary','success','danger','warning','info']">
         <ui-button :type="[type,'block','rounded']">
@@ -25,6 +26,5 @@
 </template>
 
 <script type="text/babel">
-export default {
-}
+export default {}
 </script>

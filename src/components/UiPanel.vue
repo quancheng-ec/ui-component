@@ -1,6 +1,6 @@
 <template>
 <div class="panel">
-  <slot name="header">Panel Header</slot>
+  <slot name="header"></slot>
   <div class="panel__body">
     <slot>Panel Body</slot>
   </div>
