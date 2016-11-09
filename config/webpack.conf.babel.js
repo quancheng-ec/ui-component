@@ -6,10 +6,10 @@ import autoprefixer from 'autoprefixer'
 export default function(options) {
   'use strict'
 
-  console.log(options)
+  const { dev, example } = options
 
   return {
-    entry: './src/example/index',
+    entry: example ? './example-src/index' : './src/example/index',
     output: {
       path: resolve(__dirname, './../dist'),
       publicPath: '/',
@@ -39,12 +39,12 @@ export default function(options) {
           loader: 'html'
         }, {
           test: /\.styl$/,
-          loader: 'stylus'
+          loader: 'style!css!postcss!stylus'
         }
       ]
     },
     plugins: [
-      new HtmlWebpackPlugin({ title: 'UI Demo Example', template: './src/example/example.html' }),
+      new HtmlWebpackPlugin({ title: 'UI Demo Example', template: './example-src/index.html' }),
       new webpack.LoaderOptionsPlugin({
         vue: {
           postcss: [autoprefixer('last 3 versions', '> 1%')]
@@ -52,11 +52,11 @@ export default function(options) {
       })
     ],
     devServer: {
-      contentBase: './src',
+      contentBase: './example-src',
       historyApiFallback: true,
       port: 4441
     },
-    devtool: options.dev
+    devtool: dev
       ? 'cheap-module-eval-source-map'
       : 'hidden-source-map'
   }

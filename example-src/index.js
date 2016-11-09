@@ -1,28 +1,30 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Demo from './DemoApp'
+import Example from './Example'
+import QCUI from './../src/components'
+
+import './assets/style.styl'
 
 Vue.use(VueRouter)
+Vue.use(QCUI)
 
-function dynamicLoadPage(to, from, next) {
-  console.log(to)
+function requireAll(requireContext) {
+  return requireContext.keys().map(mod => ({ path: getPath(mod), component: requireContext(mod) }))
 }
+
+function getPath(module) {
+  return '/' + module.replace(/(\.\/)|(\.vue)/g, '')
+}
+
+const pages = requireAll(require.context('./pages', false, /\.vue$/))
 
 const router = new VueRouter({
   mode: 'history',
-  base: __dirname,
-  routes: [
-    {
-      path: '/'
-    }, {
-      path: '/*',
-      beforeEnter: dynamicLoadPage
-    }
-  ]
+  routes: pages
 })
 
 new Vue({
   el: '#example',
   router,
-  render: h => h(Demo)
+  render: h => h(Example)
 })
