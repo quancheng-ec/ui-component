@@ -22,3 +22,4 @@ export default {
       .grid__item:not(:last-child)
         margin-right 8px
 </style>
+Index.vue

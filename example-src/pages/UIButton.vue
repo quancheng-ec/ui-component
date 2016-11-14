@@ -26,5 +26,10 @@
 </template>
 
 <script type="text/babel">
-export default {}
+export default {
+  pageConfig: {
+    name: '按钮',
+    sidebar: false
+  }
+}
 </script>

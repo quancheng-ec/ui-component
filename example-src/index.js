@@ -9,6 +9,8 @@ import './assets/style.styl'
 Vue.use(VueRouter)
 Vue.use(QCUI)
 
+routeConfig.unshift({ path: '/', redirect: '/Index' })
+
 const router = new VueRouter({
   mode: 'history',
   routes: routeConfig

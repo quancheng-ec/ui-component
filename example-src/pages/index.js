@@ -2,9 +2,11 @@ function requireAll(requireContext) {
   return function(type) {
     return requireContext.keys().map(mod => {
       if (type === 'router') {
+        const modContent = requireContext(mod)
         return {
           path: '/' + getPath(mod),
-          component: requireContext(mod)
+          component: modContent,
+          meta: modContent.routeConfig
         }
       }
       return getPath(mod)
