@@ -8,6 +8,8 @@ export default {
   UiButton,
   UiGridGroup,
   UiGridItem,
+  UiHeading,
+  UiPanel,
   install(Vue) {
     Vue.component('UiButton', UiButton)
     Vue.component('UiGridGroup', UiGridGroup)
