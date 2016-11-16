@@ -28,9 +28,3 @@ export default {
   }
 }
 </script>
-
-<style rel="stylesheet/stylus" lang="stylus">
-.heading
-  padding 5px 10px
-  margin 0 0 10px 0
-</style>

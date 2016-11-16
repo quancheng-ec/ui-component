@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Example from './Example'
-import QCUI from './../src/components'
+import QCUI from './../src'
 import { routeConfig } from './pages'
 
 import './assets/style.styl'

@@ -329,6 +329,10 @@ babel-helper-replace-supers@^6.18.0, babel-helper-replace-supers@^6.8.0:
     babel-traverse "^6.18.0"
     babel-types "^6.18.0"
 
+babel-helper-vue-jsx-merge-props:
+  version "2.0.2"
+  resolved "http://repo.quancheng-ec.com/repository/npm-public/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-2.0.2.tgz#aceb1c373588279e2755ea1cfd35c22394fd33f8"
+
 babel-helpers@^6.16.0:
   version "6.16.0"
   resolved "https://registry.yarnpkg.com/babel-helpers/-/babel-helpers-6.16.0.tgz#1095ec10d99279460553e67eb3eee9973d3867e3"
@@ -364,6 +368,10 @@ babel-plugin-syntax-async-functions@^6.8.0:
 babel-plugin-syntax-exponentiation-operator@^6.8.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-exponentiation-operator/-/babel-plugin-syntax-exponentiation-operator-6.13.0.tgz#9ee7e8337290da95288201a6a57f4170317830de"
+
+babel-plugin-syntax-jsx:
+  version "6.18.0"
+  resolved "http://repo.quancheng-ec.com/repository/npm-public/babel-plugin-syntax-jsx/-/babel-plugin-syntax-jsx-6.18.0.tgz#0af32a9a6e13ca7a3fd5069e62d7b0f58d0d8946"
 
 babel-plugin-syntax-trailing-function-commas@^6.8.0:
   version "6.13.0"
@@ -569,6 +577,12 @@ babel-plugin-transform-strict-mode@^6.18.0:
     babel-runtime "^6.0.0"
     babel-types "^6.18.0"
 
+babel-plugin-transform-vue-jsx:
+  version "3.1.2"
+  resolved "http://repo.quancheng-ec.com/repository/npm-public/babel-plugin-transform-vue-jsx/-/babel-plugin-transform-vue-jsx-3.1.2.tgz#6255d561ff93d9ea8cfeb781da17280a5ca77bb5"
+  dependencies:
+    esutils "^2.0.2"
+
 babel-preset-es2015@^6.16.0:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babel-preset-es2015/-/babel-preset-es2015-6.18.0.tgz#b8c70df84ec948c43dcf2bf770e988eb7da88312"
@@ -732,6 +746,10 @@ boom@2.x.x:
   resolved "https://registry.yarnpkg.com/boom/-/boom-2.10.1.tgz#39c8918ceff5799f83f9492a848f625add0c766f"
   dependencies:
     hoek "2.x.x"
+
+bootstrap:
+  version "3.3.7"
+  resolved "http://repo.quancheng-ec.com/repository/npm-public/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
 
 brace-expansion@^1.0.0:
   version "1.1.6"
@@ -1821,6 +1839,12 @@ file-entry-cache@^2.0.0:
     flat-cache "^1.2.1"
     object-assign "^4.0.1"
 
+file-loader:
+  version "0.9.0"
+  resolved "http://repo.quancheng-ec.com/repository/npm-public/file-loader/-/file-loader-0.9.0.tgz#1d2daddd424ce6d1b07cfe3f79731bed3617ab42"
+  dependencies:
+    loader-utils "~0.2.5"
+
 filename-regex@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.0.tgz#996e3e80479b98b9897f15a8a58b3d084e926775"
@@ -2596,7 +2620,7 @@ loader-runner@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.2.0.tgz#824c1b699c4e7a2b6501b85902d5b862bf45b3fa"
 
-loader-utils@^0.2.10, loader-utils@^0.2.11, loader-utils@^0.2.15, loader-utils@^0.2.16, loader-utils@^0.2.7, loader-utils@^0.2.9, loader-utils@~0.2.2:
+loader-utils@^0.2.10, loader-utils@^0.2.11, loader-utils@^0.2.15, loader-utils@^0.2.16, loader-utils@^0.2.7, loader-utils@^0.2.9, loader-utils@~0.2.2, loader-utils@~0.2.5, loader-utils@0.2.x:
   version "0.2.16"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-0.2.16.tgz#f08632066ed8282835dff88dfb52704765adee6d"
   dependencies:
@@ -2746,6 +2770,10 @@ mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.7:
 mime@^1.3.4, mime@1.3.4:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.3.4.tgz#115f9e3b6b3daf2959983cb38f149a2d40eb5d53"
+
+mime@1.2.x:
+  version "1.2.11"
+  resolved "http://repo.quancheng-ec.com/repository/npm-public/mime/-/mime-1.2.11.tgz#58203eed86e3a5ef17aed2b7d9ebd47f0a60dd10"
 
 minimalistic-assert@^1.0.0:
   version "1.0.0"
@@ -4224,6 +4252,13 @@ upper-case-first@^1.1.0, upper-case-first@^1.1.2:
 upper-case@^1.0.3, upper-case@^1.1.0, upper-case@^1.1.1, upper-case@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/upper-case/-/upper-case-1.1.3.tgz#f6b4501c2ec4cdd26ba78be7222961de77621598"
+
+url-loader:
+  version "0.5.7"
+  resolved "http://repo.quancheng-ec.com/repository/npm-public/url-loader/-/url-loader-0.5.7.tgz#67e8779759f8000da74994906680c943a9b0925d"
+  dependencies:
+    loader-utils "0.2.x"
+    mime "1.2.x"
 
 url-parse@^1.1.1:
   version "1.1.7"

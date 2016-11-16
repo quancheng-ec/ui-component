@@ -3,13 +3,11 @@ import { resolve } from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 
-export default function(options) {
-  'use strict'
-
+export default function(options = {}) {
   const { dev, example } = options
 
   return {
-    entry: example ? './example-src/index' : './src/example/index',
+    entry: example ? './example-src/index' : './src/index',
     output: {
       path: resolve(__dirname, './../dist'),
       publicPath: '/',
@@ -28,18 +26,32 @@ export default function(options) {
       rules: [
         {
           test: /\.vue$/,
-          loader: 'vue',
+          loader: 'vue-loader',
           options: {
             loaders: {
-              js: 'babel'
+              js: 'babel-loader'
             }
           }
         }, {
           test: /\.html$/,
-          loader: 'html'
+          loader: 'html-loader'
+        }, {
+          test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+          loader: 'url-loader',
+          query: {
+            limit: 1000,
+            name: '[name].[ext]?[hash]'
+          }
         }, {
           test: /\.styl$/,
-          loader: 'style!css!postcss!stylus'
+          loader: 'style-loader!css-loader!postcss-loader!stylus-loader'
+        }, {
+          test: /\.css$/,
+          loader: 'style-loader!css-loader!postcss-loader'
+        }, {
+          test: /\.js$/,
+          loader: 'babel-loader',
+          exclude: /node_modules/
         }
       ]
     },
