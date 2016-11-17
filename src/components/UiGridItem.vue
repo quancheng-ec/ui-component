@@ -1,9 +1,25 @@
 <template>
-<div class="grid__item">
-  <slot></slot>
-</div>
+    <div :class="itemClass">
+        <slot></slot>
+    </div>
 </template>
 
 <script>
-export default {}
+  export default {
+    props: {
+      space: {
+        type: [String, Number],
+        required: true
+      },
+      offset: {
+        type: [String, Number],
+        default: 0
+      }
+    },
+    computed: {
+      itemClass(){
+        return 'col-sm-' + this.space
+      }
+    }
+  }
 </script>
