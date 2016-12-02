@@ -64,7 +64,6 @@ export default function(options = {}) {
       })
     ],
     devServer: {
-      host:'10.100.0.160',
       contentBase: './example-src',
       historyApiFallback: true,
       port: 4441
