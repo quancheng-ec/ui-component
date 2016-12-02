@@ -3,15 +3,17 @@
         <div class="cell__stage clearfix">
 
             <div class="pull-left">
-                <div>
-                    <span class="icon-pic" :class="iconClass" v-if="icon"></span>
-                    <slot>{{title}}</slot>
+                <div class="cell-center">
+                    <div>
+                        <span class="icon-pic" :class="iconClass" v-if="icon"></span>
+                        <slot>{{title}}</slot>
+                    </div>
+                    <div class="text-muted">{{subTitle}}</div>
                 </div>
-                <div class="text-muted">{{subTitle}}</div>
             </div>
 
             <div class="pull-right">
-                <span class="pull-right" :class="fontColor">{{rightText}}</span>
+                <span class="pull-right text-r" :class="fontColor">{{rightText}}</span>
                 <span class="fa fa-angle-right icon-r" v-if="arrow"></span>
             </div>
 
@@ -28,6 +30,10 @@
 				type: [String, Array],
 				default: 'default'
 			},
+      photo: {
+	      type: String,
+	      default: null
+      },
 			icon: {
 				type: String,
 				default: null
@@ -66,17 +72,28 @@
 
 <style lang='stylus' rel='stylesheet/stylus'>
     .cell__stage
-        border-top 1px #d9d9d9 solid
-        border-bottom 1px #d9d9d9 solid
-        padding 10px 15px
-        margin-bottom 10px
-        position relative
-        .icon-pic
-            padding-right 5px
-        .icon-r
-            position absolute
-            right 10px
-            top 50%
-            transform translateY(-50%)
-            padding-left 10px
+      border-top 1px #d9d9d9 solid
+      border-bottom 1px #d9d9d9 solid
+      margin-bottom 10px
+      padding 15px
+      min-height 50px
+      position relative
+      .cell-center
+        position absolute
+        left 0
+        top 50%
+        transform translateY(-50%)
+      .icon-pic
+        padding-right 5px
+      .icon-r
+        position absolute
+        right 10px
+        top 50%
+        transform translateY(-50%)
+        padding-left 10px
+      .text-r
+        position absolute
+        right 25px
+        top 50%
+        transform translateY(-50%)
 </style>
