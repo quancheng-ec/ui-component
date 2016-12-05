@@ -1,8 +1,8 @@
 {
-  "name": "UiComponent",
-  "version": "1.0.0",
+  "name": "qc-ui-component",
+  "version": "0.0.2",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/main.js",
   "scripts": {
     "example-dev": "webpack-dev-server --env.dev --env.example --config config/webpack.conf.babel.js --inline --hot",
     "build": "webpack --config config/webpack.conf.babel.js -p"
@@ -24,6 +24,7 @@
     "highlight.js": "^9.8.0",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.24.0",
+    "isomorphic-style-loader": "^1.1.0",
     "postcss-loader": "^1.1.0",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",

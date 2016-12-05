@@ -44,10 +44,10 @@ export default function(options = {}) {
           }
         }, {
           test: /\.styl$/,
-          loader: 'style-loader!css-loader!postcss-loader!stylus-loader'
+          loader: 'isomorphic-style-loader!css-loader!postcss-loader!stylus-loader'
         }, {
           test: /\.css$/,
-          loader: 'style-loader!css-loader!postcss-loader'
+          loader: 'isomorphic-style-loader!css-loader!postcss-loader'
         }, {
           test: /\.js$/,
           loader: 'babel-loader',
