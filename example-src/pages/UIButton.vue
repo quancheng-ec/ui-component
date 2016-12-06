@@ -88,8 +88,6 @@
     },
     methods: {
       alertMsg(msg){
-        console.log(msg)
-        window.alert(msg)
       }
     }
   }

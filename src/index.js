@@ -8,9 +8,8 @@ import UiPanel from './components/UiPanel.vue'
 import UiCell from './components/UiCell.vue'
 import UiTable from './components/UiTable.vue'
 import UiInfo from './components/UiInfo.vue'
-import UiModal from './components/UiModal.vue'
 
-export default {
+const QCUI = {
   UiButton,
   UiGridGroup,
   UiGridItem,
@@ -19,8 +18,7 @@ export default {
   UiCell,
   UiTable,
   UiInfo,
-  UiModal,
-  'install'(Vue) {
+  install(Vue) {
     Vue.component('UiButton', UiButton)
     Vue.component('UiGridGroup', UiGridGroup)
     Vue.component('UiGridItem', UiGridItem)
@@ -29,6 +27,7 @@ export default {
     Vue.component('UiCell', UiCell)
     Vue.component('UiTable', UiTable)
     Vue.component('UiInfo', UiInfo)
-    Vue.component('UiModal', UiModal)
   }
 }
+
+module.exports = QCUI
