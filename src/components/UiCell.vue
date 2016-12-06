@@ -1,6 +1,6 @@
 <template>
     <div class="cellclass">
-        <div class="cell__stage clearfix">
+        <div class="cell__stage clearfix" @click="onClick">
 
             <div class="pull-left">
                 <div class="cell-center">
@@ -57,6 +57,10 @@
 				type: String,
 				default: 'text-muted'
 			},
+			onClick: {
+				type: Function,
+				default: function(){}
+      }
 		},
 		computed: {
 			iconClass(){
@@ -65,7 +69,7 @@
 			fontColor(){
 				return classNames('text-' + this.color)
 			}
-		},
+		}
 	}
 </script>
 

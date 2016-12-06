@@ -6,7 +6,7 @@
         Default cell
       </div>
       <ui-cell
-        icon="smile-o"
+        :icon="icon"
         title="Notifications"
         right-text="Enable"
         color="primary"
@@ -15,6 +15,7 @@
         title="Notifications"
         sub-title="isLink is set to true when link exists"
         arrow
+        :on-click="handleClick"
       ></ui-cell>
     </ui-panel>
   </div>
@@ -25,6 +26,16 @@
 <script type="text/babel">
 
 	export default {
+		data(){
+			return {
+				icon:'smile-o'
+      }
+    },
+    methods:{
+			handleClick(){
+				alert(1)
+      }
+    }
 
 	}
 
