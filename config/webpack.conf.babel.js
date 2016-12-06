@@ -2,6 +2,7 @@ import webpack from 'webpack'
 import { resolve } from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 export default function(options = {}) {
   const { dev, example } = options
@@ -11,7 +12,9 @@ export default function(options = {}) {
     output: {
       path: resolve(__dirname, './../dist'),
       publicPath: '/',
-      filename: '[name].js'
+      filename: '[name].js',
+      library: 'QCUI',
+      libraryTarget: 'umd'
     },
     resolve: {
       extensions: [
@@ -29,6 +32,14 @@ export default function(options = {}) {
           loader: 'vue-loader',
           options: {
             loaders: {
+              css: ExtractTextPlugin.extract({
+                loader: 'css-loader',
+                fallbackLoader: 'vue-style-loader'
+              }),
+              stylus: ExtractTextPlugin.extract({
+                loader: 'css-loader!stylus-loader',
+                fallbackLoader: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
+              }),
               js: 'babel-loader'
             }
           }
@@ -44,10 +55,16 @@ export default function(options = {}) {
           }
         }, {
           test: /\.styl$/,
-          loader: 'isomorphic-style-loader!css-loader!postcss-loader!stylus-loader'
+          loader: ExtractTextPlugin.extract({
+            fallbackLoader: 'style-loader',
+            loader: 'css-loader!postcss-loader!stylus-loader'
+          })
         }, {
           test: /\.css$/,
-          loader: 'isomorphic-style-loader!css-loader!postcss-loader'
+          loader: ExtractTextPlugin.extract({
+            fallbackLoader: 'style-loader',
+            loader: 'css-loader!postcss-loader'
+          })
         }, {
           test: /\.js$/,
           loader: 'babel-loader',
@@ -56,6 +73,7 @@ export default function(options = {}) {
       ]
     },
     plugins: [
+      new ExtractTextPlugin('[name].style.css'),
       new HtmlWebpackPlugin({ title: 'UI Demo Example', template: './example-src/index.html' }),
       new webpack.LoaderOptionsPlugin({
         vue: {
