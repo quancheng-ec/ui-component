@@ -50,7 +50,7 @@
 		},
 		methods: {
 			closeModal(){
-				this.show=false;
+				this.$emit('uiModelClose')
 			}
 		},
 		computed: {
@@ -84,7 +84,7 @@
       position absolute
       top 50%
       left 50%
-      transform: translate(-50%);
+      transform:translate(-50%,-50%);
       &.modal-lg
         width 900px
       &.modal-sm

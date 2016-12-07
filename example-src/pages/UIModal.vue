@@ -11,8 +11,9 @@
       <ui-modal
         title="我是标题"
         :show="show"
+        @uiModelClose="closeModal"
         showCloseButton
-        size="lg"
+        size="sm"
       >
       <div slot="content">我是内容</div>
       <div slot="foot-btn">
