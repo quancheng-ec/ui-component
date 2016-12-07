@@ -3,13 +3,11 @@
         <div class="cell__stage clearfix" @click="onClick">
 
             <div class="pull-left">
-                <div class="cell-center">
-                    <div>
-                        <span class="icon-pic" :class="iconClass" v-if="icon"></span>
-                        <slot>{{title}}</slot>
-                    </div>
-                    <div class="text-muted">{{subTitle}}</div>
+                <div>
+                    <span class="icon-pic" :class="iconClass" v-if="icon"></span>
+                    <slot>{{title}}</slot>
                 </div>
+                <div class="text-muted">{{subTitle}}</div>
             </div>
 
             <div class="pull-right">
@@ -26,14 +24,6 @@
 	import classNames from 'classnames'
 	export default {
 		props: {
-			type: {
-				type: [String, Array],
-				default: 'default'
-			},
-      photo: {
-	      type: String,
-	      default: null
-      },
 			icon: {
 				type: String,
 				default: null
@@ -82,11 +72,6 @@
       padding 15px
       min-height 50px
       position relative
-      .cell-center
-        position absolute
-        left 0
-        top 50%
-        transform translateY(-50%)
       .icon-pic
         padding-right 5px
       .icon-r
