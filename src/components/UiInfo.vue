@@ -3,7 +3,22 @@
 
         <span class="pull-left icon-pic" :class="iconClass" v-if="icon"></span>
 
-        <span class="pull-left info-text">{{infoText}}</span>
+        <span class="pull-left info-text">
+          <span v-if="infoText"></span>
+          <slot v-else>{{infoText}}</slot>
+        </span>
+
+        <ui-info
+
+        icon="person"
+
+        info-text="this is a info"
+
+        >
+
+          xxxxxxxxxx
+
+        </ui-info>
 
     </div>
 </template>
@@ -12,10 +27,6 @@
 	import classNames from 'classnames'
 	export default {
 		props: {
-			type: {
-				type: [String, Array],
-				default: 'default'
-			},
 			icon: {
 				type: String,
 				default: null
@@ -27,8 +38,9 @@
 		computed: {
 			iconClass(){
 				return classNames('fa', 'fa-' + this.icon)
+        // fa fa-person
 			}
-		},
+		}
 	}
 </script>
 
