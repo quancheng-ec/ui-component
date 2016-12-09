@@ -1,15 +1,23 @@
 <template>
-  <div>
-    <form class="form-horizontal">
-      <slot></slot>
-    </form>
-  </div>
+<div>
+  <form :class="formClass">
+    <slot></slot>
+  </form>
+</div>
 </template>
 
 <script>
-  export default {
-    props: {
-
+export default {
+  props: {
+    horizontal: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    formClass() {
+      return this.horizontal ? 'form-horizontal' : 'form'
     }
   }
+}
 </script>

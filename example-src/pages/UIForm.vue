@@ -1,33 +1,37 @@
 <template>
-<div class="">
-  <ui-panel>
-    <ui-form>
-      <ui-text-box label="textbox" v-model="form.input.value" validation-rules="form.input.validation">
-      </ui-text-box>
+<div>
+  <ui-grid-group>
+    <ui-grid-item :space="6" v-for="isHorizontal in [false,true]">
+      <ui-panel>
+        <ui-form :horizontal="isHorizontal">
+          <ui-text-box label="textbox" v-model="form.input.value" validation-rules="form.input.validation">
+          </ui-text-box>
 
-      <ui-text-box label="textbox-with-addon" v-model="form.input.value" validation-rules="form.input.validation">
-        <div slot="addon">
-          选择日期
-        </div>
-      </ui-text-box>
-      <ui-text-box label="textarea" multi-line v-model="form.textarea.value" validation-rules="form.textarea.validation">
-      </ui-text-box>
+          <ui-text-box label="textbox-with-addon" v-model="form.input.value" validation-rules="form.input.validation">
+            <div slot="addon">
+              选择日期
+            </div>
+          </ui-text-box>
+          <ui-text-box label="textarea" multi-line v-model="form.textarea.value" validation-rules="form.textarea.validation">
+          </ui-text-box>
 
-      <ui-select label="select" :options="form.select.options" v-model="form.select.value" validation-rules="form.select.validation">
-      </ui-select>
+          <ui-select label="select" :options="form.select.options" v-model="form.select.value" validation-rules="form.select.validation">
+          </ui-select>
 
 
-      <ui-select label="select-with-addon" :options="form.select.options" v-model="form.select.value" validation-rules="form.select.validation">
-        <div slot="addon">
-          选择一项
-        </div>
-      </ui-select>
+          <ui-select label="select-with-addon" :options="form.select.options" v-model="form.select.value" validation-rules="form.select.validation">
+            <div slot="addon">
+              选择一项
+            </div>
+          </ui-select>
 
-      <code>
-        {{form}}
-      </code>
-    </ui-form>
-  </ui-panel>
+          <code>
+            {{form}}
+          </code>
+        </ui-form>
+      </ui-panel>
+    </ui-grid-item>
+  </ui-grid-group>
 </div>
 </template>
 
