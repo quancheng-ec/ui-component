@@ -1,5 +1,5 @@
 <template>
-<button :class='btnClass' :disabled="disabled" @click="onClick">
+<button :class='btnClass' :disabled="disabled" @click.prevent="clickHandler">
   <i v-if="icon && iconPosition == 'left'" :class="iconClass"></i>
   <span v-if="!circle">
     <slot>{{text}}</slot>
@@ -42,7 +42,7 @@ export default {
     },
     onClick: {
       type: Function,
-      default() {}
+      default () {}
     }
   },
   computed: {
@@ -55,6 +55,11 @@ export default {
     },
     iconClass() {
       return classNames('fa', 'fa-' + this.icon)
+    }
+  },
+  methods: {
+    clickHandler() {
+      this.onClick()
     }
   }
 }

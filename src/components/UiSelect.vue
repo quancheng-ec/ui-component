@@ -6,7 +6,7 @@
       <slot name="addon"></slot>
     </span>
     <select class="form-control" ref="select" :value="value" @input="updateValue($event.target.value)">
-      <option v-for="option in options" :value="option.value">
+      <option v-for="option in options" :value="option.value" :disabled="option.disabled">
         {{option.text}}
       </option>
     </select>
