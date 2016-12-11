@@ -6909,6 +6909,16 @@ button.close {
   background: #fff;
 }
 
+.form-control.diseditabled {
+  border: 1px solid transparent;
+  position: relative;
+}
+.form-control.diseditabled .editable-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 
 
 
