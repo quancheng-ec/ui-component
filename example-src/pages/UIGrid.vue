@@ -36,12 +36,12 @@
 			  orderList: {
 				  schema: {
 					  name: '参数',
-					  description: '描述',
+					  description: '描述'
 				  },
 				  values: [
 					  {
 						  name: 'space',
-						  description: '一行分成12个栅格，想要分成几部分，就用12除即可，例如，想分成两部分，那么space="6"。',
+						  description: '一行分成12个栅格，想要分成几部分，就用12除即可，例如，想分成两部分，那么space="6"。'
 					  }
 				  ]
 			  }
