@@ -7,7 +7,7 @@
           <ui-text-box :editable="false" :placeholder="form.input.placeholder" label="textbox" v-model="form.input.value" validation-rules="form.input.validationRules">
           </ui-text-box>
 
-          <ui-text-box :placeholder="form.input.placeholder" label="textbox-with-addon" v-model="form.input.value" validation-rules="form.input.validationRules">
+          <ui-text-box :editable="false" :placeholder="form.input.placeholder" label="textbox-with-addon" v-model="form.input.value" validation-rules="form.input.validationRules">
             <div slot="addon">
               选择日期
             </div>
