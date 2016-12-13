@@ -21,35 +21,19 @@
     	return {
 		    orderList: {
 			    schema: {
-				    id: '#',
-				    firstName: '名字',
-				    lastName: '姓',
-				    username: '用户名',
-				    role: '角色',
-            status: '状态'
+				    name: '参数',
+				    description: '描述',
+				    type: '类型',
+				    Default: '默认值',
+				    note: '备注'
 			    },
-
 			    values: [
 				    {
-					    id: '1',
-					    firstName: 'Deshmukh',
-					    lastName: 'Hickle',
-					    username: '@Maruti',
-					    role: '会员',
-				    },
-				    {
-					    id: '2',
-					    firstName: 'Deshmukh',
-					    lastName: 'PROHASKA',
-					    username: '@Genelia',
-					    role: '管理员'
-				    },
-            {
-					    id: '3',
-					    firstName: 'Sanghani',
-					    lastName: 'Gusikowski',
-					    username: '@Govinda',
-					    role: '会员'
+					    name: 'type',
+					    description: '类型',
+					    type: '[String, Array]',
+					    Default: 'null',
+					    note: 'bordered:带边框,striped:间隔行带背景色,hover:鼠标悬浮时带背景色'
 				    }
 			    ]
 		    }

@@ -12,10 +12,6 @@
 	import classNames from 'classnames'
 	export default {
 		props: {
-			type: {
-				type: [String, Array],
-				default: 'default'
-			},
 			icon: {
 				type: String,
 				default: null
