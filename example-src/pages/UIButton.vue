@@ -74,6 +74,8 @@
                 </ui-panel>
             </ui-grid-item>
         </ui-grid-group>
+
+        <ui-panel><ui-table :order-list="orderList" type="bordered striped"></ui-table></ui-panel>
     </div>
 </template>
 
@@ -83,7 +85,56 @@
   export default {
     data(){
       return {
-        btnTypes
+        btnTypes,
+        orderList: {
+		    schema: {
+			    name: '参数',
+				    description: '描述',
+				    type: '类型',
+				    Default: '默认值',
+				    note: '备注'
+		    },
+		    values: [
+			    {
+				    name: 'type',
+				    description: '类型',
+				    type: '[String, Array]',
+				    Default: 'default',
+				    note: 'rounded:圆角,outline:描边,btn-block:填充'
+			    },
+			    {
+				    name: 'circle',
+				    description: '圆形按钮',
+				    type: 'Boolean',
+				    Default: 'false',
+			    },
+			    {
+				    name: 'text',
+				    description: '按钮的文本',
+				    type: 'String',
+				    Default: 'Button',
+			    },
+			    {
+				    name: 'disabled',
+				    description: '禁用，不可点',
+				    type: 'Boolean',
+				    Default: 'false',
+			    },
+			    {
+				    name: 'icon',
+				    description: '按钮的图标',
+				    type: 'String',
+				    Default: 'null',
+			    },
+			    {
+				    name: 'iconPosition',
+				    description: '图标的位置',
+				    type: 'String',
+				    Default: 'left',
+				    note: 'left:靠左,right:靠右'
+			    }
+		    ]
+	    }
       }
     },
     methods: {
