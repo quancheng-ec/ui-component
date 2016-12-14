@@ -4,15 +4,24 @@
 
             <div class="pull-left">
                 <div>
-                    <span class="icon-pic" :class="iconClass" v-if="icon"></span>
-                    <slot>{{title}}</slot>
+                    <slot name="leftUpper">
+                        <span class="icon-pic" :class="iconClass" v-if="icon"></span>
+                        {{title}}
+                    </slot>
                 </div>
-                <div class="text-muted">{{subTitle}}</div>
+                <div>
+                    <slot name="leftButtom">
+                        <div class="text-muted">{{subTitle}}</div>
+                    </slot>
+                </div>
             </div>
 
             <div class="pull-right">
-                <span class="pull-right text-r" :class="fontColor">{{rightText}}</span>
-                <span class="fa fa-angle-right icon-r" v-if="arrow"></span>
+                <slot name="right">
+                    <span class="pull-right text-r" :class="fontColor">{{rightText}}</span>
+                    <span class="fa fa-angle-right icon-r" v-if="arrow"></span>
+                </slot>
+
             </div>
 
         </div>
