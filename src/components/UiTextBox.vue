@@ -2,18 +2,18 @@
   <div class="form-group">
     <label v-if="label">{{label}}</label>
 
-      <div :class="{'input-group':$slots.addon}">
+    <div :class="{'input-group':$slots.addon}">
         <span class="input-group-addon" v-if="$slots.addon">
           <slot name="addon"></slot>
         </span>
-        <input v-if="!multiLine" class="form-control" :readonly="readonly" :disabled="disabled"
-               :placeholder="placeHolder" ref="input"
-               :type="type" :value="value"
-        />
-        <textarea v-else class="form-control" :readonly="readonly" :disabled="disabled" :placeholder="placeHolder"
-                  ref="input" :value="value" @input="updateValue($event.target.value)">
+      <input v-if="!multiLine" class="form-control" :class="inputSize" :readonly="readonly" :disabled="disabled"
+             :placeholder="placeHolder" ref="input"
+             :type="type" :value="value"
+      />
+      <textarea v-else class="form-control" :readonly="readonly" :disabled="disabled" :placeholder="placeHolder"
+                ref="input" :value="value" @input="updateValue($event.target.value)">
         </textarea>
-      </div>
+    </div>
   </div>
 </template>
 
@@ -23,6 +23,9 @@
     mixins: [formElementMixin],
     props: {
       label: {
+        type: String
+      },
+      size: {
         type: String
       },
       placeHolder: {
@@ -46,6 +49,11 @@
       disabled: {
         type: Boolean,
         default: false
+      }
+    },
+    computed: {
+      inputSize(){
+        return this.size ? 'input-' + this.size : ''
       }
     }
   }
