@@ -50,18 +50,6 @@
         type: Boolean,
         default: false
       }
-    },
-    computed: {
-      inputSize(){
-        return this.size ? 'input-' + this.size : ''
-      },
-      fontSize(){
-        if (!this.size) return ''
-        const map = {
-          'sm': 'font-12'
-        }
-        return map[this.size] || ''
-      }
     }
   }
 </script>

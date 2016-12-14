@@ -918,6 +918,13 @@ exports.default = {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /***/ },
 /* 19 */
@@ -1393,18 +1400,6 @@ exports.default = {
       type: Boolean,
       default: false
     }
-  },
-  computed: {
-    inputSize: function inputSize() {
-      return this.size ? 'input-' + this.size : '';
-    },
-    fontSize: function fontSize() {
-      if (!this.size) return '';
-      var map = {
-        'sm': 'font-12'
-      };
-      return map[this.size] || '';
-    }
   }
 }; //
 //
@@ -1444,6 +1439,9 @@ exports.default = {
     validationMessages: {
       type: Object
     },
+    size: {
+      type: String
+    },
     autoFocus: {
       type: Boolean,
       default: false
@@ -1459,6 +1457,18 @@ exports.default = {
     }
   },
 
+  computed: {
+    inputSize: function inputSize() {
+      return this.size ? 'input-' + this.size : '';
+    },
+    fontSize: function fontSize() {
+      if (!this.size) return '';
+      var map = {
+        'sm': 'font-12'
+      };
+      return map[this.size] || '';
+    }
+  },
   methods: {
     updateValue: function updateValue(value) {
       var formattedValue = value.trim();
@@ -1580,15 +1590,17 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
   return _c('div', {
     staticClass: "form-group"
-  }, [(_vm.label) ? _c('label', [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), (!_vm.multiLine) ? _c('div', {
+  }, [(_vm.label) ? _c('label', [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), _c('div', {
     class: {
       'input-group': _vm.$slots.addon
     }
   }, [(_vm.$slots.addon) ? _c('span', {
-    staticClass: "input-group-addon"
+    staticClass: "input-group-addon",
+    class: _vm.fontSize
   }, [_vm._t("addon")], true) : _vm._e(), _vm._v(" "), _c('select', {
     ref: "input",
     staticClass: "form-control",
+    class: _vm.inputSize,
     domProps: {
       "value": _vm.value
     },
@@ -1606,7 +1618,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "value": option.value
       }
     }, [_vm._v("\n        " + _vm._s(option.text) + "\n      ")])
-  }))]) : _vm._e()])
+  }))])])
 },staticRenderFns: []}
 if (false) {
   module.hot.accept()
@@ -1629,19 +1641,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "pull-left"
-  }, [_c('div', [(_vm.icon) ? _c('span', {
+  }, [_c('div', [_vm._t("leftUpper", [(_vm.icon) ? _c('span', {
     staticClass: "icon-pic",
     class: _vm.iconClass
-  }) : _vm._e(), _vm._v(" "), _vm._t("default", [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _vm._t("sub")], true), _vm._v(" "), _c('div', {
+  }) : _vm._e(), _vm._v("\n                        " + _vm._s(_vm.title) + "\n                    ")])], true), _vm._v(" "), _c('div', [_vm._t("leftButtom", [_c('div', {
     staticClass: "text-muted"
-  }, [_vm._v(_vm._s(_vm.subTitle))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.subTitle))])])], true)]), _vm._v(" "), _c('div', {
     staticClass: "pull-right"
-  }, [_c('span', {
+  }, [_vm._t("right", [_c('span', {
     staticClass: "pull-right text-r",
     class: _vm.fontColor
   }, [_vm._v(_vm._s(_vm.rightText))]), _vm._v(" "), (_vm.arrow) ? _c('span', {
     staticClass: "fa fa-angle-right icon-r"
-  }) : _vm._e()])])])
+  }) : _vm._e()])], true)])])
 },staticRenderFns: []}
 if (false) {
   module.hot.accept()
