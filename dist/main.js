@@ -43,16 +43,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmory imports with the correct context
+/******/ 	// identity function for calling harmony imports with the correct context
 /******/ 	__webpack_require__.i = function(value) { return value; };
 /******/
-/******/ 	// define getter function for harmory exports
+/******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		Object.defineProperty(exports, name, {
-/******/ 			configurable: false,
-/******/ 			enumerable: true,
-/******/ 			get: getter
-/******/ 		});
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -1502,10 +1504,10 @@ exports.default = {
 /* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;
-  return _vm._h('div', {
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+  return _c('div', {
     staticClass: "row"
-  }, [_vm._t("default")])
+  }, [_vm._t("default")], true)
 },staticRenderFns: []}
 if (false) {
   module.hot.accept()
@@ -1518,17 +1520,17 @@ if (false) {
 /* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;
-  return _vm._h('div', {
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+  return _c('div', {
     staticClass: "form-group"
-  }, [(_vm.label) ? _vm._h('label', [_vm._s(_vm.label)]) : _vm._e(), " ", _vm._h('div', {
+  }, [(_vm.label) ? _c('label', [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), _c('div', {
     class: {
       'input-group': _vm.$slots.addon
     }
-  }, [(_vm.$slots.addon) ? _vm._h('span', {
+  }, [(_vm.$slots.addon) ? _c('span', {
     staticClass: "input-group-addon",
     class: _vm.fontSize
-  }, [_vm._t("addon")]) : _vm._e(), " ", (!_vm.multiLine) ? _vm._h('input', {
+  }, [_vm._t("addon")], true) : _vm._e(), _vm._v(" "), (!_vm.multiLine) ? _c('input', {
     ref: "input",
     staticClass: "form-control",
     class: _vm.inputSize,
@@ -1546,7 +1548,7 @@ module.exports={render:function (){var _vm=this;
         _vm.updateValue($event.target.value)
       }
     }
-  }) : _vm._h('textarea', {
+  }) : _c('textarea', {
     ref: "input",
     staticClass: "form-control",
     attrs: {
@@ -1562,7 +1564,7 @@ module.exports={render:function (){var _vm=this;
         _vm.updateValue($event.target.value)
       }
     }
-  }), " "])])
+  }), _vm._v(" ")])])
 },staticRenderFns: []}
 if (false) {
   module.hot.accept()
@@ -1575,16 +1577,16 @@ if (false) {
 /* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;
-  return _vm._h('div', {
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+  return _c('div', {
     staticClass: "form-group"
-  }, [(_vm.label) ? _vm._h('label', [_vm._s(_vm.label)]) : _vm._e(), " ", (!_vm.multiLine) ? _vm._h('div', {
+  }, [(_vm.label) ? _c('label', [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), (!_vm.multiLine) ? _c('div', {
     class: {
       'input-group': _vm.$slots.addon
     }
-  }, [(_vm.$slots.addon) ? _vm._h('span', {
+  }, [(_vm.$slots.addon) ? _c('span', {
     staticClass: "input-group-addon"
-  }, [_vm._t("addon")]) : _vm._e(), " ", _vm._h('select', {
+  }, [_vm._t("addon")], true) : _vm._e(), _vm._v(" "), _c('select', {
     ref: "input",
     staticClass: "form-control",
     domProps: {
@@ -1595,16 +1597,16 @@ module.exports={render:function (){var _vm=this;
         _vm.updateValue($event.target.value)
       }
     }
-  }, [_vm._l((_vm.options), function(option) {
-    return _vm._h('option', {
+  }, _vm._l((_vm.options), function(option) {
+    return _c('option', {
       attrs: {
         "disabled": option.disabled
       },
       domProps: {
         "value": option.value
       }
-    }, ["\n        " + _vm._s(option.text) + "\n      "])
-  })])]) : _vm._e()])
+    }, [_vm._v("\n        " + _vm._s(option.text) + "\n      ")])
+  }))]) : _vm._e()])
 },staticRenderFns: []}
 if (false) {
   module.hot.accept()
@@ -1617,27 +1619,27 @@ if (false) {
 /* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;
-  return _vm._h('div', {
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+  return _c('div', {
     staticClass: "cellclass"
-  }, [_vm._h('div', {
+  }, [_c('div', {
     staticClass: "cell__stage clearfix",
     on: {
       "click": _vm.onClick
     }
-  }, [_vm._h('div', {
+  }, [_c('div', {
     staticClass: "pull-left"
-  }, [_vm._h('div', [(_vm.icon) ? _vm._h('span', {
+  }, [_c('div', [(_vm.icon) ? _c('span', {
     staticClass: "icon-pic",
     class: _vm.iconClass
-  }) : _vm._e(), " ", _vm._t("default", [_vm._s(_vm.title)]), " ", _vm._t("sub")]), " ", _vm._h('div', {
+  }) : _vm._e(), _vm._v(" "), _vm._t("default", [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _vm._t("sub")], true), _vm._v(" "), _c('div', {
     staticClass: "text-muted"
-  }, [_vm._s(_vm.subTitle)])]), " ", _vm._h('div', {
+  }, [_vm._v(_vm._s(_vm.subTitle))])]), _vm._v(" "), _c('div', {
     staticClass: "pull-right"
-  }, [_vm._h('span', {
+  }, [_c('span', {
     staticClass: "pull-right text-r",
     class: _vm.fontColor
-  }, [_vm._s(_vm.rightText)]), " ", (_vm.arrow) ? _vm._h('span', {
+  }, [_vm._v(_vm._s(_vm.rightText))]), _vm._v(" "), (_vm.arrow) ? _c('span', {
     staticClass: "fa fa-angle-right icon-r"
   }) : _vm._e()])])])
 },staticRenderFns: []}
@@ -1652,16 +1654,16 @@ if (false) {
 /* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;
-  return _vm._h('div', {}, [_vm._m(0), " ", _vm._t("default")])
-},staticRenderFns: [function (){var _vm=this;
-  return _vm._h('ul', {
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+  return _c('div', {}, [_vm._m(0), _vm._v(" "), _vm._t("default")], true)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+  return _c('ul', {
     staticClass: "nav nav-tabs"
-  }, [_vm._h('li', [_vm._h('a', {
+  }, [_c('li', [_c('a', {
     attrs: {
       "href": "#"
     }
-  }, ["123"])])])
+  }, [_vm._v("123")])])])
 }]}
 if (false) {
   module.hot.accept()
@@ -1674,10 +1676,10 @@ if (false) {
 /* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;
-  return _vm._h('div', {
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+  return _c('div', {
     class: _vm.itemClass
-  }, [_vm._t("default")])
+  }, [_vm._t("default")], true)
 },staticRenderFns: []}
 if (false) {
   module.hot.accept()
@@ -1690,16 +1692,16 @@ if (false) {
 /* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;
-  return _vm._h('table', {
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+  return _c('table', {
     class: _vm.tableClass
-  }, [_vm._h('thead', [_vm._h('tr', [_vm._l((_vm.orderList.schema), function(v) {
-    return _vm._h('th', ["\n        " + _vm._s(v) + "\n      "])
-  })])]), " ", _vm._h('tbody', [_vm._l((_vm.orderList.values), function(order) {
-    return _vm._h('tr', [_vm._l((_vm.orderList.schema), function(v, k) {
-      return _vm._h('td', ["\n        " + _vm._s(order[k]) + "\n      "])
-    })])
-  })])])
+  }, [_c('thead', [_c('tr', _vm._l((_vm.orderList.schema), function(v) {
+    return _c('th', [_vm._v("\n        " + _vm._s(v) + "\n      ")])
+  }))]), _vm._v(" "), _c('tbody', _vm._l((_vm.orderList.values), function(order) {
+    return _c('tr', _vm._l((_vm.orderList.schema), function(v, k) {
+      return _c('td', [_vm._v("\n        " + _vm._s(order[k]) + "\n      ")])
+    }))
+  }))])
 },staticRenderFns: []}
 if (false) {
   module.hot.accept()
@@ -1712,8 +1714,8 @@ if (false) {
 /* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;
-  return _vm._h('button', {
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+  return _c('button', {
     class: _vm.btnClass,
     attrs: {
       "disabled": _vm.disabled
@@ -1724,9 +1726,9 @@ module.exports={render:function (){var _vm=this;
         _vm.clickHandler($event)
       }
     }
-  }, [(_vm.icon && _vm.iconPosition == 'left') ? _vm._h('i', {
+  }, [(_vm.icon && _vm.iconPosition == 'left') ? _c('i', {
     class: _vm.iconClass
-  }) : _vm._e(), " ", (!_vm.circle) ? _vm._h('span', [_vm._t("default", [_vm._s(_vm.text)])]) : _vm._e(), " ", (_vm.icon && _vm.iconPosition == 'right') ? _vm._h('i', {
+  }) : _vm._e(), _vm._v(" "), (!_vm.circle) ? _c('span', [_vm._t("default", [_vm._v(_vm._s(_vm.text))])], true) : _vm._e(), _vm._v(" "), (_vm.icon && _vm.iconPosition == 'right') ? _c('i', {
     class: _vm.iconClass
   }) : _vm._e()])
 },staticRenderFns: []}
@@ -1741,8 +1743,8 @@ if (false) {
 /* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;
-  return _vm._h('div', [_vm._h('div', {
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+  return _c('div', [_c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -1750,30 +1752,30 @@ module.exports={render:function (){var _vm=this;
       expression: "show"
     }],
     staticClass: "modalclass"
-  }, [_vm._h('div', {
+  }, [_c('div', {
     staticClass: "modal-shadow",
     on: {
       "click": _vm.closeModal
     }
-  }), " ", _vm._h('div', {
+  }), _vm._v(" "), _c('div', {
     staticClass: "modal-wrapper",
     class: _vm.modalSize
-  }, [_vm._t("title", [_vm._h('div', {
+  }, [_vm._t("title", [_c('div', {
     staticClass: "modal-title"
-  }, [(_vm.showCloseButton) ? _vm._h('span', {
+  }, [(_vm.showCloseButton) ? _c('span', {
     staticClass: "close",
     on: {
       "click": _vm.closeModal
     }
-  }, ["×"]) : _vm._e(), " ", _vm._h('div', {
+  }, [_vm._v("×")]) : _vm._e(), _vm._v(" "), _c('div', {
     domProps: {
       "textContent": _vm._s(_vm.title)
     }
-  })])]), " ", _vm._t("main", [_vm._h('div', {
+  })])]), _vm._v(" "), _vm._t("main", [_c('div', {
     staticClass: "modal-body"
-  }, [_vm._t("content")])]), " ", _vm._t("button", [_vm._h('div', {
+  }, [_vm._t("content")], true)]), _vm._v(" "), _vm._t("button", [_c('div', {
     staticClass: "modal-footer"
-  }, [_vm._t("foot-btn")])])])])])
+  }, [_vm._t("foot-btn")], true)])], true)])])
 },staticRenderFns: []}
 if (false) {
   module.hot.accept()
@@ -1786,10 +1788,10 @@ if (false) {
 /* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;
-  return _vm._h('div', [_vm._h('form', {
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+  return _c('div', [_c('form', {
     class: _vm.formClass
-  }, [_vm._t("default")])])
+  }, [_vm._t("default")], true)])
 },staticRenderFns: []}
 if (false) {
   module.hot.accept()
@@ -1802,15 +1804,15 @@ if (false) {
 /* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;
-  return _vm._h('div', {
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+  return _c('div', {
     staticClass: "infoclass clearfix"
-  }, [(_vm.icon) ? _vm._h('span', {
+  }, [(_vm.icon) ? _c('span', {
     staticClass: "pull-left icon-pic",
     class: _vm.iconClass
-  }) : _vm._e(), " ", _vm._h('span', {
+  }) : _vm._e(), _vm._v(" "), _c('span', {
     staticClass: "pull-left info-text"
-  }, [_vm._t("default", [_vm._s(_vm.infoText)])])])
+  }, [_vm._t("default", [_vm._v(_vm._s(_vm.infoText))])], true)])
 },staticRenderFns: []}
 if (false) {
   module.hot.accept()
@@ -1918,6 +1920,5 @@ var QCUI = {
 module.exports = QCUI;
 
 /***/ }
-/******/ ])
+/******/ ]);
 });
-;
