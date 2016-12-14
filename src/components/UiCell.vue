@@ -1,7 +1,6 @@
 <template>
-    <div class="cellclass">
-        <div class="cell__stage clearfix" @click="onClick">
-
+<div class="cellclass">
+  <div class="cell__stage clearfix" @click="onClick">
             <div class="pull-left">
                 <div>
                     <slot name="leftUpper">
@@ -24,52 +23,52 @@
 
             </div>
 
-        </div>
+  </div>
 
-    </div>
+</div>
 </template>
 
 <script type='text/babel'>
-	import classNames from 'classnames'
-	export default {
-		props: {
-			icon: {
-				type: String,
-				default: null
-			},
-			title: {
-				type: String,
-				default: 'cell',
-				require: true
-			},
-			subTitle: {
-				type: String
-			},
-			arrow: {
-				type: Boolean,
-				default: false
-			},
-			rightText: {
-				type: String
-			},
-			color: {
-				type: String,
-				default: 'text-muted'
-			},
-			onClick: {
-				type: Function,
-				default: function(){}
-      }
-		},
-		computed: {
-			iconClass(){
-				return classNames('fa', 'fa-' + this.icon)
-			},
-			fontColor(){
-				return classNames('text-' + this.color)
-			}
-		}
-	}
+import classNames from 'classnames'
+export default {
+  props: {
+    icon: {
+      type: String,
+      default: null
+    },
+    title: {
+      type: String,
+      default: 'cell',
+      require: true
+    },
+    subTitle: {
+      type: String
+    },
+    arrow: {
+      type: Boolean,
+      default: false
+    },
+    rightText: {
+      type: String
+    },
+    color: {
+      type: String,
+      default: 'text-muted'
+    },
+    onClick: {
+      type: Function,
+      default() {}
+    }
+  },
+  computed: {
+    iconClass() {
+      return classNames('fa', 'fa-' + this.icon)
+    },
+    fontColor() {
+      return classNames('text-' + this.color)
+    }
+  }
+}
 </script>
 
 

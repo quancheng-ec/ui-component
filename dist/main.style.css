@@ -6828,14 +6828,6 @@ button.close {
   min-height: 50px;
   position: relative;
 }
-.cell__stage .cell-center {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
-}
 .cell__stage .icon-pic {
   padding-right: 5px;
 }
@@ -6869,3 +6861,87 @@ button.close {
   width: calc(100% - 25px);
   color: #fff;
 }
+
+.modal-open {
+  display: visibility;
+}
+.modalclass {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 9999;
+}
+.modalclass .modal-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,0.4);
+}
+.modalclass .modal-wrapper {
+  width: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.modalclass .modal-wrapper.modal-lg {
+  width: 900px;
+}
+.modalclass .modal-wrapper.modal-sm {
+  width: 300px;
+}
+.modalclass .modal-title {
+  padding: 15px;
+  background: #fff;
+  border-bottom: 1px #e5e5e5 solid;
+}
+.modalclass .modal-body {
+  padding: 25px 15px;
+  background: #fff;
+}
+.modalclass .modal-footer {
+  background: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

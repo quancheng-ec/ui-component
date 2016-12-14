@@ -9,6 +9,10 @@ import UiCell from './components/UiCell.vue'
 import UiTable from './components/UiTable.vue'
 import UiInfo from './components/UiInfo.vue'
 import UiModal from './components/UiModal.vue'
+import UiForm from './components/UiForm.vue'
+import UiTextBox from './components/UiTextBox.vue'
+import UiSelect from './components/UiSelect.vue'
+import UiTabs from './components/UiTabs.vue'
 
 const QCUI = {
   UiButton,
@@ -20,6 +24,10 @@ const QCUI = {
   UiTable,
   UiInfo,
   UiModal,
+  UiForm,
+  UiTextBox,
+  UiSelect,
+  UiTabs,
   install(Vue) {
     Vue.component('UiButton', UiButton)
     Vue.component('UiGridGroup', UiGridGroup)
@@ -30,6 +38,10 @@ const QCUI = {
     Vue.component('UiTable', UiTable)
     Vue.component('UiInfo', UiInfo)
     Vue.component('UiModal', UiModal)
+    Vue.component('UiForm', UiForm)
+    Vue.component('UiTextBox', UiTextBox)
+    Vue.component('UiSelect', UiSelect)
+    Vue.component('UiTabs', UiTabs)
   }
 }
 

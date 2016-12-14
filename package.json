@@ -1,6 +1,6 @@
 {
   "name": "qc-ui-component",
-  "version": "0.0.4",
+  "version": "0.0.11",
   "description": "",
   "main": "dist/main.js",
   "scripts": {
@@ -31,10 +31,11 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^2.3.1",
     "url-loader": "^0.5.7",
-    "vue": "^2.0.7",
-    "vue-loader": "^9.9.5",
+    "vee-validate": "^2.0.0-beta.17",
+    "vue": "^2.1.6",
+    "vue-loader": "^10.0.0",
     "vue-router": "^2.0.1",
-    "webpack": "2.1.0-beta.25"
+    "webpack": "^2.1.0-beta.28"
   },
   "devDependencies": {
     "eslint": "^3.9.1",
