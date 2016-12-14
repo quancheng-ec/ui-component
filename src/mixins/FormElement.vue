@@ -6,6 +6,17 @@
       },
       validationMessages: {
         type: Object
+      },
+      autoFocus: {
+        type: Boolean,
+        default: false
+      }
+    },
+    mounted(){
+      if (this.autoFocus) {
+        this.$nextTick(() => {
+          this.$refs.input.focus()
+        })
       }
     },
     methods: {
