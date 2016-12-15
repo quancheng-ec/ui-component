@@ -84,6 +84,7 @@ export default function(options = {}) {
     devServer: {
       contentBase: './example-src',
       historyApiFallback: true,
+      host:'10.100.0.160',
       port: 4441
     },
     devtool: dev
