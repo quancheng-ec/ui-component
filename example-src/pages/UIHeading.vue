@@ -57,6 +57,13 @@ export default {
 						description: '标题背景色',
 						type: 'Boolean',
 						Default: 'false',
+					},
+					{
+						name: 'gravity',
+						description: '控制文案位置可使用',
+						type: 'String',
+						Default: 'left',
+						note:'left,center,right'
 					}
 				]
 			}
