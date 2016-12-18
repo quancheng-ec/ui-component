@@ -1,4 +1,5 @@
 <script>
+  import Validator from 'validatorjs'
   export default {
     props: {
       validationRules: {
@@ -35,12 +36,20 @@
       }
     },
     methods: {
-      updateValue: function(value) {
+      updateValue(value) {
         const formattedValue = value.trim()
         if (formattedValue !== value) {
           this.$refs.input.value = formattedValue
         }
+        if (this.validationRules) {
+          console.log(this.validateValue(value))
+        }
         this.$emit('input', formattedValue)
+      },
+      validateValue(value){
+        return new Validator({ foo: value }, {
+          foo: this.validationRules
+        })
       }
     }
   }
