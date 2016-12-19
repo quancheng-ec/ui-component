@@ -78,12 +78,6 @@
               note: 'primary:紫色,success:绿色,info:蓝色,warning:黄色,danger:橘色,muted:灰色,'
             },
             {
-              name: 'onClick',
-              description: '点击事件',
-              type: 'Function',
-              Default: 'function(){}',
-            },
-            {
               name: 'leftUpperSlot',
               description: '左侧上方位slot',
               type: 'slot标识',
