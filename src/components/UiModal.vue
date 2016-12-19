@@ -4,7 +4,7 @@
       <div class="modal-shadow" @click="closeModal"></div>
       <div class="modal-wrapper" :class="modalSize">
 
-        <slot name="title">
+        <slot name="title" v-if="title || $slots.title">
           <div class="modal-title">
             <span class="close" @click="closeModal" v-if="showCloseButton">×</span>
             <div v-text="title"></div>

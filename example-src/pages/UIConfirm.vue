@@ -8,7 +8,6 @@
     methods: {
       openConfirm(){
         this.$confirmBox({
-          title: '请确认',
           content: '这是一个confirm box'
         })
           .then(res => console.log('confirmed---', res))

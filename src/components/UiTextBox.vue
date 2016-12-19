@@ -6,13 +6,20 @@
         <span class="input-group-addon" :class="fontSize" v-if="$slots.addon">
           <slot name="addon"></slot>
         </span>
-      <input v-if="!multiLine" class="form-control" :class="inputSize" :readonly="readonly" :disabled="disabled"
-             :placeholder="placeHolder" ref="input"
-             :type="type" :value="value" @input="updateValue($event.target.value)"
-      />
-      <textarea v-else class="form-control" :readonly="readonly" :disabled="disabled" :placeholder="placeHolder"
-                ref="input" :value="value" @input="updateValue($event.target.value)">
+      <div v-if="type == 'date'">
+        <div class="form-control">
+          {{value}}
+        </div>
+      </div>
+      <template v-else>
+        <input v-if="!multiLine" class="form-control" :class="inputSize" :readonly="readonly" :disabled="disabled"
+               :placeholder="placeHolder" ref="input"
+               :type="type" :value="value" @input="updateValue($event.target.value)"
+        />
+        <textarea v-else class="form-control" :readonly="readonly" :disabled="disabled" :placeholder="placeHolder"
+                  ref="input" :value="value" @input="updateValue($event.target.value)">
         </textarea>
+      </template>
     </div>
   </div>
 </template>
