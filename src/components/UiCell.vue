@@ -1,18 +1,26 @@
 <template>
   <div class="cellclass">
     <div class="cell__stage clearfix" @click="clickFn">
-
       <div class="pull-left">
         <div>
-          <span class="icon-pic" :class="iconClass" v-if="icon"></span>
-          <slot>{{title}}</slot>
+          <slot name="leftUpperSlot">
+            <span class="icon-pic" :class="iconClass" v-if="icon"></span>
+            {{title}}
+          </slot>
         </div>
-        <div class="text-muted">{{subTitle}}</div>
+        <div>
+          <slot name="leftButtomSlot">
+            <div class="text-muted">{{subTitle}}</div>
+          </slot>
+        </div>
       </div>
 
       <div class="pull-right">
-        <span class="pull-right text-r" :class="fontColor">{{rightText}}</span>
-        <span class="fa fa-angle-right icon-r" v-if="arrow"></span>
+        <slot name="rightSlot">
+          <span class="pull-right text-r" :class="fontColor">{{rightText}}</span>
+          <span class="fa fa-angle-right icon-r" v-if="arrow"></span>
+        </slot>
+
       </div>
 
     </div>
@@ -46,11 +54,6 @@
       color: {
         type: String,
         default: 'text-muted'
-      },
-      onClick: {
-        type: Function,
-        default: function () {
-        }
       }
     },
     computed: {
