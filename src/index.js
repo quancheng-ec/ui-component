@@ -14,6 +14,7 @@ import UiTextBox from './components/UiTextBox.vue'
 import UiSelect from './components/UiSelect.vue'
 import UiTabs from './components/UiTabs.vue'
 import UiConfirm from './components/UiConfirm'
+import UiDatePicker from './components/UiDatePicker.vue'
 
 const QCUI = {
   UiButton,
@@ -43,6 +44,7 @@ const QCUI = {
     Vue.component('UiTextBox', UiTextBox)
     Vue.component('UiSelect', UiSelect)
     Vue.component('UiTabs', UiTabs)
+    Vue.component('UiDatePicker', UiDatePicker)
     Object.defineProperties(Vue.prototype, {
       $confirmBox: {
         get(){
