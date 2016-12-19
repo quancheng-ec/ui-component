@@ -90,7 +90,7 @@
               note: '左上角slot的name值'
             },
             {
-              name: 'leftButtomSlot',
+              name: 'leftBottomSlot',
               description: '左侧下方位slot',
               type: 'slot标识',
               Default: null,
