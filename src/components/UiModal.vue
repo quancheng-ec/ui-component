@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="modalclass" v-show="show">
+    <div class="modalclass" v-if="show">
       <div class="modal-shadow" @click="closeModal"></div>
       <div class="modal-wrapper" :class="modalSize">
 

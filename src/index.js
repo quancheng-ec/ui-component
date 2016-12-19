@@ -13,6 +13,7 @@ import UiForm from './components/UiForm.vue'
 import UiTextBox from './components/UiTextBox.vue'
 import UiSelect from './components/UiSelect.vue'
 import UiTabs from './components/UiTabs.vue'
+import UiConfirm from './components/UiConfirm'
 
 const QCUI = {
   UiButton,
@@ -42,6 +43,13 @@ const QCUI = {
     Vue.component('UiTextBox', UiTextBox)
     Vue.component('UiSelect', UiSelect)
     Vue.component('UiTabs', UiTabs)
+    Object.defineProperties(Vue.prototype, {
+      $confirmBox: {
+        get(){
+          return UiConfirm.bind(this)
+        }
+      }
+    })
   }
 }
 
