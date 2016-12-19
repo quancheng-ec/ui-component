@@ -15,7 +15,7 @@
         title="Notifications"
         sub-title="isLink is set to true when link exists"
         arrow
-        :on-click="handleClick"
+        @on-click="handleClick('111')"
       ></ui-cell>
       <ui-table :order-list="orderList" type="bordered striped"></ui-table>
     </ui-panel>
@@ -88,8 +88,8 @@
       }
     },
     methods:{
-			handleClick(){
-				alert(1)
+			handleClick(param){
+				alert(param)
       }
     }
 
