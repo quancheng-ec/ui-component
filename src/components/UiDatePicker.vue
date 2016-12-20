@@ -1,6 +1,6 @@
 <template>
-  <div class="date-picker">
-    <ui-text-box @click.native="togglePanel" v-model="value" type="date">
+  <div>
+    <ui-text-box @click.native="togglePanel" v-model="value" type="date" :size="size">
       <span slot="addon" v-if="addon">{{addon}}</span>
     </ui-text-box>
     <transition name="toggle">
@@ -95,6 +95,7 @@
       }
     },
     props: {
+      size: {},
       addon: {},
       language: { default: 'ch' },
       min: { default: '1970-01-01' },

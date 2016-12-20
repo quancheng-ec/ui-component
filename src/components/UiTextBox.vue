@@ -6,11 +6,11 @@
         <span class="input-group-addon" :class="fontSize" v-if="$slots.addon">
           <slot name="addon"></slot>
         </span>
-      <div v-if="type == 'date'">
-        <div class="form-control">
+      <template v-if="type == 'date'">
+        <div class="form-control" :class="inputSize">
           {{value}}
         </div>
-      </div>
+      </template>
       <template v-else>
         <input v-if="!multiLine" class="form-control" :class="inputSize" :readonly="readonly" :disabled="disabled"
                :placeholder="placeHolder" ref="input"

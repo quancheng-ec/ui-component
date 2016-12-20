@@ -3161,6 +3161,7 @@ exports.default = {
   },
 
   props: {
+    size: {},
     addon: {},
     language: { default: 'ch' },
     min: { default: '1970-01-01' },
@@ -4140,9 +4141,7 @@ exports.default = {
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
-  return _c('div', {
-    staticClass: "date-picker"
-  }, [_c('ui-text-box', {
+  return _c('div', [_c('ui-text-box', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4150,7 +4149,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "value"
     }],
     attrs: {
-      "type": "date"
+      "type": "date",
+      "size": _vm.size
     },
     domProps: {
       "value": (_vm.value)
@@ -4374,9 +4374,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [(_vm.$slots.addon) ? _c('span', {
     staticClass: "input-group-addon",
     class: _vm.fontSize
-  }, [_vm._t("addon")], true) : _vm._e(), _vm._v(" "), (_vm.type == 'date') ? _c('div', [_c('div', {
-    staticClass: "form-control"
-  }, [_vm._v("\n        " + _vm._s(_vm.value) + "\n      ")])]) : [(!_vm.multiLine) ? _c('input', {
+  }, [_vm._t("addon")], true) : _vm._e(), _vm._v(" "), (_vm.type == 'date') ? [_c('div', {
+    staticClass: "form-control",
+    class: _vm.inputSize
+  }, [_vm._v("\n        " + _vm._s(_vm.value) + "\n      ")])] : [(!_vm.multiLine) ? _c('input', {
     ref: "input",
     staticClass: "form-control",
     class: _vm.inputSize,
