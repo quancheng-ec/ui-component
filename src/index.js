@@ -14,6 +14,7 @@ import UiTextBox from './components/UiTextBox.vue'
 import UiSelect from './components/UiSelect.vue'
 import UiTabs from './components/UiTabs.vue'
 import UiConfirm from './components/UiConfirm'
+import UiAlert from './components/UiAlert'
 import UiDatePicker from './components/UiDatePicker.vue'
 
 const QCUI = {
@@ -49,6 +50,11 @@ const QCUI = {
       $confirmBox: {
         get(){
           return UiConfirm.bind(this)
+        }
+      },
+      $alertBox: {
+        get(){
+          return UiAlert.bind(this)
         }
       }
     })

@@ -18,7 +18,7 @@
         </slot>
 
         <slot name="button">
-          <div class="modal-foot">
+          <div class="modal-footer">
             <slot name="foot-btn"></slot>
           </div>
         </slot>
@@ -114,7 +114,8 @@
     .modal-body
       padding 25px 15px
       background #fff
-    .modal-foot
+    .modal-footer
+      
       background #fff
     .bg-white
       background #fff
