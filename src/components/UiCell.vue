@@ -1,6 +1,6 @@
 <template>
   <div class="cellclass">
-    <div class="cell__stage clearfix" @click="onClick">
+    <div class="cell__stage clearfix" @click="clickFn">
       <div class="pull-left">
         <div>
           <slot name="leftUpperSlot">
@@ -9,7 +9,7 @@
           </slot>
         </div>
         <div>
-          <slot name="leftButtomSlot">
+          <slot name="leftBottomSlot">
             <div class="text-muted">{{subTitle}}</div>
           </slot>
         </div>
@@ -54,19 +54,19 @@
       color: {
         type: String,
         default: 'text-muted'
-      },
-      onClick: {
-        type: Function,
-        default() {
-        }
       }
     },
     computed: {
-      iconClass() {
+      iconClass(){
         return classNames('fa', 'fa-' + this.icon)
       },
-      fontColor() {
+      fontColor(){
         return classNames('text-' + this.color)
+      }
+    },
+    methods: {
+      clickFn(){
+        this.$emit('on-click');
       }
     }
   }

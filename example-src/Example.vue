@@ -38,9 +38,10 @@
     .example
         width 100%
         display flex
-        height 100%
+        height auto
+        min-height 100%
         &-sidebar
-            height 100%
+            height auto
             flex 0 0 160px
             flex-direction column
             display flex
