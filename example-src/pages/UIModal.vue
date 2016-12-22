@@ -14,10 +14,12 @@
         @uiModelClose="closeModal"
         showCloseButton
         size="sm"
+        bgColor="blue"
+        textPosition="center"
       >
       <div slot="content">我是内容</div>
       <div slot="foot-btn">
-        <button type="button" class="btn btn-info waves-effect" data-dismiss="modal" @click="closeModal">Close</button>
+        <button type="button" class="btn btn-info waves-effect btn-position" data-dismiss="modal" @click="closeModal">Close</button>
       </div>
       </ui-modal>
 
@@ -68,8 +70,22 @@
 							description: '弹窗的大小',
 							type: 'String',
 							Default: 'null',
-							note: 'sm:宽300px,lg:宽900px,默认是600px'
-						}
+							note: 'per:宽90%,sm:宽300px,lg:宽900px,默认是600px'
+						},
+            {
+              name: 'bgColor',
+              description: '标题背景色',
+              type: 'String',
+              Default: 'white',
+              note: 'white:白色,purple:紫色,orange:橙色,gray:灰色,green:绿色,red:红色,blue:蓝色'
+            },
+            {
+              name: 'textPosition',
+              description: '标题位置',
+              type: 'String',
+              Default: 'left',
+              note: 'left:偏左,center:居中'
+            }
 					]
 				}
 			}
@@ -85,3 +101,5 @@
 	}
 
 </script>
+
+

@@ -5,7 +5,7 @@
       <div class="modal-wrapper" :class="modalSize">
 
         <slot name="title" v-if="title || $slots.title">
-          <div class="modal-title">
+          <div class="modal-title" :class="[bgClass,positionClass]">
             <span class="close" @click="closeModal" v-if="showCloseButton">×</span>
             <div v-text="title"></div>
           </div>
@@ -18,7 +18,7 @@
         </slot>
 
         <slot name="button">
-          <div class="modal-footer">
+          <div class="modal-foot">
             <slot name="foot-btn"></slot>
           </div>
         </slot>
@@ -44,9 +44,17 @@
 				type: Boolean,
 				default: false
       },
-			size:{
+			size: {
 				type: String
-      }
+      },
+      bgColor: {
+        type: String,
+        default: 'white'
+      },
+      textPosition: {
+        type: String,
+        default: 'left'
+      },
 		},
 		methods: {
 			closeModal(){
@@ -56,7 +64,13 @@
 		computed: {
 			modalSize(){
 				return classNames('modal-' + this.size)
-			}
+			},
+      bgClass(){
+        return classNames('bg-' + this.bgColor)
+      },
+      positionClass(){
+        return classNames('title-' + this.textPosition)
+      }
 		}
 	}
 </script>
@@ -89,13 +103,37 @@
         width 900px
       &.modal-sm
         width 300px
+      &.modal-per
+        width 90%
     .modal-title
       padding 15px
       background #fff
       border-bottom 1px #e5e5e5 solid
+    .title-center
+      text-align center
     .modal-body
       padding 25px 15px
       background #fff
-    .modal-footer
+    .modal-foot
       background #fff
+    .bg-white
+      background #fff
+    .bg-purple
+      background #9786ff
+      color #fff
+    .bg-orange
+      background #ff9f39
+      color #fff
+    .bg-gray
+      background #aab0b5
+      color #fff
+    .bg-green
+      background #87BC3B
+      color #fff
+    .bg-red
+      background #FF9B99
+      color #fff
+    .bg-blue
+      background #5A97F1
+      color #fff
 </style>
