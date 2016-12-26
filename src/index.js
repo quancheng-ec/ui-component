@@ -16,6 +16,7 @@ import UiTabs from './components/UiTabs.vue'
 import UiConfirm from './components/UiConfirm'
 import UiAlert from './components/UiAlert'
 import UiDatePicker from './components/UiDatePicker.vue'
+import UiToast from './components/UiToast'
 
 const QCUI = {
   UiButton,
@@ -56,7 +57,12 @@ const QCUI = {
         get(){
           return UiAlert.bind(this)
         }
-      }
+      },
+      $toastBox: {
+        get(){
+          return UiToast.bind(this)
+        }
+      },
     })
   }
 }
