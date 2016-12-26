@@ -9,7 +9,7 @@
           </slot>
         </div>
         <div>
-          <slot name="leftButtomSlot">
+          <slot name="leftBottomSlot">
             <div class="text-muted">{{subTitle}}</div>
           </slot>
         </div>

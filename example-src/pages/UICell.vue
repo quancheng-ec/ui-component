@@ -76,6 +76,27 @@
 		          type: 'String',
 		          Default: 'text-muted',
               note: 'primary:紫色,success:绿色,info:蓝色,warning:黄色,danger:橘色,muted:灰色,'
+            },
+            {
+              name: 'leftUpperSlot',
+              description: '左侧上方位slot',
+              type: 'slot标识',
+              Default: null,
+              note: '左上角slot的name值'
+            },
+            {
+              name: 'leftBottomSlot',
+              description: '左侧下方位slot',
+              type: 'slot标识',
+              Default: null,
+              note: '右上角slot的name值'
+            },
+            {
+              name: 'rightSlot',
+              description: '右侧slot',
+              type: 'slot标识',
+              Default: null,
+              note: '右上角slot的name值'
 	          },
 	          {
 		          name: 'onClick',
