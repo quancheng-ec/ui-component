@@ -20,6 +20,9 @@
                   ref="input" :value="value" @input="updateValue($event.target.value)">
         </textarea>
       </template>
+        <span class="input-group-addon" :class="fontSize" v-if="$slots.otherAddon">
+          <slot name="otherAddon"></slot>
+        </span>
     </div>
   </div>
 </template>

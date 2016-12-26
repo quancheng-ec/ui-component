@@ -11,6 +11,9 @@
             <div slot="addon">
               选择日期
             </div>
+            <div slot="otherAddon">
+              单位
+            </div>
           </ui-text-box>
           <ui-text-box :placeholder="form.textarea.placeholder" label="textarea" multi-line v-model="form.textarea.value" validation-rules="form.textarea.validationRules">
           </ui-text-box>
