@@ -6,7 +6,7 @@ const UiConfirm = {
   data(){
     return {
       show: true,
-      title: 'confirm',
+      title: 'alert',
       content: 'xxx'
     }
   },

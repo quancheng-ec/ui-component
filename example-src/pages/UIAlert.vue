@@ -11,7 +11,6 @@
           content: '这是一个alert box'
         })
           .then(res => console.log('confirmed---', res))
-          .catch(e => console.log('canceled---', e))
       }
     }
   }
