@@ -1,9 +1,27 @@
 <script>
   import Validator from 'validatorjs'
+  Validator.useLang('zh');
   export default {
+    data(){
+      return {
+        valid: true,
+        validationErrors: []
+      }
+    },
+    created(){
+      this.$root.$on('form:validate', this.validateValue)
+      this.$on('input', this.validateValue)
+    },
+    destroyed(){
+      this.$root.$off('form:validate', this.validateValue)
+      this.$off('input', this.validateValue)
+    },
     props: {
+      name: {
+        type: String
+      },
       validationRules: {
-        type: [Function, Array, String]
+        type: String
       },
       validationMessages: {
         type: Object
@@ -37,19 +55,21 @@
     },
     methods: {
       updateValue(value) {
-        const formattedValue = value.trim()
-        if (formattedValue !== value) {
-          this.$refs.input.value = formattedValue
-        }
-        if (this.validationRules) {
-          console.log(this.validateValue(value))
-        }
-        this.$emit('input', formattedValue)
+        this.$emit('input', value)
       },
-      validateValue(value){
-        return new Validator({ foo: value }, {
-          foo: this.validationRules
+      createValidator(value){
+        return new Validator({ [this.name || 'field']: value }, {
+          [this.name || 'field']: this.validationRules
         })
+      },
+      validateValue(){
+        if (this.validationRules) {
+          this.$nextTick(() => {
+            const validation = this.createValidator(this.value)
+            this.valid = validation.passes()
+            this.validationErrors = validation.errors.get(this.name || 'field')
+          })
+        }
       }
     }
   }

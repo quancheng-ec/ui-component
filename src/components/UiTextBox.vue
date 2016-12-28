@@ -24,6 +24,7 @@
           <slot name="otherAddon"></slot>
         </span>
     </div>
+    <span class="text-danger" v-for="error in validationErrors">{{error}}</span>
   </div>
 </template>
 
