@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group">
+  <div class="form-group" :class="{'has-error':!valid}">
     <label v-if="label">{{label}}</label>
 
     <div :class="{'input-group':$slots.addon}">
@@ -20,11 +20,11 @@
                   ref="input" :value="value" @input="updateValue($event.target.value)">
         </textarea>
       </template>
-        <span class="input-group-addon" :class="fontSize" v-if="$slots.otherAddon">
+      <span class="input-group-addon" :class="fontSize" v-if="$slots.otherAddon">
           <slot name="otherAddon"></slot>
         </span>
     </div>
-    <span class="text-danger" v-for="error in validationErrors">{{error}}</span>
+    <span class="help-block text-danger" v-for="error in validationErrors">{{error}}</span>
   </div>
 </template>
 

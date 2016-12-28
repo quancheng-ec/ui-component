@@ -1,25 +1,34 @@
 <script>
   import Validator from 'validatorjs'
+  import uuid from 'uuid'
   Validator.useLang('zh');
   export default {
     data(){
       return {
+        uid: 0,
+        parentEventBus: null,
         valid: true,
         validationErrors: []
       }
     },
     created(){
-      this.$root.$on('form:validate', this.validateValue)
-      this.$on('input', this.validateValue)
+      this.uid = uuid.v1();
+      let parent = this.$parent
+      while (parent && !parent.eventBus) {
+        parent = parent.$parent
+      }
+      if (!parent.eventBus) return
+      this.parentEventBus = parent.eventBus
+      this.parentEventBus.$on('form:validate', this.validateValue)
     },
     destroyed(){
-      this.$root.$off('form:validate', this.validateValue)
-      this.$off('input', this.validateValue)
+      this.parentEventBus.$off('form:validate', this.validateValue)
     },
     props: {
       name: {
         type: String
       },
+      eventBus: {},
       validationRules: {
         type: String
       },
@@ -53,6 +62,11 @@
         return map[this.size] || ''
       }
     },
+    watch: {
+      'value'(){
+        this.validateValue()
+      }
+    },
     methods: {
       updateValue(value) {
         this.$emit('input', value)
@@ -64,12 +78,14 @@
       },
       validateValue(){
         if (this.validationRules) {
-          this.$nextTick(() => {
-            const validation = this.createValidator(this.value)
-            this.valid = validation.passes()
-            this.validationErrors = validation.errors.get(this.name || 'field')
+          const validation = this.createValidator(this.value)
+          this.valid = validation.passes()
+          this.validationErrors = validation.errors.get(this.name || 'field')
+          this.parentEventBus.$emit('validate:invalid', {
+            id: this.uid, errors: this.validationErrors
           })
         }
+        return this.valid
       }
     }
   }

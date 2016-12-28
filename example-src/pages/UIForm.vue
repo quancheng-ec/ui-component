@@ -3,7 +3,7 @@
     <ui-grid-group>
       <ui-grid-item :space="6" v-for="isHorizontal in [false,true]">
         <ui-panel>
-          <ui-form :horizontal="isHorizontal">
+          <ui-form :horizontal="isHorizontal" ref="form">
             <ui-text-box :editable="false" :placeholder="form.input.placeholder" label="textbox"
                          v-model="form.input.value" :validation-rules="form.input.validationRules">
             </ui-text-box>
@@ -42,6 +42,7 @@
         </ui-panel>
       </ui-grid-item>
     </ui-grid-group>
+    <ui-button @click.native="$refs.form[0].validate">validate</ui-button>
   </div>
 </template>
 
@@ -51,7 +52,7 @@
       return {
         form: {
           input: {
-            value: '123',
+            value: '',
             validationRules: 'required|email'
           },
           textarea: {
