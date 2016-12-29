@@ -10472,7 +10472,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     attrs: {
       "type": "date",
-      "size": _vm.size
+      "size": _vm.size,
+      "name": _vm.name,
+      "validation-rules": _vm.validationRules
     },
     domProps: {
       "value": (_vm.value)
@@ -10761,7 +10763,10 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "form-group"
+    staticClass: "form-group",
+    class: {
+      'has-error': !_vm.valid
+    }
   }, [(_vm.label) ? _c('label', [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), _c('div', {
     class: {
       'input-group': _vm.$slots.addon
@@ -10790,7 +10795,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "value": option.value
       }
     }, [_vm._v("\n        " + _vm._s(option.text) + "\n      ")])
-  }))])])
+  }))]), _vm._v(" "), _vm._l((_vm.validationErrors), function(error) {
+    return _c('span', {
+      staticClass: "help-block text-danger"
+    }, [_vm._v(_vm._s(error))])
+  })], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -13048,7 +13057,9 @@ exports.default = {
     range: {
       type: Boolean,
       default: false
-    }
+    },
+    name: {},
+    validationRules: {}
   },
   methods: {
     togglePanel: function togglePanel() {
@@ -13323,6 +13334,7 @@ exports.default = {
     window.removeEventListener('click', this.close);
   }
 }; //
+//
 //
 //
 //
@@ -13807,6 +13819,8 @@ exports.default = {
     }
   }
 }; //
+//
+//
 //
 //
 //

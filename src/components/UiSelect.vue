@@ -1,5 +1,5 @@
 <template>
-<div class="form-group">
+<div class="form-group" :class="{'has-error':!valid}">
   <label v-if="label">{{label}}</label>
   <div :class="{'input-group':$slots.addon}">
     <span class="input-group-addon" :class="fontSize" v-if="$slots.addon">
@@ -11,6 +11,8 @@
       </option>
     </select>
   </div>
+
+  <span class="help-block text-danger" v-for="error in validationErrors">{{error}}</span>
 </div>
 </template>
 
