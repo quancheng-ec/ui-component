@@ -13428,11 +13428,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 
-var eventBus = new _vue2.default();
 exports.default = {
   data: function data() {
     return {
-      eventBus: eventBus,
+      eventBus: null,
       errors: {}
     };
   },
@@ -13444,6 +13443,7 @@ exports.default = {
     }
   },
   created: function created() {
+    this.eventBus = new _vue2.default();
     this.eventBus.$on('validate:invalid', this.addError);
   },
   destroyed: function destroyed() {
@@ -13471,8 +13471,15 @@ exports.default = {
       }
     },
     validate: function validate() {
+      var _this = this;
+
       this.clearErrors();
-      this.eventBus.$emit('form:validate');
+      return new Promise(function (resolve, reject) {
+        _this.eventBus.$emit('form:validate');
+        _this.$nextTick(function () {
+          resolve(_this.valid);
+        });
+      });
     },
     clearErrors: function clearErrors() {
       var _iteratorNormalCompletion = true;

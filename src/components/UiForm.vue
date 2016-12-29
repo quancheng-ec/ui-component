@@ -9,11 +9,11 @@
 <script>
   import Vue from 'vue'
   import _isEmpty from 'lodash.isempty'
-  const eventBus = new Vue()
+
   export default {
     data(){
       return {
-        eventBus,
+        eventBus: null,
         errors: {}
       }
     },
@@ -24,6 +24,7 @@
       }
     },
     created(){
+      this.eventBus = new Vue()
       this.eventBus.$on('validate:invalid', this.addError)
     },
     destroyed(){
@@ -48,7 +49,12 @@
       },
       validate(){
         this.clearErrors()
-        this.eventBus.$emit('form:validate')
+        return new Promise((resolve, reject) => {
+          this.eventBus.$emit('form:validate')
+          this.$nextTick(() => {
+            resolve(this.valid)
+          })
+        })
       },
       clearErrors(){
         for (const id of Object.keys(this.errors)) {
