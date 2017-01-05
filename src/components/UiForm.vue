@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <form :class="formClass">
-      <slot></slot>
-    </form>
+  <div :class="formClass">
+    <slot></slot>
   </div>
 </template>
 

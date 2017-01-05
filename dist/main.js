@@ -11003,9 +11003,9 @@ if (false) {
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('form', {
+  return _c('div', {
     class: _vm.formClass
-  }, [_vm._t("default")], 2)])
+  }, [_vm._t("default")], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -13425,8 +13425,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
 
 exports.default = {
   data: function data() {
@@ -14082,7 +14080,7 @@ exports.default = {
     this.parentEventBus.$on('form:validate', this.validateValue);
   },
   destroyed: function destroyed() {
-    this.parentEventBus.$off('form:validate', this.validateValue);
+    this.parentEventBus && this.parentEventBus.$off('form:validate', this.validateValue);
   },
 
   props: {
