@@ -6,6 +6,7 @@
           <slot name="leftUpperSlot">
             <span class="icon-pic" :class="iconClass" v-if="icon"></span>
             {{title}}
+            <span class="icon-require" v-if="required">*</span>
           </slot>
         </div>
         <div>
@@ -54,6 +55,10 @@
       color: {
         type: String,
         default: 'text-muted'
+      },
+      required: {
+        type: Boolean,
+        default: false
       }
     },
     computed: {
@@ -94,4 +99,6 @@
       right 25px
       top 50%
       transform translateY(-50%)
+    .icon-require
+      color #ff0000
 </style>
