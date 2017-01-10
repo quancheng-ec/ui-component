@@ -72,15 +72,15 @@
         this.$emit('input', value)
       },
       createValidator(value){
-        return new Validator({ [this.name || 'field']: value }, {
-          [this.name || 'field']: this.validationRules
+        return new Validator({ [this.name || this.label || 'field']: value }, {
+          [this.name || this.label || 'field']: this.validationRules
         })
       },
       validateValue(){
         if (this.validationRules) {
           const validation = this.createValidator(this.value)
           this.valid = validation.passes()
-          this.validationErrors = validation.errors.get(this.name || 'field')
+          this.validationErrors = validation.errors.get(this.name || this.label ||'field')
           this.parentEventBus.$emit('validate:invalid', {
             id: this.uid, errors: this.validationErrors
           })

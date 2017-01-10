@@ -1,6 +1,6 @@
 <template>
   <div class="form-group" :class="{'has-error':!valid}">
-    <label v-if="label">{{label}}</label>
+    <label v-if="label">{{label}}</label><span class="icon-require" v-if="required">*</span>
 
     <div :class="{'input-group':$slots.addon}">
         <span class="input-group-addon" :class="fontSize" v-if="$slots.addon">
@@ -60,7 +60,19 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+      required: {
+        type: Boolean,
+        default: false
       }
     }
   }
 </script>
+
+<style lang='stylus' rel='stylesheet/stylus'>
+  .icon-require
+    color #ff0000
+    position relative
+    top 2px
+    left 3px
+</style>
