@@ -10,6 +10,7 @@
         title="Notifications"
         right-text="Enable"
         color="primary"
+        required
       ></ui-cell>
       <ui-cell
         title="Notifications"
@@ -98,6 +99,12 @@
               Default: null,
               note: '右上角slot的name值'
 	          },
+            {
+              name: 'required',
+              description: '必填标识',
+              type: 'Boolean',
+              Default: 'false',
+            },
 	          {
 		          name: 'onClick',
 		          description: '点击事件',
