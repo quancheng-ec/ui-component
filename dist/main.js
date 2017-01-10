@@ -10472,7 +10472,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     attrs: {
       "type": "date",
-      "size": _vm.size
+      "size": _vm.size,
+      "name": _vm.name,
+      "validation-rules": _vm.validationRules
     },
     domProps: {
       "value": (_vm.value)
@@ -10761,7 +10763,10 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "form-group"
+    staticClass: "form-group",
+    class: {
+      'has-error': !_vm.valid
+    }
   }, [(_vm.label) ? _c('label', [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), _c('div', {
     class: {
       'input-group': _vm.$slots.addon
@@ -10790,7 +10795,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "value": option.value
       }
     }, [_vm._v("\n        " + _vm._s(option.text) + "\n      ")])
-  }))])])
+  }))]), _vm._v(" "), _vm._l((_vm.validationErrors), function(error) {
+    return _c('span', {
+      staticClass: "help-block text-danger"
+    }, [_vm._v(_vm._s(error))])
+  })], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -10994,9 +11003,9 @@ if (false) {
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('form', {
+  return _c('div', {
     class: _vm.formClass
-  }, [_vm._t("default")], 2)])
+  }, [_vm._t("default")], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -13048,7 +13057,9 @@ exports.default = {
     range: {
       type: Boolean,
       default: false
-    }
+    },
+    name: {},
+    validationRules: {}
   },
   methods: {
     togglePanel: function togglePanel() {
@@ -13385,6 +13396,7 @@ exports.default = {
 //
 //
 //
+//
 
 /***/ },
 /* 75 */
@@ -13413,14 +13425,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
 
-var eventBus = new _vue2.default();
 exports.default = {
   data: function data() {
     return {
-      eventBus: eventBus,
+      eventBus: null,
       errors: {}
     };
   },
@@ -13432,6 +13441,7 @@ exports.default = {
     }
   },
   created: function created() {
+    this.eventBus = new _vue2.default();
     this.eventBus.$on('validate:invalid', this.addError);
   },
   destroyed: function destroyed() {
@@ -13459,8 +13469,15 @@ exports.default = {
       }
     },
     validate: function validate() {
+      var _this = this;
+
       this.clearErrors();
-      this.eventBus.$emit('form:validate');
+      return new Promise(function (resolve, reject) {
+        _this.eventBus.$emit('form:validate');
+        _this.$nextTick(function () {
+          resolve(_this.valid);
+        });
+      });
     },
     clearErrors: function clearErrors() {
       var _iteratorNormalCompletion = true;
@@ -13822,6 +13839,8 @@ exports.default = {
 //
 //
 //
+//
+//
 
 /***/ },
 /* 83 */
@@ -14061,7 +14080,7 @@ exports.default = {
     this.parentEventBus.$on('form:validate', this.validateValue);
   },
   destroyed: function destroyed() {
-    this.parentEventBus.$off('form:validate', this.validateValue);
+    this.parentEventBus && this.parentEventBus.$off('form:validate', this.validateValue);
   },
 
   props: {

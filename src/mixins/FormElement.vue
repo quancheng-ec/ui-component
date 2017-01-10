@@ -22,7 +22,7 @@
       this.parentEventBus.$on('form:validate', this.validateValue)
     },
     destroyed(){
-      this.parentEventBus.$off('form:validate', this.validateValue)
+      this.parentEventBus && this.parentEventBus.$off('form:validate', this.validateValue)
     },
     props: {
       name: {

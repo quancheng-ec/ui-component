@@ -11,7 +11,7 @@
             <ui-text-box :editable="false" :placeholder="form.input.placeholder" label="textbox-with-addon"
                          v-model="form.input.value" :validation-rules="form.input.validationRules">
               <div slot="addon">
-                选择日期
+                选择日期<span class="icon-require" v-if="required">*</span>
               </div>
               <div slot="otherAddon">
                 单位
@@ -48,6 +48,12 @@
 
 <script>
   export default {
+    props: {
+      required: {
+        type: Boolean,
+        default: false
+      }
+    },
     data() {
       return {
         form: {
@@ -79,3 +85,8 @@
     }
   }
 </script>
+
+<style lang='stylus' rel='stylesheet/stylus'>
+  .icon-require
+    color #ff0000
+</style>
