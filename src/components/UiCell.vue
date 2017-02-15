@@ -15,17 +15,13 @@
           </slot>
         </div>
       </div>
-
       <div class="pull-right">
         <slot name="rightSlot">
           <span class="pull-right text-r" :class="fontColor">{{rightText}}</span>
           <span class="fa fa-angle-right icon-r" v-if="arrow"></span>
         </slot>
-
       </div>
-
     </div>
-
   </div>
 </template>
 

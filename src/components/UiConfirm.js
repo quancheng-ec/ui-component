@@ -56,10 +56,11 @@ export default function $confirm(opts = {}) {
 
   confirm.$mount(confirmContainer)
 
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     confirm.$on('ui-confirm:chosen', arg => {
       remove()
-      resolve(arg)
+      if (arg === 'confirm') return resolve(arg)
+      reject(arg)
     })
   })
 

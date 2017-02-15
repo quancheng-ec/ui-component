@@ -76,6 +76,7 @@ export default function(options = {}) {
       new ExtractTextPlugin('[name].style.css'),
       new HtmlWebpackPlugin({ title: 'UI Demo Example', template: './example-src/index.html' }),
       new webpack.LoaderOptionsPlugin({
+        postcss: [autoprefixer('last 3 versions', '> 1%')],
         vue: {
           postcss: [autoprefixer('last 3 versions', '> 1%')]
         }
