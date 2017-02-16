@@ -1,5 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import './styles/eliteadmin/style.css'
 import UiButton from './components/UiButton.vue'
 import UiGridGroup from './components/UiGridGroup.vue'
 import UiGridItem from './components/UiGridItem.vue'
@@ -62,7 +60,7 @@ const QCUI = {
         get(){
           return UiToast.bind(this)
         }
-      },
+      }
     })
   }
 }
