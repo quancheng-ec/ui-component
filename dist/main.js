@@ -11064,7 +11064,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-title"
   }, [_vm._v(_vm._s(_vm.title))])])]) : _vm._e(), (_vm.$slots.content) ? _c('div', {
     staticClass: "modal-body"
-  }, [_vm._t("content")], 2) : _vm._e(), (_vm.$slots.footBtn) ? _c('div', {
+  }, [_vm._t("content")], 2) : _vm._e(), (_vm.$slots['foot-btn']) ? _c('div', {
     staticClass: "modal-footer"
   }, [_vm._t("foot-btn")], 2) : _vm._e()], 2)])])
 },staticRenderFns: []}

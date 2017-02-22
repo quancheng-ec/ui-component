@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade in" :style="{display: show?'block':'none'}">
+  <div class="modal fade in" :style="{display: value?'block':'none'}">
     <div class="modal-shadow" @click="closeModal"></div>
     <div class="modal-dialog" :class="modalSize">
       <div class="modal-content">
@@ -12,7 +12,7 @@
         <div class="modal-body" v-if="$slots.content">
           <slot name="content"></slot>
         </div>
-        <div class="modal-footer" v-if="$slots.footBtn">
+        <div class="modal-footer" v-if="$slots['foot-btn']">
           <slot name="foot-btn"></slot>
         </div>
       </div>
@@ -28,7 +28,7 @@
         type: String,
         require: true
       },
-      show: {
+      value: {
         type: Boolean,
         default: false
       },
@@ -50,11 +50,11 @@
     },
     methods: {
       closeModal(){
-        this.$emit('uiModelClose')
+        this.$emit('input',false)
       }
     },
     watch: {
-      show(n){
+      value(n){
         document.body.classList[n ? 'add' : 'remove']('modal-open')
       }
     },
