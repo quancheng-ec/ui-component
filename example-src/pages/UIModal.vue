@@ -10,8 +10,7 @@
 
       <ui-modal
         title="我是标题"
-        :show="show"
-        @uiModelClose="closeModal"
+        v-model="show"
         showCloseButton
         size="sm"
         bgColor="blue"

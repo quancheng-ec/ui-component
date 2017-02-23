@@ -4,7 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
-export default function(options = {}) {
+export default function (options = {}) {
   const { dev, example } = options
 
   return {
@@ -78,6 +78,7 @@ export default function(options = {}) {
       new webpack.LoaderOptionsPlugin({
         postcss: [autoprefixer('last 3 versions', '> 1%')],
         vue: {
+          preserveWhitespace: false,
           postcss: [autoprefixer('last 3 versions', '> 1%')]
         }
       })
@@ -86,7 +87,8 @@ export default function(options = {}) {
       contentBase: './example-src',
       historyApiFallback: true,
       port: 4441
-    },
+    }
+    ,
     devtool: dev
       ? 'cheap-module-eval-source-map'
       : 'hidden-source-map'
