@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade in" :style="{display: value?'block':'none'}">
+  <div class="modal fade" :class="{'in':active}" v-if="value">
     <div class="modal-shadow" @click="closeModal"></div>
     <div class="modal-dialog" :class="modalSize">
       <div class="modal-content">
@@ -23,6 +23,11 @@
 <script type='text/babel'>
   import classNames from 'classnames'
   export default {
+    data(){
+      return {
+        active: false
+      }
+    },
     props: {
       title: {
         type: String,
@@ -50,12 +55,13 @@
     },
     methods: {
       closeModal(){
-        this.$emit('input',false)
+        this.$emit('input', false)
       }
     },
     watch: {
       value(n){
         document.body.classList[n ? 'add' : 'remove']('modal-open')
+        this.$nextTick(() => this.active = n)
       }
     },
     computed: {
@@ -73,8 +79,11 @@
 </script>
 
 <style rel="stylesheet/stylus" lang="stylus">
+  .modal
+    display block
+
   .modal-shadow
-    background rgba(0,0,0,0.3)
+    background rgba(0, 0, 0, 0.3)
     width 100%
     height 100%
     position fixed

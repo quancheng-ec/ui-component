@@ -35,10 +35,18 @@
       validationMessages: {
         type: Object
       },
+      horizontal: {
+        type: Boolean,
+        default: false
+      },
       size: {
         type: String
       },
       autoFocus: {
+        type: Boolean,
+        default: false
+      },
+      required: {
         type: Boolean,
         default: false
       }
@@ -80,7 +88,7 @@
         if (this.validationRules) {
           const validation = this.createValidator(this.value)
           this.valid = validation.passes()
-          this.validationErrors = validation.errors.get(this.name || this.label ||'field')
+          this.validationErrors = validation.errors.get(this.name || this.label || 'field')
           this.parentEventBus.$emit('validate:invalid', {
             id: this.uid, errors: this.validationErrors
           })

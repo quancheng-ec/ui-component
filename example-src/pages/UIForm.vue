@@ -4,11 +4,11 @@
       <ui-grid-item :space="6" v-for="isHorizontal in [false,true]">
         <ui-panel>
           <ui-form :horizontal="isHorizontal" ref="form">
-            <ui-text-box :editable="false" :placeholder="form.input.placeholder" label="textbox"
+            <ui-text-box :horizontal="isHorizontal" :editable="false" :placeholder="form.input.placeholder" label="textbox"
                          v-model="form.input.value" :validation-rules="form.input.validationRules">
             </ui-text-box>
 
-            <ui-text-box :editable="false" :placeholder="form.input.placeholder" label="textbox-with-addon"
+            <ui-text-box :horizontal="isHorizontal" :editable="false" :placeholder="form.input.placeholder" label="textbox-with-addon"
                          v-model="form.input.value" :validation-rules="form.input.validationRules">
               <div slot="addon">
                 选择日期
@@ -17,16 +17,16 @@
                 单位
               </div>
             </ui-text-box>
-            <ui-text-box :placeholder="form.textarea.placeholder" label="textarea" multi-line
+            <ui-text-box :horizontal="isHorizontal" :placeholder="form.textarea.placeholder" label="textarea" multi-line
                          v-model="form.textarea.value" :validation-rules="form.textarea.validationRules">
             </ui-text-box>
 
-            <ui-select label="select" :options="form.select.options" v-model="form.select.value"
+            <ui-select :horizontal="isHorizontal" label="select" :options="form.select.options" v-model="form.select.value"
                        :validation-rules="form.select.validationRules">
             </ui-select>
 
 
-            <ui-select label="select-with-addon" :options="form.select.options" v-model="form.select.value"
+            <ui-select :horizontal="isHorizontal" label="select-with-addon" :options="form.select.options" v-model="form.select.value"
                        :validation-rules="form.select.validationRules">
               <div slot="addon">
                 选择一项

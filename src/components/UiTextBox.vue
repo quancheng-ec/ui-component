@@ -1,8 +1,8 @@
 <template>
   <div class="form-group" :class="{'has-error':!valid}">
-    <label v-if="label">{{label}}</label><span class="icon-require" v-if="required">*</span>
-
-    <div :class="{'input-group':$slots.addon}">
+    <label v-if="label" :class="{'col-sm-3 control-label':horizontal}">{{label}}</label>
+    <span class="icon-require" v-if="required">*</span>
+    <div :class="{'input-group':$slots.addon,'col-sm-9':horizontal}">
         <span class="input-group-addon" :class="fontSize" v-if="$slots.addon">
           <slot name="addon"></slot>
         </span>
@@ -23,6 +23,7 @@
       <span class="input-group-addon" :class="fontSize" v-if="$slots.otherAddon">
           <slot name="otherAddon"></slot>
         </span>
+      <slot></slot>
     </div>
     <span class="help-block text-danger" v-for="error in validationErrors">{{error}}</span>
   </div>

@@ -5,14 +5,14 @@ const UiConfirm = {
   components: { UiModal },
   data(){
     return {
-      show: true,
+      value: false,
       title: 'confirm',
       content: 'xxx'
     }
   },
   methods: {
     confirm(){
-      this.show = false
+      this.value = false
       this.$nextTick(() => {
         this.$emit('ui-confirm:chosen', 'confirm')
       })
@@ -24,25 +24,21 @@ const UiConfirm = {
       })
     }
   },
-  render(h){
-    return (
-      <ui-modal
-        title={this.title}
-        show={this.show}
+  template: `<ui-modal
+        :title="title"
+        v-model="value"
         size="sm"
       >
-        <div slot="content">{this.content}</div>
+        <div slot="content">{{content}}</div>
         <div slot="foot-btn">
           <button type="button" class="btn btn-info waves-effect" data-dismiss="modal"
-                  onClick={this.confirm}>确认
+                  @click="confirm">确认
           </button>
           <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal"
-                  onClick={this.cancel}>取消
+                  @click="cancel">取消
           </button>
         </div>
-      </ui-modal>
-    )
-  }
+      </ui-modal>`
 }
 
 export default function $confirm(opts = {}) {
@@ -54,7 +50,7 @@ export default function $confirm(opts = {}) {
   confirm.title = title
   confirm.content = content
 
-  confirm.$mount(confirmContainer)
+  confirm.$mount(confirmContainer).value = true
 
   return new Promise((resolve, reject) => {
     confirm.$on('ui-confirm:chosen', arg => {
