@@ -5,14 +5,14 @@ const UiConfirm = {
   components: { UiModal },
   data(){
     return {
-      value: false,
+      show: false,
       title: 'confirm',
       content: 'xxx'
     }
   },
   methods: {
     confirm(){
-      this.value = false
+      this.show = false
       this.$nextTick(() => {
         this.$emit('ui-confirm:chosen', 'confirm')
       })
@@ -26,7 +26,7 @@ const UiConfirm = {
   },
   template: `<ui-modal
         :title="title"
-        v-model="value"
+        v-model="show"
         size="sm"
       >
         <div slot="content">{{content}}</div>
@@ -50,7 +50,7 @@ export default function $confirm(opts = {}) {
   confirm.title = title
   confirm.content = content
 
-  confirm.$mount(confirmContainer).value = true
+  confirm.$mount(confirmContainer).show = true
 
   return new Promise((resolve, reject) => {
     confirm.$on('ui-confirm:chosen', arg => {
