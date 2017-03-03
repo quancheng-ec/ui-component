@@ -411,3 +411,12 @@ ul[data-v-4f04f828] {
 .toastclass .toast-modal.toast-per {
   width: 90%;
 }
+
+.bg-transition {
+  -webkit-transition: border 0.4s, box-shadow 0.4s, background-color 1.2s;
+  transition: border 0.4s, box-shadow 0.4s, background-color 1.2s;
+}
+.btn-transition {
+  -webkit-transition: background-color 0.4s, left 0.2s;
+  transition: background-color 0.4s, left 0.2s;
+}
