@@ -2,6 +2,7 @@
   <div class="toastclass">
     <div :class="modalSize">
       {{content}}
+
     </div>
   </div>
 </template>
@@ -11,7 +12,7 @@
   export default {
     computed: {
       modalSize(){
-        return classNames('toast-modal', 'toast-' + this.size)
+        return classNames('toast-modal', 'toast-' + this.size, 'alert', 'alert-' + this.type)
       }
     }
   }
@@ -34,7 +35,6 @@
       left 50%
       color #fff
       transform translate(-50%, -50%)
-      background rgba(0, 0, 0, 0.4)
       text-align center
       &.toast-lg
         width 900px

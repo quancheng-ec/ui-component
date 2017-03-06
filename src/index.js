@@ -17,6 +17,9 @@ import UiDatePicker from './components/UiDatePicker.vue'
 import UiToast from './components/UiToast'
 import UiSwitcher from './components/UiSwitcher'
 
+import FkDepartment from './components/FkDepartment.vue'
+import FkSuperPicker from './components/FkSuperPicker.vue'
+
 const QCUI = {
   UiButton,
   UiGridGroup,
@@ -32,6 +35,8 @@ const QCUI = {
   UiSelect,
   UiTabs,
   UiSwitcher,
+  FkDepartment,
+  FkSuperPicker,
   install(Vue) {
     Vue.component('UiButton', UiButton)
     Vue.component('UiGridGroup', UiGridGroup)
@@ -48,6 +53,8 @@ const QCUI = {
     Vue.component('UiTabs', UiTabs)
     Vue.component('UiDatePicker', UiDatePicker)
     Vue.component('UiSwitcher', UiSwitcher)
+    Vue.component('FkDepartment', FkDepartment)
+    Vue.component('FkSuperPicker', FkSuperPicker)
     Object.defineProperties(Vue.prototype, {
       $confirmBox: {
         get(){

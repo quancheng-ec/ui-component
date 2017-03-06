@@ -399,7 +399,6 @@ ul[data-v-4f04f828] {
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.4);
   text-align: center;
 }
 .toastclass .toast-modal.toast-lg {
@@ -419,4 +418,14 @@ ul[data-v-4f04f828] {
 .btn-transition {
   -webkit-transition: background-color 0.4s, left 0.2s;
   transition: background-color 0.4s, left 0.2s;
+}
+
+.label-group .label {
+  display: inline-block;
+  margin: 5px;
+}
+.tree-panel {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid rgba(0,0,0,0.1);
 }

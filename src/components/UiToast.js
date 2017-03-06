@@ -2,14 +2,15 @@ import UiToast from './UiToast.vue'
 import Vue from 'vue'
 
 export default function $toast(opts = {}, delay = 1000) {
-  const {content,size} = opts
+  const {content,size,type} = opts
 
   const confirmContainer = document.createElement('div')
   document.body.appendChild(confirmContainer)
 
   const confirm = new Vue(UiToast)
   confirm.content = content
-  confirm.size = size
+  confirm.size = size || 'sm'
+  confirm.type = type || 'success'
 
   confirm.$mount(confirmContainer)
 
