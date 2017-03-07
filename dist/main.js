@@ -10511,14 +10511,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var UiConfirm = {
   components: { UiModal: _UiModal2.default },
-  data: function data() {
-    return {
-      show: false,
-      title: 'confirm',
-      content: 'xxx'
-    };
-  },
-
+  props: ['opts'],
   methods: {
     confirm: function confirm() {
       var _this = this;
@@ -10537,22 +10530,24 @@ var UiConfirm = {
       });
     }
   },
-  template: '<ui-modal\n        :title="title"\n        v-model="show"\n        size="sm"\n      >\n        <div slot="content">{{content}}</div>\n        <div slot="foot-btn">\n          <button type="button" class="btn btn-info waves-effect" data-dismiss="modal"\n                  @click="confirm">\u786E\u8BA4\n          </button>\n          <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal"\n                  @click="cancel">\u53D6\u6D88\n          </button>\n        </div>\n      </ui-modal>'
+  template: '<ui-modal\n        :title="opts.title"\n        v-model="opts.show"\n        :size="opts.size"\n      >\n        <div slot="content">{{opts.content}}</div>\n        <div slot="foot-btn">\n          <button type="button" class="btn btn-info waves-effect" data-dismiss="modal"\n                  @click="confirm">\u786E\u8BA4\n          </button>\n          <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal"\n                  @click="cancel">\u53D6\u6D88\n          </button>\n        </div>\n      </ui-modal>'
 };
 
 function $confirm() {
   var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var title = opts.title,
-      content = opts.content;
 
+  opts.show = true;
+  opts.type = 'sm';
   var confirmContainer = document.createElement('div');
   document.body.appendChild(confirmContainer);
 
-  var confirm = new _vue2.default(UiConfirm);
-  confirm.title = title;
-  confirm.content = content;
+  var confirm = new _vue2.default(Object.assign(UiConfirm, {
+    propsData: {
+      opts: opts
+    }
+  }));
 
-  confirm.$mount(confirmContainer).show = true;
+  confirm.$mount(confirmContainer);
 
   return new Promise(function (resolve, reject) {
     confirm.$on('ui-confirm:chosen', function (arg) {
@@ -10592,10 +10587,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function $toast() {
   var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
   var content = opts.content,
       size = opts.size,
-      type = opts.type;
+      type = opts.type,
+      duration = opts.duration;
 
 
   var confirmContainer = document.createElement('div');
@@ -10607,8 +10602,7 @@ function $toast() {
   confirm.type = type || 'success';
 
   confirm.$mount(confirmContainer);
-
-  setTimeout(remove, delay);
+  setTimeout(remove, duration || 2000);
 
   function remove() {
     confirm.$el.parentNode.removeChild(confirm.$el);
@@ -31159,12 +31153,26 @@ var _classnames2 = _interopRequireDefault(_classnames);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-  data: function data() {
-    return {
-      active: false
-    };
-  },
+  computed: {
+    modalSize: function modalSize() {
+      return 'modal-' + this.size;
+    },
+    bgClass: function bgClass() {
+      return (0, _classnames2.default)('bg-' + this.bgColor);
+    },
+    positionClass: function positionClass() {
+      return (0, _classnames2.default)('title-' + this.textPosition);
+    },
 
+    active: {
+      get: function get() {
+        return this.value;
+      },
+      set: function set(bool) {
+        this.$emit('input', bool);
+      }
+    }
+  },
   props: {
     title: {
       type: String,
@@ -31192,28 +31200,12 @@ exports.default = {
   },
   methods: {
     closeModal: function closeModal() {
-      this.$emit('input', false);
+      this.active = false;
     }
   },
   watch: {
     value: function value(n) {
-      var _this = this;
-
       document.body.classList[n ? 'add' : 'remove']('modal-open');
-      this.$nextTick(function () {
-        return _this.active = n;
-      });
-    }
-  },
-  computed: {
-    modalSize: function modalSize() {
-      return 'modal-' + this.size;
-    },
-    bgClass: function bgClass() {
-      return (0, _classnames2.default)('bg-' + this.bgColor);
-    },
-    positionClass: function positionClass() {
-      return (0, _classnames2.default)('title-' + this.textPosition);
     }
   }
 }; //
@@ -31595,6 +31587,10 @@ exports.default = {
     }
   }
 }; //
+//
+//
+//
+//
 //
 //
 //
@@ -34254,7 +34250,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "toastclass"
   }, [_c('div', {
     class: _vm.modalSize
-  }, [_vm._v("\n    " + _vm._s(_vm.content) + "\n\n  ")])])
+  }, [_vm._v("\n    " + _vm._s(_vm.content) + "\n\n\n\n\n\n  ")])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

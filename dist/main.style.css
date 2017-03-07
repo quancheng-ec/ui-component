@@ -400,6 +400,8 @@ ul[data-v-4f04f828] {
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   text-align: center;
+  opacity: 0.8;
+  border-radius: 10px;
 }
 .toastclass .toast-modal.toast-lg {
   width: 900px;

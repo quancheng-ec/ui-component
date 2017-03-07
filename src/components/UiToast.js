@@ -1,8 +1,8 @@
 import UiToast from './UiToast.vue'
 import Vue from 'vue'
 
-export default function $toast(opts = {}, delay = 1000) {
-  const {content,size,type} = opts
+export default function $toast(opts = {}) {
+  const { content, size, type, duration } = opts
 
   const confirmContainer = document.createElement('div')
   document.body.appendChild(confirmContainer)
@@ -13,8 +13,7 @@ export default function $toast(opts = {}, delay = 1000) {
   confirm.type = type || 'success'
 
   confirm.$mount(confirmContainer)
-
-  setTimeout(remove, delay)
+  setTimeout(remove, duration || 2000)
 
   function remove() {
     confirm.$el.parentNode.removeChild(confirm.$el)

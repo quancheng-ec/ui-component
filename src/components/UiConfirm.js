@@ -3,21 +3,15 @@ import Vue from 'vue'
 
 const UiConfirm = {
   components: { UiModal },
-  data(){
-    return {
-      show: false,
-      title: 'confirm',
-      content: 'xxx'
-    }
-  },
+  props: ['opts'],
   methods: {
-    confirm(){
+    confirm() {
       this.show = false
       this.$nextTick(() => {
         this.$emit('ui-confirm:chosen', 'confirm')
       })
     },
-    cancel(){
+    cancel() {
       this.show = false
       this.$nextTick(() => {
         this.$emit('ui-confirm:chosen', 'cancel')
@@ -25,11 +19,11 @@ const UiConfirm = {
     }
   },
   template: `<ui-modal
-        :title="title"
-        v-model="show"
-        size="sm"
+        :title="opts.title"
+        v-model="opts.show"
+        :size="opts.size"
       >
-        <div slot="content">{{content}}</div>
+        <div slot="content">{{opts.content}}</div>
         <div slot="foot-btn">
           <button type="button" class="btn btn-info waves-effect" data-dismiss="modal"
                   @click="confirm">确认
@@ -42,15 +36,18 @@ const UiConfirm = {
 }
 
 export default function $confirm(opts = {}) {
-  const { title, content } = opts
+  opts.show = true
+  opts.type = 'sm'
   const confirmContainer = document.createElement('div')
   document.body.appendChild(confirmContainer)
 
-  const confirm = new Vue(UiConfirm)
-  confirm.title = title
-  confirm.content = content
+  const confirm = new Vue(Object.assign(UiConfirm, {
+    propsData: {
+      opts
+    }
+  }))
 
-  confirm.$mount(confirmContainer).show = true
+  confirm.$mount(confirmContainer)
 
   return new Promise((resolve, reject) => {
     confirm.$on('ui-confirm:chosen', arg => {
@@ -65,4 +62,3 @@ export default function $confirm(opts = {}) {
     confirm.$destroy()
   }
 }
-

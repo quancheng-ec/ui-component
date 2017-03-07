@@ -23,9 +23,23 @@
 <script type='text/babel'>
   import classNames from 'classnames'
   export default {
-    data(){
-      return {
-        active: false
+    computed: {
+      modalSize(){
+        return 'modal-' + this.size
+      },
+      bgClass(){
+        return classNames('bg-' + this.bgColor)
+      },
+      positionClass(){
+        return classNames('title-' + this.textPosition)
+      },
+      active: {
+        get(){
+          return this.value
+        },
+        set(bool){
+          this.$emit('input', bool)
+        }
       }
     },
     props: {
@@ -55,24 +69,12 @@
     },
     methods: {
       closeModal(){
-        this.$emit('input', false)
+        this.active = false
       }
     },
     watch: {
       value(n){
         document.body.classList[n ? 'add' : 'remove']('modal-open')
-        this.$nextTick(() => this.active = n)
-      }
-    },
-    computed: {
-      modalSize(){
-        return 'modal-' + this.size
-      },
-      bgClass(){
-        return classNames('bg-' + this.bgColor)
-      },
-      positionClass(){
-        return classNames('title-' + this.textPosition)
       }
     }
   }

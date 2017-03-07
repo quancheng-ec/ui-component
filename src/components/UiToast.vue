@@ -3,6 +3,10 @@
     <div :class="modalSize">
       {{content}}
 
+
+
+
+
     </div>
   </div>
 </template>
@@ -36,6 +40,8 @@
       color #fff
       transform translate(-50%, -50%)
       text-align center
+      opacity 0.8
+      border-radius 10px
       &.toast-lg
         width 900px
       &.toast-sm
