@@ -82,8 +82,8 @@
         default: '20170113105245001'
       }
     },
-    computed:{
-      show:{
+    computed: {
+      show: {
         get(){
           return this.value
         },
@@ -117,11 +117,16 @@
         const result = {}
         result.id = departmentId || groupId
         result.name = name
-        if (_.find(this.chosenList, { id: result.id })) return this.$toastBox({ content: '重复', type: 'sm' })
+        if (_.find(this.chosenList, { id: result.id })) {
+          return this.$toastBox({
+            content: '重复',
+            size: 'sm',
+            type: 'danger'
+          })
+        }
         this.chosenList.push(result)
       },
       closeModal(type){
-
         if (type) {
           const method = `on${firstUpperCase(type)}`
 

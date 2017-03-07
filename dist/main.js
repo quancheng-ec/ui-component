@@ -30266,7 +30266,13 @@ exports.default = {
       var result = {};
       result.id = departmentId || groupId;
       result.name = name;
-      if (_lodash2.default.find(this.chosenList, { id: result.id })) return this.$toastBox({ content: '重复', type: 'sm' });
+      if (_lodash2.default.find(this.chosenList, { id: result.id })) {
+        return this.$toastBox({
+          content: '重复',
+          size: 'sm',
+          type: 'danger'
+        });
+      }
       this.chosenList.push(result);
     },
     closeModal: function closeModal(type) {
