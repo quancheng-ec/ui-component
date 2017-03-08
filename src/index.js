@@ -19,6 +19,7 @@ import UiSwitcher from './components/UiSwitcher'
 
 import FkDepartment from './components/FkDepartment.vue'
 import FkSuperPicker from './components/FkSuperPicker.vue'
+import FkTreeSelect from './components/FkTreeSelect.vue'
 
 const QCUI = {
   UiButton,
@@ -37,6 +38,7 @@ const QCUI = {
   UiSwitcher,
   FkDepartment,
   FkSuperPicker,
+  FkTreeSelect,
   install(Vue) {
     Vue.component('UiButton', UiButton)
     Vue.component('UiGridGroup', UiGridGroup)
@@ -55,6 +57,7 @@ const QCUI = {
     Vue.component('UiSwitcher', UiSwitcher)
     Vue.component('FkDepartment', FkDepartment)
     Vue.component('FkSuperPicker', FkSuperPicker)
+    Vue.component('FkTreeSelect', FkTreeSelect)
     Object.defineProperties(Vue.prototype, {
       $confirmBox: {
         get(){

@@ -4,22 +4,34 @@
       <button
         :data-action="collapsedType"
         type="button"
-        @click="departmentData.isCollapsed = !departmentData.isCollapsed"
+        @click="toggleCollapsed"
         v-if="departmentData.children.length"
       >
         Collapse
 
 
       </button>
-      <div class="dd-handle" @click="chooseDepartment(departmentData)">
-        {{departmentData.name}}
+      <div class="dd-handle" @click="chooseItem(departmentData)">
+        <i class="fa fa-sitemap"></i> {{departmentData.name}}
 
 
+      </div>
+      <div v-for="account in accounts" v-if="!departmentData.isCollapsed">
+        <ol class="dd-list">
+          <li class="dd-item">
+            <div class="dd-handle" @click="chooseItem(account,'account')">
+              <i class="fa fa-user"></i> {{account.cnName}}
+
+
+            </div>
+          </li>
+        </ol>
       </div>
       <div v-if="departmentData.children.length && !departmentData.isCollapsed">
         <draggable :list="departmentData.children" @change="onEnd">
           <fk-department
             :department-data="dept"
+            :need-account="needAccount"
             v-for="dept in departmentData.children"
             :event-bus="eventBus"
             :level="level+1"
@@ -35,7 +47,24 @@
   import draggable from 'vuedraggable'
   export default {
     name: 'fk-department',
-    props: ['departmentData', 'eventBus', 'level'],
+    data(){
+      return {
+        accounts: []
+      }
+    },
+    props: {
+      'departmentData': {},
+      'eventBus': {},
+      'level': {},
+      needAccount: {
+        type: Boolean,
+        default: true
+      },
+      url: {
+        type: String,
+        default: '/api/enterprise/pickerData'
+      }
+    },
     components: {
       draggable
     },
@@ -45,10 +74,37 @@
       }
     },
     mounted(){
+      this.loadAccountofGroup()
     },
     methods: {
+      toggleCollapsed(){
+        this.departmentData.isCollapsed = !this.departmentData.isCollapsed
+        this.loadAccountofGroup()
+      },
+      loadAccountofGroup(){
+        if (!this.needAccount) return
+        if (!this.departmentData.isCollapsed) {
+          this.$http.get(this.url, {
+            params: {
+              groupId: this.departmentData.departmentId,
+              accountOnly: true
+            }
+          }).then(res => {
+            this.accounts = res.data.data.accounts
+          })
+        }
+      },
+      chooseItem(item, type){
+        this.eventBus.$emit('item:chosen', {
+          type,
+          data: item
+        })
+      },
       chooseDepartment(group){
         this.eventBus.$emit('group:chosen', group)
+      },
+      chooseAccount(account){
+        this.eventBus.$emit('account:chosen', account)
       },
       onEnd(evt){
         console.log(evt)
