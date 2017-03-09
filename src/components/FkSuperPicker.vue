@@ -93,7 +93,7 @@
       }
     },
     created(){
-      this.eventBus.$on('group:chosen', this.onChosen)
+      this.eventBus.$on('item:chosen', this.onChosen)
     },
     mounted(){
       this.$http.get(this.url, {
@@ -112,11 +112,16 @@
       setData(res){
         this.trees = res.data.data
       },
-      onChosen(data){
-        const { departmentId, name, groupId } = data
-        const result = {}
-        result.id = departmentId || groupId
-        result.name = name
+      onChosen(item){
+        console.log(item)
+        const { type, data } = item
+        const result = { type }
+        if (type === 'account') {
+          result.id = data.accountId
+        } else {
+          result.id = data.departmentId || data.groupId
+        }
+        result.name = data.cnName || data.name
         if (_.find(this.chosenList, { id: result.id })) {
           return this.$toastBox({
             content: '重复',

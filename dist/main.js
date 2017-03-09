@@ -30336,7 +30336,7 @@ exports.default = {
     }
   },
   created: function created() {
-    this.eventBus.$on('group:chosen', this.onChosen);
+    this.eventBus.$on('item:chosen', this.onChosen);
   },
   mounted: function mounted() {
     this.$http.get(this.url, {
@@ -30356,14 +30356,18 @@ exports.default = {
     setData: function setData(res) {
       this.trees = res.data.data;
     },
-    onChosen: function onChosen(data) {
-      var departmentId = data.departmentId,
-          name = data.name,
-          groupId = data.groupId;
+    onChosen: function onChosen(item) {
+      console.log(item);
+      var type = item.type,
+          data = item.data;
 
-      var result = {};
-      result.id = departmentId || groupId;
-      result.name = name;
+      var result = { type: type };
+      if (type === 'account') {
+        result.id = data.accountId;
+      } else {
+        result.id = data.departmentId || data.groupId;
+      }
+      result.name = data.cnName || data.name;
       if (_lodash2.default.find(this.chosenList, { id: result.id })) {
         return this.$toastBox({
           content: '重复',
