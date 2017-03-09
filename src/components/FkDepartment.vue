@@ -32,6 +32,7 @@
           <fk-department
             :department-data="dept"
             :need-account="needAccount"
+            :account-only="accountOnly"
             v-for="dept in departmentData.children"
             :event-bus="eventBus"
             :level="level+1"
@@ -59,6 +60,10 @@
       needAccount: {
         type: Boolean,
         default: true
+      },
+      accountOnly:{
+        type: Boolean,
+        default: false
       },
       url: {
         type: String,
@@ -95,6 +100,7 @@
         }
       },
       chooseItem(item, type){
+        if(this.accountOnly && type !== 'account') return
         this.eventBus.$emit('item:chosen', {
           type,
           data: item
