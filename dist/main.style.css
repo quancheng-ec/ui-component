@@ -422,6 +422,32 @@ ul[data-v-4f04f828] {
   transition: background-color 0.4s, left 0.2s;
 }
 
+.ui-checkbox_label {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+.ui-checkbox_inline {
+  display: inline-block;
+}
+
+.ui-radio_label {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+.ui-radio_inline {
+  display: inline-block;
+}
+
 .label-group .label {
   display: inline-block;
   margin: 5px;
