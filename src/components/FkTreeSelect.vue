@@ -69,7 +69,7 @@
         if (type !== 'account' && this.accountOnly) return
         this.treePanel.show = false
         this.text = data.name || data.cnName
-        this.$emit('input', data[this.dataKey])
+        this.$emit('input', this.findKey(data))
       })
       this.eventBus.$on('drag:end', () => {
         console.log(1)
@@ -83,6 +83,13 @@
       }).then(res => this.remoteTree = res.data.data[this.type])
     },
     methods: {
+      findKey(data){
+        let result
+        ['accountId', 'groupId', 'departmentId', 'accountId'].forEach(id => {
+          if (data.hasOwnProperty(id)) result = id
+        })
+        return result
+      },
       showTreePanel(e){
         this.treePanel.show = !this.treePanel.show
       }
