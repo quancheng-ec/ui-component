@@ -431,8 +431,11 @@ ul[data-v-4f04f828] {
           align-items: center;
   cursor: pointer;
 }
-.ui-checkbox_inline {
-  display: inline-block;
+.ui-checkbox_label input[type=checkbox] {
+  zoom: 150%;
+  margin: 0;
+  left: 0;
+  top: 0;
 }
 
 .ui-radio_label {
@@ -444,8 +447,11 @@ ul[data-v-4f04f828] {
           align-items: center;
   cursor: pointer;
 }
-.ui-radio_inline {
-  display: inline-block;
+.ui-radio_label input[type=radio] {
+  zoom: 150%;
+  margin: 0;
+  left: 0;
+  top: 0;
 }
 
 .label-group .label {

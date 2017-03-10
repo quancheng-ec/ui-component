@@ -30810,10 +30810,6 @@ exports.default = {
       type: [String, Array]
     },
     value: {},
-    inline: {
-      type: Boolean,
-      default: false
-    },
     label: {
       type: String,
       default: ''
@@ -30835,7 +30831,7 @@ exports.default = {
 
   computed: {
     checkboxClass: function checkboxClass() {
-      var Classes = typeof this.type === 'string' ? this.type.split(' ') : this.type;
+      var Classes = this.type ? typeof this.type === 'string' ? this.type.split(' ') : this.type : [];
       return (0, _classnames2.default)(Classes.map(function (cls) {
         return 'checkbox-' + cls;
       }));
@@ -30847,8 +30843,6 @@ exports.default = {
     }
   }
 }; //
-//
-//
 //
 //
 //
@@ -31687,10 +31681,6 @@ exports.default = {
       type: [String, Array]
     },
     value: {},
-    inline: {
-      type: Boolean,
-      default: false
-    },
     label: {
       type: String,
       default: ''
@@ -31712,7 +31702,7 @@ exports.default = {
 
   computed: {
     radioClass: function radioClass() {
-      var Classes = typeof this.type === 'string' ? this.type.split(' ') : this.type;
+      var Classes = this.type ? typeof this.type === 'string' ? this.type.split(' ') : this.type : [];
       return (0, _classnames2.default)(Classes.map(function (cls) {
         return 'radio-' + cls;
       }));
@@ -31724,8 +31714,6 @@ exports.default = {
     }
   }
 }; //
-//
-//
 //
 //
 //
@@ -34695,11 +34683,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    class: {
-      'ui-radio_inline': _vm.inline
-    }
-  }, [_c('label', {
+  return _c('label', {
     staticClass: "radio ui-radio_label",
     class: _vm.radioClass
   }, [_c('input', {
@@ -34717,7 +34701,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.updateValue($event.target)
       }
     }
-  }), _c('label'), _vm._t("default", [_vm._v(_vm._s(_vm.label))])], 2)])
+  }), _c('label'), _vm._t("default", [_vm._v(_vm._s(_vm.label))])], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -35242,11 +35226,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    class: {
-      'ui-checkbox_inline': _vm.inline
-    }
-  }, [_c('label', {
+  return _c('label', {
     staticClass: "checkbox ui-checkbox_label",
     class: _vm.checkboxClass
   }, [_c('input', {
@@ -35264,7 +35244,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.updateValue($event.target)
       }
     }
-  }), _c('label'), _vm._t("default", [_vm._v(_vm._s(_vm.label))])], 2)])
+  }), _c('label'), _vm._t("default", [_vm._v(_vm._s(_vm.label))])], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
