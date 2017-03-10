@@ -30524,10 +30524,10 @@ exports.default = {
   props: {
     'tree': {},
     'value': {},
-    'dataKey': {},
-    type: { default: 'structure' },
+    type: { default: 'structure' }, // structure,project,costcenter,account
     'horizontal': {},
     label: {},
+    dataKey: {},
     url: {
       type: String,
       default: '/api/enterprise/pickerData'
@@ -30565,21 +30565,36 @@ exports.default = {
   mounted: function mounted() {
     var _this2 = this;
 
+    var defaults = [];
+    if (this.value) {
+      defaults.push({
+        id: this.value,
+        type: this.type
+      });
+    }
     this.$http.get(this.url, {
       params: {
-        items: this.type
+        items: this.type,
+        defaults: JSON.stringify(defaults)
       }
     }).then(function (res) {
-      return _this2.remoteTree = res.data.data[_this2.type];
+      var resData = res.data.data;
+      _this2.text = resData.defaults.length ? resData.defaults[0].name : '';
+      _this2.remoteTree = res.data.data[_this2.type];
     });
   },
 
   methods: {
     findKey: function findKey(data) {
       var result = void 0;
-      ['accountId', 'groupId', 'departmentId', 'accountId'].forEach(function (id) {
-        if (data.hasOwnProperty(id)) result = id;
-      });
+      var _arr = ['accountId', 'groupId', 'departmentId'];
+      for (var _i = 0; _i < _arr.length; _i++) {
+        var id = _arr[_i];
+        if (data.hasOwnProperty(id)) {
+          result = data[id];
+          break;
+        }
+      }
       return result;
     },
     showTreePanel: function showTreePanel(e) {
@@ -34880,7 +34895,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "department-data": _vm.groupTree,
       "event-bus": _vm.eventBus,
       "level": _vm.deptLevel,
-      "need-account": _vm.needAccount,
+      "need-account": _vm.type === 'account',
       "url": _vm.url
     }
   })], 1) : _vm._e()]) : _vm._e()], 1)

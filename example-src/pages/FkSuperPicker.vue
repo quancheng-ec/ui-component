@@ -6,9 +6,19 @@
       account-only
       :items="['account']"
       :chosen-list="accountPicker.chosenList"
-      url="//fkadmin.dev.quancheng-ec.com/api/enterprise/pickerData"
+      url="//localhost:3000/api/enterprise/pickerData"
     >
     </fk-super-picker>
+    <fk-tree-select
+      horizontal
+      account-only
+      v-model="accountPicker.reportAccountId"
+      label="直属上级"
+      type="account"
+      url="//localhost:3000/api/enterprise/pickerData"
+    >
+
+    </fk-tree-select>
   </div>
 </template>
 
@@ -18,7 +28,8 @@
       return {
         accountPicker: {
           show: false,
-          chosenList: []
+          chosenList: [],
+          reportAccountId: '103170224164717001'
         }
       }
     }

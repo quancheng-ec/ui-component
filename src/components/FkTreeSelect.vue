@@ -17,7 +17,7 @@
           :department-data="groupTree"
           :event-bus="eventBus"
           :level="deptLevel"
-          :need-account="needAccount"
+          :need-account="type === 'account'"
           :url="url"
         ></fk-department>
       </div>
@@ -42,10 +42,10 @@
     props: {
       'tree': {},
       'value': {},
-      'dataKey': {},
-      type: { default: 'structure' },
+      type: { default: 'structure' }, // structure,project,costcenter,account
       'horizontal': {},
       label: {},
+      dataKey: {},
       url: {
         type: String,
         default: '/api/enterprise/pickerData'
@@ -76,18 +76,33 @@
       })
     },
     mounted(){
+      const defaults = []
+      if (this.value) {
+        defaults.push({
+          id: this.value,
+          type: this.type
+        })
+      }
       this.$http.get(this.url, {
         params: {
-          items: this.type
+          items: this.type,
+          defaults: JSON.stringify(defaults)
         }
-      }).then(res => this.remoteTree = res.data.data[this.type])
+      }).then(res => {
+        const resData = res.data.data
+        this.text = resData.defaults.length ? resData.defaults[0].name : ''
+        this.remoteTree = res.data.data[this.type]
+      })
     },
     methods: {
       findKey(data){
         let result
-        ['accountId', 'groupId', 'departmentId', 'accountId'].forEach(id => {
-          if (data.hasOwnProperty(id)) result = id
-        })
+        for (const id of ['accountId', 'groupId', 'departmentId']) {
+          if (data.hasOwnProperty(id)) {
+            result = data[id]
+            break
+          }
+        }
         return result
       },
       showTreePanel(e){
