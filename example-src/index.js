@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
 import Example from './Example'
 import QCUI from './../src'
 import { routeConfig } from './pages'
@@ -8,6 +9,7 @@ import './assets/style.styl'
 
 Vue.use(VueRouter)
 Vue.use(QCUI)
+Vue.use(VueResource)
 
 routeConfig.unshift({ path: '/', redirect: '/Index' })
 

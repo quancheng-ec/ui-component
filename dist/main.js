@@ -30298,6 +30298,7 @@ exports.default = {
 //
 //
 //
+//
 
 /***/ }),
 /* 52 */
@@ -35327,7 +35328,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "need-account": _vm.needAccount,
         "account-only": _vm.accountOnly,
         "event-bus": _vm.eventBus,
-        "level": _vm.level + 1
+        "level": _vm.level + 1,
+        "url": _vm.url
       }
     })
   }))], 1) : _vm._e()], 2)])

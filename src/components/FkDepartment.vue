@@ -36,6 +36,7 @@
             v-for="dept in departmentData.children"
             :event-bus="eventBus"
             :level="level+1"
+            :url="url"
           >
           </fk-department>
         </draggable>
