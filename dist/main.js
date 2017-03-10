@@ -30361,6 +30361,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 
 var labelMap = {
   structure: '部门',
@@ -30405,7 +30406,9 @@ exports.default = {
     },
     companyId: {
       default: '20170113105245001'
-    }
+    },
+    onSave: {},
+    onCancel: {}
   },
   computed: {
     show: {

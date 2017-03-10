@@ -27,7 +27,8 @@
         <ui-grid-item :space="6">
           <div class="tree-panel" v-for="item in items">
             <p>{{ labelMap[item] }}：</p>
-            <fk-department :department-data="trees[item]" :level="1" :event-bus="eventBus" :account-only="item === 'account'" :need-account="item === 'account'"></fk-department>
+            <fk-department :department-data="trees[item]" :level="1" :event-bus="eventBus"
+                           :account-only="item === 'account'" :need-account="item === 'account'"></fk-department>
           </div>
         </ui-grid-item>
       </ui-grid-group>
@@ -80,7 +81,9 @@
       },
       companyId: {
         default: '20170113105245001'
-      }
+      },
+      onSave: {},
+      onCancel: {}
     },
     computed: {
       show: {
