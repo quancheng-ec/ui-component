@@ -56,7 +56,7 @@
     display inline-flex
     align-items center
     cursor pointer
-    & input[type=checkbox]
+    & input[type=radio]
       zoom 150%
       margin 0
       left 0
