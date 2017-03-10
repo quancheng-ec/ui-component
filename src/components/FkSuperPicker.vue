@@ -27,7 +27,7 @@
         <ui-grid-item :space="6">
           <div class="tree-panel" v-for="item in items">
             <p>{{ labelMap[item] }}：</p>
-            <fk-department :department-data="trees[item]" :level="1" :event-bus="eventBus"
+            <fk-department :department-data="trees[item]" :level="1" :event-bus="eventBus" :url="url"
                            :account-only="item === 'account'" :need-account="item === 'account'"></fk-department>
           </div>
         </ui-grid-item>

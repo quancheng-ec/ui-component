@@ -34644,6 +34644,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "department-data": _vm.trees[item],
         "level": 1,
         "event-bus": _vm.eventBus,
+        "url": _vm.url,
         "account-only": item === 'account',
         "need-account": item === 'account'
       }
