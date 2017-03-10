@@ -1,11 +1,9 @@
 <template>
-  <div :class="{'ui-checkbox_inline':inline}">
-    <label class="checkbox ui-checkbox_label" :class="checkboxClass">
-      <input type="checkbox" :name="name" :disabled="disabled" :value="inputValue" @change="updateValue($event.target)" :checked="value">
-      <label></label>
-      <slot>{{label}}</slot>
-    </label>
-  </div>
+  <label class="checkbox ui-checkbox_label" :class="checkboxClass">
+    <input type="checkbox" :name="name" :disabled="disabled" :value="inputValue" @change="updateValue($event.target)" :checked="value">
+    <label></label>
+    <slot>{{label}}</slot>
+  </label>
 </template>
 
 <script>
@@ -20,10 +18,6 @@
         type: [String, Array]
       },
       value: {
-      },
-      inline: {
-        type: Boolean,
-        default: false
       },
       label: {
         type : String,
@@ -46,7 +40,7 @@
     },
     computed: {
       checkboxClass() {
-        const Classes = (typeof this.type === 'string' ? this.type.split(' ') : this.type)
+        const Classes = this.type?(typeof this.type === 'string' ? this.type.split(' ') : this.type):[];
         return classNames(Classes.map(cls => 'checkbox-' + cls));
       }
     },
@@ -62,6 +56,9 @@
     display inline-flex
     align-items center
     cursor pointer
-  .ui-checkbox_inline
-    display inline-block
+    & input[type=checkbox]
+      zoom 150%
+      margin 0
+      left 0
+      top 0
 </style>
