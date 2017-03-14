@@ -18,6 +18,7 @@ import UiToast from './components/UiToast'
 import UiSwitcher from './components/UiSwitcher'
 import UiCheckbox from './components/UiCheckbox'
 import UiRadio from './components/UiRadio'
+import UiDropdown from './components/UiDropdown.vue'
 
 import FkDepartment from './components/FkDepartment.vue'
 import FkSuperPicker from './components/FkSuperPicker.vue'
@@ -40,6 +41,7 @@ const QCUI = {
   UiSwitcher,
   UiCheckbox,
   UiRadio,
+  UiDropdown,
   FkDepartment,
   FkSuperPicker,
   FkTreeSelect,
@@ -61,6 +63,7 @@ const QCUI = {
     Vue.component('UiSwitcher', UiSwitcher)
     Vue.component('UiCheckbox', UiCheckbox)
     Vue.component('UiRadio', UiRadio)
+    Vue.component('UiDropdown', UiDropdown)
     Vue.component('FkDepartment', FkDepartment)
     Vue.component('FkSuperPicker', FkSuperPicker)
     Vue.component('FkTreeSelect', FkTreeSelect)
