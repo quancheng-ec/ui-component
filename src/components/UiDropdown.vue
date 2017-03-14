@@ -30,7 +30,9 @@
       },
       list: {
         type: Array,
-        default: []
+        default(){
+          return [];
+        }
       },
       dropup: {
         type: Boolean,
