@@ -454,6 +454,19 @@ ul[data-v-4f04f828] {
   top: 0;
 }
 
+.dropdown-menu_icon a {
+  position: relative;
+  padding-right: 30px;
+}
+.dropdown-menu_icon .dropdown_icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+      -ms-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+}
+
 .label-group .label {
   display: inline-block;
   margin: 5px;

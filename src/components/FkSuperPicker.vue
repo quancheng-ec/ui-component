@@ -146,7 +146,6 @@
             return this.show = false
           }
         }
-
         return this.show = false
 
         function firstUpperCase(str) {
