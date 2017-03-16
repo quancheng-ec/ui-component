@@ -4,9 +4,13 @@
       <slot>{{label}}</slot> <span class="caret"></span>
     </button>
     <slot name="menu">
-      <ul role="menu" class="dropdown-menu">
+      <ul role="menu" class="dropdown-menu" :class="{'dropdown-menu_icon':select}">
         <template v-for="item in list">
-          <li><a @click="clickItem(item, $event)" href="javascript:void(0)">{{item[textKey]}}</a></li>
+          <li>
+            <a @click="clickItem(item, $event)"  href="javascript:void(0)">{{item[textKey]}}
+              <i v-if="select && item.checked" class="print-dropdown_icon" :class="iconClass"></i>
+            </a>
+          </li>
           <li v-if="item.divider" class="divider"></li>
         </template>
       </ul>
@@ -30,7 +34,9 @@
       },
       list: {
         type: Array,
-        default: []
+        default(){
+          return [];
+        }
       },
       dropup: {
         type: Boolean,
@@ -43,7 +49,19 @@
       clickClose: {
         type: Boolean,
         default: true
-      }
+      },
+      select: {
+        type: Boolean,
+        default: false
+      },
+      multiple: {
+        type: Boolean,
+        default: false
+      },
+      icon: {
+        type: String,
+        default: 'check'
+      },
 
     },
     data(){
@@ -61,6 +79,9 @@
       btnClass() {
         const Classes = this.type?(typeof this.type === 'string' ? this.type.split(' ') : this.type):[];
         return classNames(Classes.map(cls => 'btn-' + cls));
+      },
+      iconClass() {
+        return classNames('fa', 'fa-' + this.icon)
       }
     },
     methods: {
@@ -68,6 +89,16 @@
         this.open = !this.open;
       },
       clickItem(item, e){
+        if(this.select){
+          if(this.multiple){
+            item.checked = !item.checked;
+          }else{
+            this.list.map(i=>{
+              i.checked = false;
+            });
+            item.checked = true;
+          }
+        }
         this.$emit('no-click', item, e);
       }
     },
@@ -93,4 +124,13 @@
   }
 </script>
 <style lang='stylus' rel='stylesheet/stylus'>
+  .dropdown-menu_icon
+    a
+      position relative
+      padding-right 30px
+    .dropdown_icon
+      position absolute
+      right 10px
+      top 50%
+      transform translate(0,-50%)
 </style>
