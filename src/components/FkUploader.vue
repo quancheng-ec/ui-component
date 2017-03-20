@@ -13,7 +13,7 @@
             <span class="fileinput-filename"> {{currentFile && currentFile.name}}</span>
           </div>
           <span class="input-group-addon btn btn-default btn-file">
-                                                                                                                                                                                              <span class="fileinput-new" v-if="!currentFile">选择文件</span>
+                                                                                                                                                                                                    <span class="fileinput-new" v-if="!currentFile">选择文件</span>
           <span v-else>更换文件</span>
           <input type="file"
                  name="..."
@@ -39,7 +39,10 @@ import loadScript from 'load-script'
 
 export default {
   props: {
-    label: '',
+    label: {},
+    url: {
+      default: '/api/oss/getToken'
+    },
     config: {
       type: Object,
       default: () => ({
@@ -84,7 +87,7 @@ export default {
       if (this.tokenExpiration && (new Date() > new Date(this.tokenExpiration))) {
         return Promise.resolve(this.client)
       }
-      return this.$http.get('/api/oss/getToken', {
+      return this.$http.get(this.getToken, {
         params: {
           companyId: this.config.companyId,
           accountId: this.config.accountId
