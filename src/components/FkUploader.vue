@@ -87,7 +87,7 @@ export default {
       if (this.tokenExpiration && (new Date() > new Date(this.tokenExpiration))) {
         return Promise.resolve(this.client)
       }
-      return this.$http.get(this.getToken, {
+      return this.$http.get(this.url, {
         params: {
           companyId: this.config.companyId,
           accountId: this.config.accountId
