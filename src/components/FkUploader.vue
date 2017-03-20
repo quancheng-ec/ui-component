@@ -1,0 +1,136 @@
+<template>
+  <div class="form-horizontal">
+    <div class="form-group"
+         v-if="initialized">
+      <label class="col-sm-12">{{label}}</label>
+      <div class="col-sm-12">
+        <div class="fileinput fileinput-new input-group"
+             data-provides="fileinput">
+          <div class="form-control"
+               data-trigger="fileinput">
+            <i class="glyphicon glyphicon-file"
+               v-if="currentFile"></i>
+            <span class="fileinput-filename"> {{currentFile && currentFile.name}}</span>
+          </div>
+          <span class="input-group-addon btn btn-default btn-file">
+                                                                                                                                                                                              <span class="fileinput-new" v-if="!currentFile">选择文件</span>
+          <span v-else>更换文件</span>
+          <input type="file"
+                 name="..."
+                 ref="fileInput"
+                 @change="setFile">
+          </span>
+          <template v-if="currentFile">
+            <span class="input-group-addon btn btn-info"
+                  v-if="isUploading"><i class="fa fa-spin fa-spinner"></i>上传中...</span>
+            <a class="input-group-addon btn btn-info"
+               style="color:#fff"
+               v-else
+               @click="uploadFile">上传</a>
+          </template>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import loadScript from 'load-script'
+
+export default {
+  props: {
+    label: '',
+    config: {
+      type: Object,
+      default: () => ({
+        companyId: '20170113105245001',
+        accountId: ''
+      })
+    }
+  },
+  data() {
+    return {
+      initialized: false,
+      currentFile: null,
+      client: null,
+      isUploading: false,
+      tokenExpiration: ''
+    }
+  },
+  beforeMount() {
+    let isScriptLoaded = false
+    for (const script of document.scripts) {
+      if (script.getAttribute('data-id') === 'aliyun-oss') {
+        isScriptLoaded = true
+        break
+      }
+    }
+    if (isScriptLoaded) {
+      return this.initialized = true
+    }
+    loadScript('http://gosspublic.alicdn.com/aliyun-oss-sdk.min.js', {
+      attrs: { 'data-id': 'aliyun-oss' }
+    }, () => { this.initialized = true })
+  },
+  methods: {
+    setFile(e) {
+      this.currentFile = e.target.files[0]
+    },
+    removeFile() {
+      this.currentFile = null
+      this.$refs.fileInput.value = ''
+    },
+    getToken() {
+      if (this.tokenExpiration && (new Date() > new Date(this.tokenExpiration))) {
+        return Promise.resolve(this.client)
+      }
+      return this.$http.get('/api/oss/getToken', {
+        params: {
+          companyId: this.config.companyId,
+          accountId: this.config.accountId
+        }
+      })
+        .then(res => {
+          const { accessKeyId, accessKeySecret, securityToken, bucket, expiration } = res.data.data
+          this.tokenExpiration = expiration
+          return new OSS.Wrapper({
+            region: 'oss-cn-hangzhou',
+            accessKeyId: accessKeyId,
+            accessKeySecret: accessKeySecret,
+            stsToken: securityToken,
+            bucket: bucket
+          })
+        })
+    },
+    makeFileName() {
+      let name = []
+      Array.prototype.forEach.call(arguments, a => {
+        if (a) name.push(a)
+      })
+      return name.join('/')
+    },
+    uploadFile() {
+      this.isUploading = true
+      this.getToken()
+        .then(client => {
+          client.multipartUpload(
+            this.makeFileName(this.config.companyId, this.config.accountId, this.currentFile.name),
+            this.currentFile
+          ).then(res => {
+            this.isUploading = false
+            this.removeFile()
+            this.$emit('uploaded', {
+              name: res.name,
+              url: res.url,
+              s_url: client.signatureUrl(res.name)
+            })
+          })
+        })
+        .catch(e => {
+          this.isUploading = false
+          console.error(e)
+        })
+    }
+  }
+}
+</script>

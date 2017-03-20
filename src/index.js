@@ -23,6 +23,7 @@ import UiDropdown from './components/UiDropdown.vue'
 import FkDepartment from './components/FkDepartment.vue'
 import FkSuperPicker from './components/FkSuperPicker.vue'
 import FkTreeSelect from './components/FkTreeSelect.vue'
+import FkUploader from './components/FkUploader.vue'
 
 const QCUI = {
   UiButton,
@@ -45,6 +46,7 @@ const QCUI = {
   FkDepartment,
   FkSuperPicker,
   FkTreeSelect,
+  FkUploader,
   install(Vue) {
     Vue.component('UiButton', UiButton)
     Vue.component('UiGridGroup', UiGridGroup)
@@ -67,19 +69,20 @@ const QCUI = {
     Vue.component('FkDepartment', FkDepartment)
     Vue.component('FkSuperPicker', FkSuperPicker)
     Vue.component('FkTreeSelect', FkTreeSelect)
+    Vue.component('FkUploader', FkUploader)
     Object.defineProperties(Vue.prototype, {
       $confirmBox: {
-        get(){
+        get() {
           return UiConfirm.bind(this)
         }
       },
       $alertBox: {
-        get(){
+        get() {
           return UiAlert.bind(this)
         }
       },
       $toastBox: {
-        get(){
+        get() {
           return UiToast.bind(this)
         }
       }

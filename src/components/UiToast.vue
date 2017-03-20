@@ -2,28 +2,23 @@
   <div class="toastclass">
     <div :class="modalSize">
       {{content}}
-
-
-
-
-
     </div>
   </div>
 </template>
 
 <script type='text/babel'>
-  import classNames from 'classnames'
-  export default {
-    computed: {
-      modalSize(){
-        return classNames('toast-modal', 'toast-' + this.size, 'alert', 'alert-' + this.type)
-      }
+import classNames from 'classnames'
+export default {
+  computed: {
+    modalSize() {
+      return classNames('toast-modal', 'toast-' + this.size, 'alert', 'alert-' + this.type)
     }
   }
+}
 </script>
 
 
-<style lang='stylus' rel='stylesheet/stylus'>
+<style lang='stylus'>
   .toastclass
     position fixed
     top 0

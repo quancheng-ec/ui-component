@@ -3,7 +3,7 @@ import Vue from 'vue'
 
 const UiConfirm = {
   components: { UiModal },
-  data(){
+  data() {
     return {
       show: true,
       title: 'alert',
@@ -11,24 +11,24 @@ const UiConfirm = {
     }
   },
   methods: {
-    confirm(){
+    confirm() {
       this.show = false
       this.$nextTick(() => {
         this.$emit('ui-confirm:chosen', 'confirm')
       })
     }
   },
-  render(h){
+  render(h) {
     return (
       <ui-modal
         title={this.title}
         show={this.show}
-        size="sm"
+        size='sm'
       >
-        <div slot="content">{this.content}</div>
-        <div slot="foot-btn">
-          <button type="button" class="btn btn-info waves-effect" data-dismiss="modal"
-                  onClick={this.confirm}>确认
+        <div slot='content'>{this.content}</div>
+        <div slot='foot-btn'>
+          <button type='button' class='btn btn-info waves-effect' data-dismiss='modal'
+            onClick={this.confirm}>确认
           </button>
         </div>
       </ui-modal>
