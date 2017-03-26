@@ -4,7 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
-export default function (options = {}) {
+export default function(options = {}) {
   const { dev, example } = options
 
   return {
@@ -81,14 +81,16 @@ export default function (options = {}) {
           preserveWhitespace: false,
           postcss: [autoprefixer('last 3 versions', '> 1%')]
         }
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        dropConsole: true
       })
     ],
     devServer: {
       contentBase: './example-src',
       historyApiFallback: true,
       port: 4441
-    }
-    ,
+    },
     devtool: dev
       ? 'cheap-module-eval-source-map'
       : 'hidden-source-map'
