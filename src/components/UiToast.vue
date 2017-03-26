@@ -1,6 +1,7 @@
 <template>
   <div class="toastclass">
-    <div :class="modalSize">
+    <div :class="modalSize"
+         ref="modal">
       {{content}}
     </div>
   </div>
@@ -13,12 +14,17 @@ export default {
     modalSize() {
       return classNames('toast-modal', 'toast-' + this.size, 'alert', 'alert-' + this.type)
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.$refs.modal.classList.add('animated', 'fadeIn')
+    })
   }
 }
 </script>
 
 
-<style lang='stylus'>
+<style lang='stylus' rel="stylesheet/stylus">
   .toastclass
     position fixed
     top 0
@@ -26,6 +32,7 @@ export default {
     bottom 0
     right 0
     z-index 9999
+    pointer-events none
     .toast-modal
       width 600px
       padding 20px
@@ -34,8 +41,9 @@ export default {
       left 50%
       color #fff
       transform translate(-50%, -50%)
+      animation-duration 200ms!important
       text-align center
-      opacity 0.8
+      opacity 0
       border-radius 10px
       &.toast-lg
         width 900px
