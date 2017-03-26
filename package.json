@@ -5,7 +5,8 @@
   "main": "dist/main.js",
   "scripts": {
     "example-dev": "webpack-dev-server --env.dev --env.example --config config/webpack.conf.babel.js --inline --hot",
-    "build": "webpack --config config/webpack.conf.babel.js"
+    "build": "webpack --config config/webpack.conf.babel.js",
+    "build-watch": "webpack --config config/webpack.conf.babel.js --watch"
   },
   "author": "zephyr",
   "license": "ISC",
