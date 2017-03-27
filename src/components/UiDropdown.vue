@@ -1,14 +1,14 @@
 <template>
   <div class="btn-group m-r-10 " :class="boxClass" @click="openDropdown">
     <button aria-expanded="false" data-toggle="dropdown" class="btn dropdown-toggle waves-effect waves-light" :class="btnClass" type="button">
-      <slot>{{label}}</slot> <span class="caret"></span>
+      <slot>{{_showLabel()}}</slot> <span class="caret"></span>
     </button>
     <slot name="menu">
-      <ul role="menu" class="dropdown-menu" :class="{'dropdown-menu_icon':select}">
+      <ul role="menu" class="dropdown-menu" >
         <template v-for="item in list">
-          <li>
-            <a @click="clickItem(item, $event)"  href="javascript:void(0)">{{item[textKey]}}
-              <i v-if="select && item.checked" class="print-dropdown_icon" :class="iconClass"></i>
+          <li :class="{'dropdown-disabled':item.disabled}">
+            <a @click="clickItem(item, $event)"  href="javascript:void(0)">{{typeof item == 'object'?item[textKey]:item}}
+              <i v-if="select && _isChecked(item)" class="dropdown_icon" :class="iconClass"></i>
             </a>
           </li>
           <li v-if="item.divider" class="divider"></li>
@@ -24,45 +24,56 @@
   import classNames from 'classnames'
   export default {
     props : {
-      label : {
+      value: {},//支持v-model，只有在props激活select属性生效
+      label: {
         type: String,
         default: 'dropdown'
       },
-      textKey : {
+      textKey : {//设置下拉菜单显示的文本值，list必须为对象数组
         type: String,
         default: 'text'
       },
-      list: {
+      valueKey : {//设置下拉菜单用于的ID值，用于v-model双绑实现选中效果，list必须为对象数组
+        type: String,
+        default: 'value'
+      },
+      list: {//渲染下拉菜单数组
         type: Array,
         default(){
           return [];
         }
       },
-      dropup: {
+      dropup: {//改变下拉菜单展开方向，是否向上展开
         type: Boolean,
         default: false
       },
-      type: {
+      type: {//设置dropdown样式(与button样式相同)
         type : [String, Array],
         default : 'info'
       },
-      clickClose: {
+      clickClose: {//选中下拉项后是否关闭下拉菜单
         type: Boolean,
         default: true
       },
-      select: {
+      select: {//将dropdown改变为select形式的组件，支持v-model绑定
         type: Boolean,
         default: false
       },
-      multiple: {
+      multiple: {//多选，只有在select形态下有效
         type: Boolean,
         default: false
       },
-      icon: {
+      icon: {//设置选中状态icon，只有在select形态下有效
         type: String,
         default: 'check'
       },
-
+      placeHolder: {//默认显示文本，只有在select形态下有效
+        type: String
+      },
+      returnObject: {
+        type: Boolean,
+        default: false
+      }
     },
     data(){
       return {
@@ -89,17 +100,68 @@
         this.open = !this.open;
       },
       clickItem(item, e){
+        if(item.disabled) return;
         if(this.select){
+          let value = JSON.parse(JSON.stringify(this.value));
           if(this.multiple){
-            item.checked = !item.checked;
-          }else{
-            this.list.map(i=>{
-              i.checked = false;
+            let i = value.findIndex(v=>{
+              return (this.returnObject?v[this.valueKey]:v)== item[this.valueKey];
             });
-            item.checked = true;
+            if(i == -1){
+              value.push(this.returnObject?item:item[this.valueKey]);
+            }else{
+              value.splice(i, 1);
+            }
+          }else{
+            value = this.returnObject?item:item[this.valueKey];
           }
+          console.log('dropdown:input=', value);
+          this.$emit('input', value , e);
         }
         this.$emit('no-click', item, e);
+      },
+      _value(item){
+        return this.returnObject?item:item[this.valueKey];
+      },
+      _isChecked(item){
+        if(!this.value) return;
+        let flag = false;
+        if(this.multiple){
+          for(let v of this.value){
+            if((this.returnObject?v[this.valueKey]:v) == item[this.valueKey]){
+              flag = true;
+              break
+            }
+          }
+        }else{
+          flag = ((this.returnObject?this.value[this.valueKey]:this.value) == item[this.valueKey]);
+        }
+        return flag;
+      },
+      _showLabel(){
+        if(this.select){
+          if(!this.value) return this.placeHolder;
+          let name = [];
+          if(this.multiple){
+            for(let v of this.value){
+              for(let item of this.list){
+                if(item[this.valueKey] == (this.returnObject?v[this.valueKey]:v)){
+                  name.push(item[this.textKey]);
+                  break;
+                }
+              }
+            }
+          }else{
+            for(let item of this.list){
+              if(item[this.valueKey] == (this.returnObject?this.value[this.valueKey]:this.value)){
+                name.push(item[this.textKey]);
+                break;
+              }
+            }
+          }
+          return name.length?name.join(','):this.placeHolder;
+        }
+        return this.label;
       }
     },
     mounted() {
@@ -124,13 +186,9 @@
   }
 </script>
 <style lang='stylus' rel='stylesheet/stylus'>
-  .dropdown-menu_icon
-    a
-      position relative
-      padding-right 30px
-    .dropdown_icon
-      position absolute
-      right 10px
-      top 50%
-      transform translate(0,-50%)
+  .dropdown-disabled a
+    color #b4b4b4 !important
+    &:hover,&:focus
+      background-color transparent !important
+      cursor not-allowed
 </style>
