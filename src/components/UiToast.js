@@ -13,10 +13,14 @@ export default function $toast(opts = {}) {
   confirm.type = type || 'success'
 
   confirm.$mount(confirmContainer)
-  setTimeout(remove, duration || 2000)
+  setTimeout(remove, duration || 1000)
 
   function remove() {
-    confirm.$el.parentNode.removeChild(confirm.$el)
-    confirm.$destroy()
+    confirm.$refs.modal.classList.remove('fadeIn')
+    confirm.$refs.modal.classList.add('fadeOut')
+    setTimeout(() => {
+      confirm.$el.parentNode.removeChild(confirm.$el)
+      confirm.$destroy()
+    }, 200)
   }
 }

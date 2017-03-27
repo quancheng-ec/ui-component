@@ -1,11 +1,12 @@
 {
   "name": "qc-ui-component",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "",
   "main": "dist/main.js",
   "scripts": {
     "example-dev": "webpack-dev-server --env.dev --env.example --config config/webpack.conf.babel.js --inline --hot",
-    "build": "webpack --config config/webpack.conf.babel.js"
+    "build": "NODE_ENV=production webpack --config config/webpack.conf.babel.js",
+    "build-watch": "webpack --config config/webpack.conf.babel.js --watch"
   },
   "author": "zephyr",
   "license": "ISC",
