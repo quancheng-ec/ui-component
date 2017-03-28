@@ -94,6 +94,20 @@ export default {
 <style rel="stylesheet/stylus" lang="stylus">
   .modal
     display block
+    text-align center
+  @media screen and (min-width: 768px) { 
+    .modal:before {
+      display: inline-block;
+      vertical-align: middle;
+      content: " ";
+      height: 100%;
+    }
+  }  
+
+  .modal-dialog
+    display inline-block
+    text-align left
+    vertical-align middle
 
   .modal-shadow
     background rgba(0, 0, 0, 0.3)
