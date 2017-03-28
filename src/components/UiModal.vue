@@ -76,11 +76,20 @@ export default {
     textPosition: {
       type: String,
       default: 'left'
+    },
+    appendEl: {
+      type: String
     }
   },
   methods: {
     closeModal() {
       this.active = false
+    }
+  },
+  mounted() {
+    if (this.appendEl === 'body') {
+      this.$el.parentNode.removeChild(this.$el)
+      document.body.append(this.$el)
     }
   },
   watch: {
