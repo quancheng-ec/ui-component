@@ -27,7 +27,10 @@
       value: {},//支持v-model，只有在props激活select属性生效
       label: {
         type: String,
-        default: 'dropdown'
+        default: ''
+      },
+      maxLabel: { //label最大显示字数
+        type: Number
       },
       textKey : {//设置下拉菜单显示的文本值，list必须为对象数组
         type: String,
@@ -102,7 +105,7 @@
       clickItem(item, e){
         if(item.disabled) return;
         if(this.select){
-          let value = JSON.parse(JSON.stringify(this.value));
+          let value = JSON.parse(JSON.stringify(this.value)) || [];
           if(this.multiple){
             let i = value.findIndex(v=>{
               return (this.returnObject?v[this.valueKey]:v)== item[this.valueKey];
@@ -115,7 +118,6 @@
           }else{
             value = this.returnObject?item:item[this.valueKey];
           }
-          console.log('dropdown:input=', value);
           this.$emit('input', value , e);
         }
         this.$emit('no-click', item, e);
@@ -159,9 +161,12 @@
               }
             }
           }
-          return name.length?name.join(','):this.placeHolder;
+          if(name.length){
+            return (this.maxLabel&&name.join(',').length > this.maxLabel)?`${name.join(',').substr(0, this.maxLabel)}...`:name.join(',');
+          }
+          return this.placeHolder;
         }
-        return this.label;
+        return this.maxLabel?this.label:'';
       }
     },
     mounted() {
