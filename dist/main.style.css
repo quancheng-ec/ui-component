@@ -468,17 +468,13 @@ ul[data-v-4f04f828] {
   top: 0;
 }
 
-.dropdown-menu_icon a {
-  position: relative;
-  padding-right: 30px;
+.dropdown-disabled a {
+  color: #b4b4b4 !important;
 }
-.dropdown-menu_icon .dropdown_icon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  -webkit-transform: translate(0, -50%);
-      -ms-transform: translate(0, -50%);
-          transform: translate(0, -50%);
+.dropdown-disabled a:hover,
+.dropdown-disabled a:focus {
+  background-color: transparent !important;
+  cursor: not-allowed;
 }
 
 .label-group .label {
