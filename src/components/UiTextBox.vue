@@ -8,15 +8,16 @@
     <div :class="{'input-group':$slots.addon,'col-sm-9':horizontal}">
       <span class="input-group-addon"
             :class="fontSize"
-            v-if="$slots.addon">
-              <slot name="addon"></slot>
-            </span>
+            v-if="$slots.addon"><slot name="addon"></slot></span>
       <template v-if="type == 'date'">
         <div class="form-control"
              :class="inputSize">
           {{value}}
         </div>
       </template>
+      <div class="form-control"
+           :class="inputSize"
+           v-else-if="!editable">{{value}}</div>
       <template v-else>
         <input v-if="!multiLine"
                class="form-control"
@@ -41,8 +42,8 @@
       <span class="input-group-addon"
             :class="fontSize"
             v-if="$slots.otherAddon">
-              <slot name="otherAddon"></slot>
-            </span>
+                        <slot name="otherAddon"></slot>
+                      </span>
       <slot></slot>
     </div>
     <span class="help-block text-danger"
@@ -82,6 +83,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    editable: {
+      type: Boolean,
+      default: true
     },
     required: {
       type: Boolean,

@@ -508,3 +508,35 @@ ul[data-v-4f04f828] {
   background: transparent;
   border: 0;
 }
+
+.dropdown-list[data-v-3301a9ee] {
+  position: absolute;
+  width: 100%;
+  padding-right: 15px;
+}
+.dropdown-content[data-v-3301a9ee] {
+  width: 100%;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+}
+.dropdown-content .list-group[data-v-3301a9ee] {
+  margin-top: 10px;
+  overflow: auto;
+  max-height: 200px;
+}
+.app-search[data-v-3301a9ee] {
+  max-width: 100%;
+  width: 100%;
+  display: inline-block;
+}
+.app-search .form-control[data-v-3301a9ee],
+.app-search .form-control[data-v-3301a9ee]:focus {
+  margin-top: 0;
+  max-width: 100%;
+  width: 100%;
+  background: #edf1f5;
+}
+.app-search a[data-v-3301a9ee] {
+  top: 5px;
+}

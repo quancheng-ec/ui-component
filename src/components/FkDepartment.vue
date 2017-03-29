@@ -99,6 +99,7 @@ export default {
     },
     chooseItem(item, type) {
       if (this.accountOnly && type !== 'account') return
+      if (!type) console.log(item)
       this.eventBus.$emit('item:chosen', {
         type,
         data: item
