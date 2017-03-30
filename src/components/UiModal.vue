@@ -94,7 +94,14 @@ export default {
   },
   watch: {
     value(n) {
-      document.body.classList[n ? 'add' : 'remove']('modal-open')
+      if (n) {
+        return document.body.classList.add('modal-open')
+      }
+      this.$nextTick(() => {
+        if (!document.querySelector('.modal')) {
+          document.body.classList.remove('modal-open')
+        }
+      })
     }
   }
 }

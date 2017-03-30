@@ -1,42 +1,38 @@
 <template>
-  <div style="position:relative;z-index:10">
-    <ui-text-box v-model="chosenNames"
-                 :horizontal="options.horizontal"
-                 place-holder="选择人员"
-                 :label="options.label"
-                 :editable="false"
-                 @click.native="list.show = true">
-      <div v-if="list.show"
-           class="dropdown-list">
-        <div class="in dropdown-content">
-          <form role="search"
-                class="app-search hidden-xs"
-                @submit.prevent>
-            <input v-model="search"
-                   placeholder="搜索员工"
-                   class="form-control"
-                   ref="input">
-            <a @click="loadAccount"
-               class="active"><i class="fa fa-search"></i></a>
-          </form>
-          <div class="list-group">
-            <a v-for="account in list.accounts"
-               class="list-group-item"
-               @click="choseItem(account)">
-              <i class="fa fa-user"></i> {{account.cnName}}
-              <br> <small class="text-muted">{{account._departmentName}}</small>
-            </a>
-          </div>
-        </div>
+  <div>
+    <ui-picker :text="chosenNames"
+               :options="options"
+               :multiple="options.multiple"
+               @list-show="loadAccount"
+               ref="picker">
+      <form role="search"
+            class="app-search hidden-xs"
+            @submit.prevent>
+        <input v-model="search"
+               placeholder="搜索员工"
+               class="form-control"
+               ref="input">
+        <a @click="loadAccount"
+           class="active"><i class="fa fa-search"></i></a>
+      </form>
+      <div class="list-group">
+        <a v-for="account in accounts"
+           class="list-group-item"
+           @click="choseItem(account)">
+          <i class="fa fa-user"></i> {{account.cnName}}
+          <br> <small class="text-muted">{{account._departmentName}}</small>
+        </a>
       </div>
-    </ui-text-box>
+    </ui-picker>
   </div>
 </template>
 
 <script>
+import UiPicker from './UiPicker.vue'
+import FkMixin from '../mixins/FkMixin.vue'
 import { debounce, isArray, includes } from 'lodash'
-import EventListener from '../libs/EventListener.es6.js'
 export default {
+  mixins: [FkMixin],
   props: {
     value: {
       type: [String, Array],
@@ -49,6 +45,7 @@ export default {
       }
     }
   },
+  components: { UiPicker },
   computed: {
     chosenNames() {
       if (this.options.multiple) {
@@ -59,42 +56,40 @@ export default {
   },
   data() {
     return {
-      list: {
-        show: false,
-        accounts: []
-      },
+      accounts: [],
       chosenList: [],
-      chosen: {},
+      chosen: {
+        accountId: '',
+        cnName: ''
+      },
       search: ''
     }
   },
-  created() {
-    if (!document) return
-    this._closeEvent = EventListener.listen(document, 'click', e => {
-      if (this.list.show === false) return
-      if (!this.$el.contains(e.target)) {
-        this.list.show = false
+  mounted() {
+    if (this.value) {
+      const request = this.$http.get(this.remote_domain + '/api/enterprise/resource', {
+        params: {
+          accountIds: this.value
+        }
+      }).then(res => res.data.data.accounts)
+      if (!this.options.multiple) {
+        return request.then(accounts => this.chosen = accounts[0])
       }
-    })
-  },
-  beforeDestroy() {
-    if (this._closeEvent) this._closeEvent.remove()
+      return request.then(accounts => this.chosenList = accounts)
+    }
   },
   watch: {
-    'list.show'(show) {
-      if (show) this.loadAccount()
-    },
     'search'(kw) {
       this.loadAccount()
     }
   },
   methods: {
     loadAccount: debounce(function () {
-      return this.$http.get(this.options.url || '/api/enterprise/resource', {
+      return this.$http.get(this.remote_domain + '/api/enterprise/resource', {
         params: {
           search: this.search
         }
-      }).then(res => this.list.accounts = res.data.data.accounts)
+      }).then(res => this.accounts = res.data.data.accounts)
     }, 300),
     choseItem(account) {
       if (this.options.multiple) {
@@ -103,7 +98,7 @@ export default {
         return this.$emit('input', this.chosenList.map(a => a.accountId).join(','))
       }
       this.chosen = account
-      this.list.show = false
+      this.$refs.picker.listShow = false
       this.$emit('input', account.accountId)
     }
   }
@@ -112,19 +107,6 @@ export default {
 
 
 <style lang="stylus" ref="stylesheet/stylus" scoped>
-  .dropdown-list
-    position absolute
-    width 100%
-    padding-right 15px
-  .dropdown-content
-    width 100%
-    padding 10px
-    background #fff
-    border 1px solid #e6e6e6
-    .list-group
-      margin-top 10px
-      overflow auto
-      max-height 200px
   .app-search
     max-width 100%
     width 100%
