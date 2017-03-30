@@ -142,7 +142,7 @@
       },
       _showLabel(){
         if(this.select){
-          if(!this.value) return this.placeHolder;
+//          if(!this.value) return this.placeHolder;
           let name = [];
           if(this.multiple){
             for(let v of this.value){
