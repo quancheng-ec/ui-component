@@ -76,6 +76,9 @@ export default {
     textPosition: {
       type: String,
       default: 'left'
+    },
+    appendEl: {
+      type: String
     }
   },
   methods: {
@@ -83,9 +86,22 @@ export default {
       this.active = false
     }
   },
+  mounted() {
+    if (this.appendEl === 'body') {
+      this.$el.parentNode.removeChild(this.$el)
+      document.body.append(this.$el)
+    }
+  },
   watch: {
     value(n) {
-      document.body.classList[n ? 'add' : 'remove']('modal-open')
+      if (n) {
+        return document.body.classList.add('modal-open')
+      }
+      this.$nextTick(() => {
+        if (!document.querySelector('.modal')) {
+          document.body.classList.remove('modal-open')
+        }
+      })
     }
   }
 }
@@ -94,6 +110,20 @@ export default {
 <style rel="stylesheet/stylus" lang="stylus">
   .modal
     display block
+    text-align center
+  @media screen and (min-width: 768px) { 
+    .modal:before {
+      display: inline-block;
+      vertical-align: middle;
+      content: " ";
+      height: 100%;
+    }
+  }  
+
+  .modal-dialog
+    display inline-block
+    text-align left
+    vertical-align middle
 
   .modal-shadow
     background rgba(0, 0, 0, 0.3)

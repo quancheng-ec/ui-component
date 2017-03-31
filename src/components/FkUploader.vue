@@ -13,7 +13,7 @@
             <span class="fileinput-filename"> {{currentFile && currentFile.name}}</span>
           </div>
           <span class="input-group-addon btn btn-default btn-file">
-                                                                                                                                                                                                    <span class="fileinput-new" v-if="!currentFile">选择文件</span>
+                                                                                                                                                                                                                      <span class="fileinput-new" v-if="!currentFile">选择文件</span>
           <span v-else>更换文件</span>
           <input type="file"
                  name="..."
@@ -87,22 +87,21 @@ export default {
       if (this.tokenExpiration && (new Date() > new Date(this.tokenExpiration))) {
         return Promise.resolve(this.client)
       }
-      return this.$http.get(this.url, {
-        params: {
-          companyId: this.config.companyId,
-          accountId: this.config.accountId
-        }
-      })
+      return this.$http.get(this.url)
         .then(res => {
-          const { accessKeyId, accessKeySecret, securityToken, bucket, expiration } = res.data.data
+          const { accessKeyId, accessKeySecret, securityToken, bucket, expiration } = res.data.data.ossAccess
           this.tokenExpiration = expiration
-          return new OSS.Wrapper({
-            region: 'oss-cn-hangzhou',
-            accessKeyId: accessKeyId,
-            accessKeySecret: accessKeySecret,
-            stsToken: securityToken,
-            bucket: bucket
-          })
+          return {
+            client: new OSS.Wrapper({
+              region: 'oss-cn-hangzhou',
+              accessKeyId: accessKeyId,
+              accessKeySecret: accessKeySecret,
+              stsToken: securityToken,
+              bucket: bucket
+            }),
+            accountId: res.data.data.accountId,
+            companyId: res.data.data.companyId
+          }
         })
     },
     makeFileName() {
@@ -115,9 +114,9 @@ export default {
     uploadFile() {
       this.isUploading = true
       this.getToken()
-        .then(client => {
+        .then(({ client, accountId, companyId }) => {
           client.multipartUpload(
-            this.makeFileName(this.config.companyId, this.config.accountId, this.currentFile.name),
+            this.makeFileName(companyId, accountId, this.currentFile.name),
             this.currentFile
           ).then(res => {
             this.isUploading = false
@@ -125,7 +124,7 @@ export default {
             this.$emit('uploaded', {
               name: res.name,
               url: res.url,
-              s_url: client.signatureUrl(res.name)
+              s_url: client.signatureUrl(res.name, { expiration: 3600 })
             })
           })
         })

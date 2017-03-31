@@ -20,10 +20,13 @@ import UiCheckbox from './components/UiCheckbox'
 import UiRadio from './components/UiRadio'
 import UiDropdown from './components/UiDropdown.vue'
 
+import FkMixin from './mixins/FkMixin.vue'
 import FkDepartment from './components/FkDepartment.vue'
 import FkSuperPicker from './components/FkSuperPicker.vue'
 import FkTreeSelect from './components/FkTreeSelect.vue'
 import FkUploader from './components/FkUploader.vue'
+import FkAccountPicker from './components/FkAccountPicker.vue'
+import FkLayout from './components/FkLayout.vue'
 
 const QCUI = {
   UiButton,
@@ -43,10 +46,13 @@ const QCUI = {
   UiCheckbox,
   UiRadio,
   UiDropdown,
+  FkMixin,
   FkDepartment,
   FkSuperPicker,
   FkTreeSelect,
   FkUploader,
+  FkAccountPicker,
+  FkLayout,
   install(Vue) {
     Vue.component('UiButton', UiButton)
     Vue.component('UiGridGroup', UiGridGroup)
@@ -70,6 +76,8 @@ const QCUI = {
     Vue.component('FkSuperPicker', FkSuperPicker)
     Vue.component('FkTreeSelect', FkTreeSelect)
     Vue.component('FkUploader', FkUploader)
+    Vue.component('FkAccountPicker', FkAccountPicker)
+    Vue.component('FkLayout', FkLayout)
     Object.defineProperties(Vue.prototype, {
       $confirmBox: {
         get() {

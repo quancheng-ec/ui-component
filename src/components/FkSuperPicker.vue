@@ -17,10 +17,7 @@
           </slot>
           <div class="label-group">
             <span class="label label-rounded label-info label-outline"
-                  v-for="chosen,index in chosenList">
-                        {{chosen.name}}
-                        <i class="fa fa-remove" @click="chosenList.splice(index,1)"></i>
-                      </span>
+                  v-for="chosen,index in chosenList">{{chosen.name}} <i class="fa fa-remove" @click="chosenList.splice(index,1)"></i></span>
           </div>
         </ui-grid-item>
         <ui-grid-item :space="6">
@@ -28,6 +25,7 @@
                v-for="item in items">
             <p>{{ labelMap[item] }}：</p>
             <fk-department :department-data="trees[item]"
+                           :type="item"
                            :level="1"
                            :event-bus="eventBus"
                            :url="url"

@@ -8,15 +8,18 @@
     <div :class="{'input-group':$slots.addon,'col-sm-9':horizontal}">
       <span class="input-group-addon"
             :class="fontSize"
-            v-if="$slots.addon">
-              <slot name="addon"></slot>
-            </span>
+            v-if="$slots.addon"><slot name="addon"></slot></span>
       <template v-if="type == 'date'">
         <div class="form-control"
-             :class="inputSize">
+             :class="inputSize"
+             @click="triggerClick">
           {{value}}
         </div>
       </template>
+      <div class="form-control"
+           :class="inputSize"
+           v-else-if="!editable"
+           @click="triggerClick">{{value}}</div>
       <template v-else>
         <input v-if="!multiLine"
                class="form-control"
@@ -27,6 +30,7 @@
                ref="input"
                :type="type"
                :value="value"
+               @click="triggerClick"
                @input="updateValue($event.target.value)" />
         <textarea v-else
                   class="form-control"
@@ -35,18 +39,17 @@
                   :placeholder="placeHolder"
                   ref="input"
                   :value="value"
+                  @click="triggerClick"
                   @input="updateValue($event.target.value)">
         </textarea>
       </template>
       <span class="input-group-addon"
             :class="fontSize"
-            v-if="$slots.otherAddon">
-              <slot name="otherAddon"></slot>
-            </span>
+            v-if="$slots.otherAddon"> <slot name="otherAddon"></slot></span>
       <slot></slot>
+      <span class="help-block text-danger"
+            v-for="error in validationErrors">{{error}}</span>
     </div>
-    <span class="help-block text-danger"
-          v-for="error in validationErrors">{{error}}</span>
   </div>
 </template>
 
@@ -83,9 +86,18 @@ export default {
       type: Boolean,
       default: false
     },
+    editable: {
+      type: Boolean,
+      default: true
+    },
     required: {
       type: Boolean,
       default: false
+    }
+  },
+  methods: {
+    triggerClick() {
+      this.$emit('click')
     }
   }
 }

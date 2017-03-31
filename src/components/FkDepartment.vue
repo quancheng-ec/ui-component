@@ -9,7 +9,7 @@
   
       </button>
       <div class="dd-handle"
-           @click="chooseItem(departmentData)">
+           @click="chooseItem(departmentData,type)">
         <i class="fa fa-sitemap"></i> {{departmentData.name}}
   
       </div>
@@ -33,6 +33,7 @@
                          v-for="dept in departmentData.children"
                          :event-bus="eventBus"
                          :level="level+1"
+                         :type="type"
                          :url="url">
           </fk-department>
         </draggable>
@@ -54,6 +55,10 @@ export default {
     'departmentData': {},
     'eventBus': {},
     'level': {},
+    type: {
+      type: String,
+      default: 'structure'
+    },
     needAccount: {
       type: Boolean,
       default: true
@@ -99,6 +104,7 @@ export default {
     },
     chooseItem(item, type) {
       if (this.accountOnly && type !== 'account') return
+      if (!type) console.log(item)
       this.eventBus.$emit('item:chosen', {
         type,
         data: item
