@@ -16,6 +16,7 @@
 
 <script>
 import UiPicker from './UiPicker.vue'
+import FkMixin from '../mixins/FkMixin.vue'
 import Vue from 'vue'
 export default {
   data() {
@@ -30,11 +31,16 @@ export default {
     }
   },
   props: {
-    'tree': {},
-    'value': {},
+    tree: {},
+    value: {},
     type: { default: 'structure' }, // structure,project,costcenter,account
-    'horizontal': {},
+    horizontal: {},
     label: {},
+    options: {
+      default: () => {
+        return {}
+      }
+    },
     dataKey: {},
     url: {
       type: String,
@@ -49,6 +55,7 @@ export default {
       default: false
     }
   },
+  mixins: [FkMixin],
   components: { UiPicker },
   computed: {
     groupTree() {
@@ -60,6 +67,7 @@ export default {
       if (type !== 'account' && this.accountOnly) return
       this.$refs.picker.listShow = false
       this.text = data.name || data.cnName
+      this.$emit('item:change', { type, data })
       this.$emit('input', this.findKey(data))
     })
     this.eventBus.$on('drag:end', () => {
@@ -78,9 +86,10 @@ export default {
           type: this.type
         })
       }
-      return this.$http.get(this.url, {
+      return this.$http.get(this.remote_domain + '/api/enterprise/pickerData', {
         params: {
           items: this.type,
+          companyId: this.options.companyId,
           defaults: JSON.stringify(defaults)
         }
       }).then(res => {

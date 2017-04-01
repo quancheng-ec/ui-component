@@ -108,5 +108,9 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
   .top-left-part
     width 245px
-
+  .navbar-header {
+    width: 100%;
+    background: #3484DF;
+    border: 0;
+  }
 </style>

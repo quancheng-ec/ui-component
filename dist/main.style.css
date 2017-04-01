@@ -85,6 +85,9 @@ h6[data-v-7d463266] {
   top: 2px;
   left: 3px;
 }
+.text-placeholder {
+  color: #999;
+}
 
 
 
@@ -537,4 +540,9 @@ ul[data-v-4f04f828] {
 
 .top-left-part {
   width: 245px;
+}
+.navbar-header {
+  width: 100%;
+  background: #3484df;
+  border: 0;
 }
