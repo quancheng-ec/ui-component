@@ -10,21 +10,21 @@
           </a>
         </div>
         <ul class="nav navbar-top-links navbar-right pull-right">
-          <li class="dropdown">
+          <li class="dropdown"
+              :class="{'open':showMenu}">
             <a class="dropdown-toggle profile-pic waves-effect"
-               data-toggle="dropdown">
+               data-toggle="dropdown"
+               @click="showMenu = !showMenu">
               <b class="hidden-xs"><i class="fa fa-user"></i> {{account.cnName}}</b>
             </a>
-            <ul class="dropdown-menu dropdown-user animated flipInY">
-              <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-              <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-              <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-              <li role="separator"
-                  class="divider"></li>
-              <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-              <li role="separator"
-                  class="divider"></li>
-              <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+            <ul class="dropdown-menu dropdown-user animated flipInY"
+                v-if="showMenu"
+                @click="showMenu = false">
+              <slot name="user-menu">
+                <li><a href="#"><i class="ti-user"></i> 账号设置</a></li>
+              </slot>
+              <li><a :href="remote_domain + '/choosecompany/view'"><i class="ti-user"></i> 切换公司</a></li>
+              <li><a @click="logout"><i class="fa fa-power-off"></i> 登出</a></li>
             </ul>
           </li>
         </ul>
@@ -93,6 +93,7 @@ export default {
   data() {
     return {
       sidebar: [],
+      showMenu: false,
       account: {}
     }
   },
@@ -101,6 +102,17 @@ export default {
       this.account = res.data.data.account
       this.sidebar = res.data.data.sidebar
     })
+  },
+  methods: {
+    logout() {
+      this.$confirmBox({
+        size: 'sm',
+        content: '确认要登出当前账号？'
+      }).then(res => {
+        this.$http.post(this.remote_domain + '/api/login/logout')
+          .then(res => location.reload())
+      })
+    }
   }
 }
 </script>
