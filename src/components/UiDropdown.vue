@@ -161,10 +161,12 @@
               }
             }
           } else {
-            for (let item of this.list) {
-              if (item[this.valueKey] == (this.returnObject ? this.value[this.valueKey] : this.value)) {
-                name.push(item[this.textKey])
-                break
+            if(this.value){
+              for (let item of this.list) {
+                if (item[this.valueKey] == (this.returnObject ? this.value[this.valueKey] : this.value)) {
+                  name.push(item[this.textKey])
+                  break
+                }
               }
             }
           }

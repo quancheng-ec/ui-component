@@ -13,7 +13,8 @@
         <div class="form-control"
              :class="inputSize"
              @click="triggerClick">
-          {{value}}
+          <template v-if="value">{{value}}</template>
+          <span v-if="!value" class="text-placeholder">{{placeHolder}}</span>
         </div>
       </template>
       <div class="form-control"
@@ -109,4 +110,6 @@ export default {
     position relative
     top 2px
     left 3px
+  .text-placeholder
+    color #999
 </style>

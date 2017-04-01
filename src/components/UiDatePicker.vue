@@ -1,7 +1,7 @@
 <template>
   <div>
     <ui-text-box @click.native="togglePanel" v-model="value" type="date" :size="size" :name="name"
-                 :validation-rules="validationRules">
+                 :validation-rules="validationRules" :place-holder="placeHolder">
       <span slot="addon" v-if="addon">{{addon}}</span>
     </ui-text-box>
     <transition name="toggle">
@@ -108,6 +108,9 @@
       range: {
         type: Boolean,
         default: false
+      },
+      placeHolder: {
+        type: String
       },
       name: {},
       validationRules: {}
