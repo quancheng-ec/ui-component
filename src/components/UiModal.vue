@@ -84,6 +84,7 @@ export default {
   methods: {
     closeModal() {
       this.active = false
+      this.$emit('uiModalClose')
     }
   },
   mounted() {
