@@ -134,39 +134,38 @@
         return this.returnObject ? item : item[this.valueKey]
       },
       _isChecked(item) {
-        if (!this.value) return
+        if (this.value == undefined) return
         let flag = false
         if (this.multiple) {
           for (let v of this.value) {
-            if ((this.returnObject ? v[this.valueKey] : v) == item[this.valueKey]) {
+            if ((this.returnObject ? v[this.valueKey] : v) === item[this.valueKey]) {
               flag = true
               break
             }
           }
         } else {
-          flag = ((this.returnObject ? this.value[this.valueKey] : this.value) == item[this.valueKey])
+          flag = ((this.returnObject ? this.value[this.valueKey] : this.value) === item[this.valueKey])
         }
         return flag
       },
       _showLabel() {
         if (this.select) {
+          if(this.value == undefined) return this.placeHolder
           let name = []
           if (this.multiple) {
             for (let v of this.value) {
               for (let item of this.list) {
-                if (item[this.valueKey] == (this.returnObject ? v[this.valueKey] : v)) {
+                if (item[this.valueKey] === (this.returnObject ? v[this.valueKey] : v)) {
                   name.push(item[this.textKey])
                   break
                 }
               }
             }
           } else {
-            if(this.value){
-              for (let item of this.list) {
-                if (item[this.valueKey] == (this.returnObject ? this.value[this.valueKey] : this.value)) {
-                  name.push(item[this.textKey])
-                  break
-                }
+            for (let item of this.list) {
+              if (item[this.valueKey] === (this.returnObject ? this.value[this.valueKey] : this.value)) {
+                name.push(item[this.textKey])
+                break
               }
             }
           }
