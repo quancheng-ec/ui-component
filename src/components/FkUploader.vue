@@ -13,7 +13,7 @@
             <span class="fileinput-filename"> {{currentFile && currentFile.name}}</span>
           </div>
           <span class="input-group-addon btn btn-default btn-file">
-                                                                                                                                                                                                                      <span class="fileinput-new" v-if="!currentFile">选择文件</span>
+                                                                                                                                                                                                                          <span class="fileinput-new" v-if="!currentFile">选择文件</span>
           <span v-else>更换文件</span>
           <input type="file"
                  name="..."
@@ -36,6 +36,7 @@
 
 <script>
 import loadScript from 'load-script'
+import FkMixin from '../mixins/FkMixin.vue'
 
 export default {
   props: {
@@ -60,6 +61,7 @@ export default {
       tokenExpiration: ''
     }
   },
+  mixins: [FkMixin],
   beforeMount() {
     let isScriptLoaded = false
     for (const script of document.scripts) {
@@ -87,7 +89,7 @@ export default {
       if (this.tokenExpiration && (new Date() > new Date(this.tokenExpiration))) {
         return Promise.resolve(this.client)
       }
-      return this.$http.get(this.url)
+      return this.$http.get(this.remote_domain + '/api/oss/getToken')
         .then(res => {
           const { accessKeyId, accessKeySecret, securityToken, bucket, expiration } = res.data.data.ossAccess
           this.tokenExpiration = expiration
