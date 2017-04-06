@@ -4,7 +4,9 @@
     <ui-text-box v-model="text"
                  :horizontal="options.horizontal"
                  :place-holder="options.placeholder"
+                 :validation-rules="options.validationRules"
                  :label="options.label"
+                 :required="required"
                  :editable="false"
                  @click="listShow = true">
       <div v-if="listShow"
@@ -35,6 +37,7 @@ export default {
       default: false
     },
     text: {},
+    required: {},
     options: {
       type: Object,
       default: () => {

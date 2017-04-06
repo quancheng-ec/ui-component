@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import _ from 'lodash'
+import { find } from 'lodash'
 import Vue from 'vue'
 const labelMap = {
   structure: '部门',
@@ -129,7 +129,7 @@ export default {
         result.id = data.departmentId || data.groupId
       }
       result.name = data.cnName || data.name
-      if (_.find(this.chosenList, { id: result.id })) {
+      if (find(this.chosenList, { id: result.id })) {
         return this.$toastBox({
           content: '重复',
           size: 'sm',

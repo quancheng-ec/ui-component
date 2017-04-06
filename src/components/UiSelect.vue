@@ -9,8 +9,8 @@
       <span class="input-group-addon"
             :class="fontSize"
             v-if="$slots.addon">
-          <slot name="addon"></slot>
-        </span>
+            <slot name="addon"></slot>
+          </span>
       <select class="form-control"
               :class="inputSize"
               ref="input"

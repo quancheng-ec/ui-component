@@ -28,6 +28,8 @@ import FkUploader from './components/FkUploader.vue'
 import FkAccountPicker from './components/FkAccountPicker.vue'
 import FkLayout from './components/FkLayout.vue'
 
+import Validator from './libs/validation'
+
 const QCUI = {
   UiButton,
   UiGridGroup,
@@ -53,6 +55,7 @@ const QCUI = {
   FkUploader,
   FkAccountPicker,
   FkLayout,
+  Validator,
   install(Vue) {
     Vue.component('UiButton', UiButton)
     Vue.component('UiGridGroup', UiGridGroup)
@@ -79,6 +82,11 @@ const QCUI = {
     Vue.component('FkAccountPicker', FkAccountPicker)
     Vue.component('FkLayout', FkLayout)
     Object.defineProperties(Vue.prototype, {
+      $validator: {
+        get() {
+          return Validator
+        }
+      },
       $confirmBox: {
         get() {
           return UiConfirm.bind(this)

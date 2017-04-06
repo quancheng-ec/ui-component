@@ -4,10 +4,10 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
-export default function(options = {}) {
+export default function (options = {}) {
   const { dev, example } = options
 
-  return {
+  const config = {
     entry: example ? './example-src/index' : './src/index',
     output: {
       path: resolve(__dirname, './../dist'),
@@ -81,9 +81,6 @@ export default function(options = {}) {
           preserveWhitespace: false,
           postcss: [autoprefixer('last 3 versions', '> 1%')]
         }
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        dropConsole: true
       })
     ],
     devServer: {
@@ -95,4 +92,12 @@ export default function(options = {}) {
       ? 'cheap-module-eval-source-map'
       : 'hidden-source-map'
   }
+
+  if (process.NODE_ENV === 'production') {
+    config.plugins.push(
+      new webpack.optimize.UglifyJsPlugin({
+        dropConsole: true
+      }))
+  }
+  return config
 }

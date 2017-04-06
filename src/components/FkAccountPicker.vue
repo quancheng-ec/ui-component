@@ -16,6 +16,8 @@
            class="active"><i class="fa fa-search"></i></a>
       </form>
       <div class="list-group">
+        <a @click="choseItem(null)"
+           class="list-group-item">无直属上级</a>
         <a v-for="account in accounts"
            class="list-group-item"
            @click="choseItem(account)">
@@ -48,6 +50,7 @@ export default {
   components: { UiPicker },
   computed: {
     chosenNames() {
+      if (!this.value) return this.options.noSelect || '无选择'
       if (this.options.multiple) {
         return this.chosenList.map(a => a.cnName).join(',')
       }
@@ -92,14 +95,18 @@ export default {
       }).then(res => this.accounts = res.data.data.accounts)
     }, 300),
     choseItem(account) {
-      if (this.options.multiple) {
-        if (this.chosenList.filter(a => a.accountId === account.accountId).length) return
-        this.chosenList.push(account)
-        return this.$emit('input', this.chosenList.map(a => a.accountId).join(','))
+      if (account) {
+        if (this.options.multiple) {
+          if (this.chosenList.filter(a => a.accountId === account.accountId).length) return
+          this.chosenList.push(account)
+          return this.$emit('input', this.chosenList.map(a => a.accountId).join(','))
+        }
+        this.chosen = account
+        this.$refs.picker.listShow = false
+        return this.$emit('input', account.accountId)
       }
-      this.chosen = account
       this.$refs.picker.listShow = false
-      this.$emit('input', account.accountId)
+      return this.$emit('input', '')
     }
   }
 }
