@@ -1,5 +1,5 @@
 <template>
-  <div class="btn-group m-r-10 "
+  <div class="btn-group"
        :class="boxClass"
        @click="openDropdown">
     <button aria-expanded="false"
