@@ -30655,6 +30655,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
   mixins: [_FkMixin2.default],
   props: {
+    required: {
+      type: Boolean
+    },
+    validationRules: {},
     value: {
       type: [String, Array],
       require: true
@@ -30669,7 +30673,7 @@ exports.default = {
   components: { UiPicker: _UiPicker2.default },
   computed: {
     chosenNames: function chosenNames() {
-      if (!this.value) return this.options.noSelect || '无选择';
+      if (!this.value) return this.required ? '' : this.options.noSelect || '无选择';
       if (this.options.multiple) {
         return this.chosenList.map(function (a) {
           return a.cnName;
@@ -30748,6 +30752,9 @@ exports.default = {
     }
   }
 }; //
+//
+//
+//
 //
 //
 //
@@ -31291,7 +31298,9 @@ exports.default = {
   },
 
   props: {
-    required: {},
+    required: {
+      type: Boolean
+    },
     tree: {},
     value: {},
     type: { default: 'structure' }, // structure,project,costcenter,account
@@ -31382,6 +31391,7 @@ exports.default = {
     }
   }
 }; //
+//
 //
 //
 //
@@ -33033,8 +33043,11 @@ exports.default = {
       type: Boolean,
       default: false
     },
+    validationRules: {},
     text: {},
-    required: {},
+    required: {
+      type: Boolean
+    },
     options: {
       type: Object,
       default: function _default() {
@@ -35767,7 +35780,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "text": _vm.chosenNames,
       "options": _vm.options,
-      "multiple": _vm.options.multiple
+      "multiple": _vm.options.multiple,
+      "required": _vm.required,
+      "validation-rules": _vm.validationRules
     },
     on: {
       "list-show": _vm.loadAccount
@@ -35812,14 +35827,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-search"
   })])]), _c('div', {
     staticClass: "list-group"
-  }, [_c('a', {
+  }, [(!_vm.required) ? _c('a', {
     staticClass: "list-group-item",
     on: {
       "click": function($event) {
         _vm.choseItem(null)
       }
     }
-  }, [_vm._v("无直属上级")]), _vm._l((_vm.accounts), function(account) {
+  }, [_vm._v("无直属上级")]) : _vm._e(), _vm._l((_vm.accounts), function(account) {
     return _c('a', {
       staticClass: "list-group-item",
       on: {
@@ -35993,9 +36008,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "options": {
         horizontal: _vm.horizontal,
         label: _vm.label,
-        placeholder: '请选择',
-        validationRules: _vm.validationRules
-      }
+        placeholder: '请选择'
+      },
+      "validation-rules": _vm.validationRules
     }
   }, [_c('div', {
     staticClass: "tree-panel"
@@ -36269,9 +36284,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'col-sm-3 control-label': _vm.horizontal
     }
-  }, [_vm._v(_vm._s(_vm.label))]) : _vm._e(), (_vm.required) ? _c('span', {
+  }, [_vm._v(_vm._s(_vm.label) + "\n    "), (_vm.required) ? _c('span', {
     staticClass: "icon-require"
-  }, [_vm._v("*")]) : _vm._e(), _c('div', {
+  }, [_vm._v("*")]) : _vm._e()]) : _vm._e(), _c('div', {
     class: {
       'input-group': _vm.$slots.addon, 'col-sm-9': _vm.horizontal
     }
@@ -36299,11 +36314,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "value": option.value
       }
     }, [_vm._v("\n        " + _vm._s(option.text) + "\n      ")])
-  }))]), _vm._l((_vm.validationErrors), function(error) {
+  })), _vm._l((_vm.validationErrors), function(error) {
     return _c('span', {
       staticClass: "help-block text-danger"
     }, [_vm._v(_vm._s(error))])
-  })], 2)
+  })], 2)])
 },staticRenderFns: []}
 
 /***/ }),
@@ -36358,7 +36373,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "horizontal": _vm.options.horizontal,
       "place-holder": _vm.options.placeholder,
-      "validation-rules": _vm.options.validationRules,
+      "validation-rules": _vm.validationRules,
       "label": _vm.options.label,
       "required": _vm.required,
       "editable": false

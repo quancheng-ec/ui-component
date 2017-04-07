@@ -3,6 +3,8 @@
     <ui-picker :text="chosenNames"
                :options="options"
                :multiple="options.multiple"
+               :required="required"
+               :validation-rules="validationRules"
                @list-show="loadAccount"
                ref="picker">
       <form role="search"
@@ -17,6 +19,7 @@
       </form>
       <div class="list-group">
         <a @click="choseItem(null)"
+           v-if="!required"
            class="list-group-item">无直属上级</a>
         <a v-for="account in accounts"
            class="list-group-item"
@@ -32,10 +35,14 @@
 <script>
 import UiPicker from './UiPicker.vue'
 import FkMixin from '../mixins/FkMixin.vue'
-import { debounce, isArray, includes } from 'lodash'
+import { debounce } from 'lodash'
 export default {
   mixins: [FkMixin],
   props: {
+    required: {
+      type: Boolean
+    },
+    validationRules: {},
     value: {
       type: [String, Array],
       require: true
@@ -50,7 +57,7 @@ export default {
   components: { UiPicker },
   computed: {
     chosenNames() {
-      if (!this.value) return this.options.noSelect || '无选择'
+      if (!this.value) return (this.required ? '' : (this.options.noSelect || '无选择'))
       if (this.options.multiple) {
         return this.chosenList.map(a => a.cnName).join(',')
       }

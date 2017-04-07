@@ -4,7 +4,7 @@
     <ui-text-box v-model="text"
                  :horizontal="options.horizontal"
                  :place-holder="options.placeholder"
-                 :validation-rules="options.validationRules"
+                 :validation-rules="validationRules"
                  :label="options.label"
                  :required="required"
                  :editable="false"
@@ -36,8 +36,11 @@ export default {
       type: Boolean,
       default: false
     },
+    validationRules: {},
     text: {},
-    required: {},
+    required: {
+      type: Boolean
+    },
     options: {
       type: Object,
       default: () => {
