@@ -31194,17 +31194,28 @@ exports.default = {
     this.eventBus.$on('item:chosen', this.onChosen);
   },
   mounted: function mounted() {
-    this.$http.get(this.url, {
-      params: {
-        items: this.items.join(',')
-      },
-      headers: {
-        companyid: this.companyId
-      }
-    }).then(this.setData);
+    this.loadData();
   },
 
+  watch: {
+    items: function items() {
+      this.loadData();
+    },
+    companyId: function companyId() {
+      this.loadData();
+    }
+  },
   methods: {
+    loadData: function loadData() {
+      return this.$http.get(this.url, {
+        params: {
+          items: this.items.join(',')
+        },
+        headers: {
+          companyid: this.companyId
+        }
+      }).then(this.setData);
+    },
     updateShow: function updateShow(s) {
       this.$emit('input', s);
     },

@@ -103,16 +103,27 @@ export default {
     this.eventBus.$on('item:chosen', this.onChosen)
   },
   mounted() {
-    this.$http.get(this.url, {
-      params: {
-        items: this.items.join(',')
-      },
-      headers: {
-        companyid: this.companyId
-      }
-    }).then(this.setData)
+    this.loadData()
+  },
+  watch: {
+    items() {
+      this.loadData()
+    },
+    companyId() {
+      this.loadData()
+    }
   },
   methods: {
+    loadData() {
+      return this.$http.get(this.url, {
+        params: {
+          items: this.items.join(',')
+        },
+        headers: {
+          companyid: this.companyId
+        }
+      }).then(this.setData)
+    },
     updateShow(s) {
       this.$emit('input', s)
     },
