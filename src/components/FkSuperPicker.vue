@@ -6,6 +6,7 @@
               showCloseButton
               bgColor="blue"
               textPosition="center"
+              :append-el="appendEl"
               @input="updateShow">
       <ui-grid-group slot="content">
         <ui-grid-item :space="6">
@@ -87,7 +88,8 @@ export default {
       default: '20170113105245001'
     },
     onSave: {},
-    onCancel: {}
+    onCancel: {},
+    appendEl: {}
   },
   computed: {
     show: {

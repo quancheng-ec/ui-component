@@ -30953,12 +30953,14 @@ exports.default = {
     return {
       sidebar: [],
       showMenu: false,
+      currentUrl: '',
       account: {}
     };
   },
   mounted: function mounted() {
     var _this = this;
 
+    this.currentUrl = location.href;
     this.$http.get(this.remote_domain + '/api/layout/getLayout').then(function (res) {
       _this.account = res.data.data.account;
       _this.sidebar = res.data.data.sidebar;
@@ -30980,6 +30982,18 @@ exports.default = {
     }
   }
 }; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -31132,6 +31146,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 
 var labelMap = {
   structure: '部门',
@@ -31178,7 +31193,8 @@ exports.default = {
       default: '20170113105245001'
     },
     onSave: {},
-    onCancel: {}
+    onCancel: {},
+    appendEl: {}
   },
   computed: {
     show: {
@@ -35599,7 +35615,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "title": _vm.title,
       "showCloseButton": "",
       "bgColor": "blue",
-      "textPosition": "center"
+      "textPosition": "center",
+      "append-el": _vm.appendEl
     },
     on: {
       "input": _vm.updateShow
@@ -36545,7 +36562,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "navbar navbar-default navbar-static-top m-b-0"
   }, [_c('div', {
     staticClass: "navbar-header"
-  }, [_vm._m(0), _c('ul', {
+  }, [_vm._m(0), _vm._m(1), _c('ul', {
     staticClass: "nav navbar-top-links navbar-right pull-right"
   }, [_c('li', {
     staticClass: "dropdown",
@@ -36573,9 +36590,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showMenu = false
       }
     }
-  }, [_vm._t("user-menu", [_vm._m(1)]), _c('li', [_c('a', {
+  }, [_vm._t("user-menu", [_vm._m(2)]), _c('li', [_c('a', {
     attrs: {
       "href": _vm.remote_domain + '/choosecompany/view'
+    }
+  }, [_c('i', {
+    staticClass: "ti-world"
+  }), _vm._v(" 切换语言")])]), _c('li', [_c('a', {
+    attrs: {
+      "href": _vm.remote_domain + '/choosecompany/view?target=' + _vm.currentUrl
     }
   }, [_c('i', {
     staticClass: "ti-user"
@@ -36614,7 +36637,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "side-menu"
     }
-  }, [_vm._m(2), _vm._l((_vm.sidebar), function(item) {
+  }, [_vm._m(3), _vm._l((_vm.sidebar), function(item) {
     return _c('li', {
       class: {
         'active': !item.collapsed
@@ -36715,6 +36738,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "alt": "home"
     }
   })])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "nav navbar-top-links navbar-left"
+  }, [_c('li', [_c('a', [_vm._v("首页")])]), _c('li', [_c('a', [_vm._v("财务工作台")])]), _c('li', [_c('a', [_vm._v("设置")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('a', {
     attrs: {

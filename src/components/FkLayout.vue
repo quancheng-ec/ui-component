@@ -9,6 +9,17 @@
             <span class="hidden-xs"><img src="//cdn.u-booking.cn/sparta/web_icon/logo_text.png" alt="home"></span>
           </a>
         </div>
+        <ul class="nav navbar-top-links navbar-left">
+          <li>
+            <a>首页</a>
+          </li>
+          <li>
+            <a>财务工作台</a>
+          </li>
+          <li>
+            <a>设置</a>
+          </li>
+        </ul>
         <ul class="nav navbar-top-links navbar-right pull-right">
           <li class="dropdown"
               :class="{'open':showMenu}">
@@ -23,7 +34,8 @@
               <slot name="user-menu">
                 <li><a href="#"><i class="ti-user"></i> 账号设置</a></li>
               </slot>
-              <li><a :href="remote_domain + '/choosecompany/view'"><i class="ti-user"></i> 切换公司</a></li>
+              <li><a :href="remote_domain + '/choosecompany/view'"><i class="ti-world"></i> 切换语言</a></li>
+              <li><a :href="remote_domain + '/choosecompany/view?target=' + currentUrl"><i class="ti-user"></i> 切换公司</a></li>
               <li><a @click="logout"><i class="fa fa-power-off"></i> 登出</a></li>
             </ul>
           </li>
@@ -94,10 +106,12 @@ export default {
     return {
       sidebar: [],
       showMenu: false,
+      currentUrl: '',
       account: {}
     }
   },
   mounted() {
+    this.currentUrl = location.href
     this.$http.get(this.remote_domain + '/api/layout/getLayout').then(res => {
       this.account = res.data.data.account
       this.sidebar = res.data.data.sidebar
@@ -120,6 +134,7 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
   .top-left-part
     width 245px
+    background none
   .navbar-header {
     width: 100%;
     background: #3484DF;
