@@ -494,16 +494,6 @@ ul[data-v-4f04f828] {
   cursor: not-allowed;
 }
 
-.label-group .label {
-  display: inline-block;
-  margin: 5px;
-}
-.tree-panel {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid rgba(0,0,0,0.1);
-}
-
 .dropdown-list {
   position: absolute;
   width: 100%;
@@ -520,6 +510,16 @@ ul[data-v-4f04f828] {
 }
 .dropdown-content .list-group {
   margin-top: 10px;
+}
+
+.label-group .label {
+  display: inline-block;
+  margin: 5px;
+}
+.tree-panel {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
 .app-search[data-v-3301a9ee] {
