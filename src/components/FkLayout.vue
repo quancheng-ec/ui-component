@@ -5,8 +5,8 @@
         <div class="top-left-part">
           <a class="logo"
              href="index.html">
-            <b><img src="//cdn.u-booking.cn/sparta/web_icon/logo.png" alt="home"></b>
-            <span class="hidden-xs"><img src="//cdn.u-booking.cn/sparta/web_icon/logo_text.png" alt="home"></span>
+            <b><img src="//qc-style.oss-cn-hangzhou.aliyuncs.com/sparta/web_icon/logo.png" alt="home"></b>
+            <span class="hidden-xs"><img src="//qc-style.oss-cn-hangzhou.aliyuncs.com/sparta/web_icon/logo_text.png" alt="home"></span>
           </a>
         </div>
         <ul class="nav navbar-top-links navbar-left">
