@@ -30952,6 +30952,7 @@ exports.default = {
   data: function data() {
     return {
       sidebar: [],
+      topbar: [],
       showMenu: false,
       currentUrl: '',
       account: {}
@@ -30964,6 +30965,7 @@ exports.default = {
     this.$http.get(this.remote_domain + '/api/layout/getLayout').then(function (res) {
       _this.account = res.data.data.account;
       _this.sidebar = res.data.data.sidebar;
+      _this.topbar = res.data.data.topbar;
     });
   },
 
@@ -30982,13 +30984,6 @@ exports.default = {
     }
   }
 }; //
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -36562,7 +36557,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "navbar navbar-default navbar-static-top m-b-0"
   }, [_c('div', {
     staticClass: "navbar-header"
-  }, [_vm._m(0), _vm._m(1), _c('ul', {
+  }, [_vm._m(0), _c('ul', {
+    staticClass: "nav navbar-top-links navbar-left"
+  }, _vm._l((_vm.topbar), function(link) {
+    return _c('li', [_c('a', {
+      attrs: {
+        "href": link.path
+      }
+    }, [_vm._v(_vm._s(link.text))])])
+  })), _c('ul', {
     staticClass: "nav navbar-top-links navbar-right pull-right"
   }, [_c('li', {
     staticClass: "dropdown",
@@ -36590,7 +36593,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showMenu = false
       }
     }
-  }, [_vm._t("user-menu", [_vm._m(2)]), _c('li', [_c('a', {
+  }, [_vm._t("user-menu", [_vm._m(1)]), _c('li', [_c('a', {
     attrs: {
       "href": _vm.remote_domain + '/choosecompany/view'
     }
@@ -36637,7 +36640,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "side-menu"
     }
-  }, [_vm._m(3), _vm._l((_vm.sidebar), function(item) {
+  }, [_vm._m(2), _vm._l((_vm.sidebar), function(item) {
     return _c('li', {
       class: {
         'active': !item.collapsed
@@ -36721,10 +36724,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "top-left-part"
   }, [_c('a', {
-    staticClass: "logo",
-    attrs: {
-      "href": "index.html"
-    }
+    staticClass: "logo"
   }, [_c('b', [_c('img', {
     attrs: {
       "src": "//qc-style.oss-cn-hangzhou.aliyuncs.com/sparta/web_icon/logo.png",
@@ -36738,10 +36738,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "alt": "home"
     }
   })])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "nav navbar-top-links navbar-left"
-  }, [_c('li', [_c('a', [_vm._v("首页")])]), _c('li', [_c('a', [_vm._v("财务工作台")])]), _c('li', [_c('a', [_vm._v("设置")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('a', {
     attrs: {

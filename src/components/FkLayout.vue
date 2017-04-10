@@ -3,21 +3,14 @@
     <nav class="navbar navbar-default navbar-static-top m-b-0">
       <div class="navbar-header">
         <div class="top-left-part">
-          <a class="logo"
-             href="index.html">
+          <a class="logo">
             <b><img src="//qc-style.oss-cn-hangzhou.aliyuncs.com/sparta/web_icon/logo.png" alt="home"></b>
             <span class="hidden-xs"><img src="//qc-style.oss-cn-hangzhou.aliyuncs.com/sparta/web_icon/logo_text.png" alt="home"></span>
           </a>
         </div>
         <ul class="nav navbar-top-links navbar-left">
-          <li>
-            <a>首页</a>
-          </li>
-          <li>
-            <a>财务工作台</a>
-          </li>
-          <li>
-            <a>设置</a>
+          <li v-for="link in topbar">
+            <a :href="link.path">{{link.text}}</a>
           </li>
         </ul>
         <ul class="nav navbar-top-links navbar-right pull-right">
@@ -105,6 +98,7 @@ export default {
   data() {
     return {
       sidebar: [],
+      topbar: [],
       showMenu: false,
       currentUrl: '',
       account: {}
@@ -115,6 +109,7 @@ export default {
     this.$http.get(this.remote_domain + '/api/layout/getLayout').then(res => {
       this.account = res.data.data.account
       this.sidebar = res.data.data.sidebar
+      this.topbar = res.data.data.topbar
     })
   },
   methods: {
