@@ -6,6 +6,7 @@
             data-toggle="dropdown"
             class="btn dropdown-toggle waves-effect waves-light"
             :class="btnClass"
+            :disabled="disabled"
             type="button">
       <slot>{{_showLabel()}}</slot> <span class="caret"></span>
     </button>
@@ -38,6 +39,10 @@
       },
       maxLabel: { //  label最大显示字数
         type: Number
+      },
+      disabled: {
+        type: Boolean,
+        default: false
       },
       textKey: {//  设置下拉菜单显示的文本值，list必须为对象数组
         type: String,
@@ -107,6 +112,7 @@
     },
     methods: {
       openDropdown() {
+        if(this.disabled) return
         this.open = !this.open
         this.$emit('dropdown:opened', this.open)
       },
