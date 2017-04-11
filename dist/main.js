@@ -32322,6 +32322,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 
 exports.default = {
   props: {
@@ -32332,6 +32333,10 @@ exports.default = {
     },
     maxLabel: { //  label最大显示字数
       type: Number
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     },
     textKey: { //  设置下拉菜单显示的文本值，list必须为对象数组
       type: String,
@@ -32404,6 +32409,7 @@ exports.default = {
   },
   methods: {
     openDropdown: function openDropdown() {
+      if (this.disabled) return;
       this.open = !this.open;
       this.$emit('dropdown:opened', this.open);
     },
@@ -35891,7 +35897,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "btn-group m-r-10 ",
+    staticClass: "btn-group",
     class: _vm.boxClass,
     on: {
       "click": _vm.openDropdown
@@ -35902,6 +35908,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-expanded": "false",
       "data-toggle": "dropdown",
+      "disabled": _vm.disabled,
       "type": "button"
     }
   }, [_vm._t("default", [_vm._v(_vm._s(_vm._showLabel()))]), _c('span', {
