@@ -27,6 +27,7 @@
               <slot name="user-menu">
                 <li><a href="#"><i class="ti-user"></i> 账号设置</a></li>
               </slot>
+              <li><a @click="setLang"><i class="ti-world"></i> 切换语言</a></li>
               <li><a :href="remote_domain + '/choosecompany/view?target=' + currentUrl"><i class="ti-user"></i> 切换公司</a></li>
               <li><a @click="logout"><i class="fa fa-power-off"></i> 登出</a></li>
             </ul>
@@ -120,6 +121,9 @@ export default {
         this.$http.post(this.remote_domain + '/api/login/logout')
           .then(res => location.reload())
       })
+    },
+    setLang() {
+      this.$http.post(this.remote_domain + '/api/chooselang/setLang').then(res => location.reload())
     }
   }
 }
