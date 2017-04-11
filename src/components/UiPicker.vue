@@ -53,8 +53,7 @@ export default {
       if (val) this.$emit('list-show')
     }
   },
-  created() {
-    if (!document) return
+  mounted() {
     this._closeEvent = EventListener.listen(document, 'click', e => {
       if (this.listShow === false) return
       if (!this.$el.contains(e.target)) {

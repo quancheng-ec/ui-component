@@ -33082,10 +33082,9 @@ exports.default = {
       if (val) this.$emit('list-show');
     }
   },
-  created: function created() {
+  mounted: function mounted() {
     var _this = this;
 
-    if (!document) return;
     this._closeEvent = _EventListenerEs2.default.listen(document, 'click', function (e) {
       if (_this.listShow === false) return;
       if (!_this.$el.contains(e.target)) {
