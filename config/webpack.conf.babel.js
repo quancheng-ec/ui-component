@@ -4,7 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
-export default function (options = {}) {
+export default function(options = {}) {
   const { dev, example } = options
 
   const config = {
@@ -93,7 +93,7 @@ export default function (options = {}) {
       : 'hidden-source-map'
   }
 
-  if (process.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production') {
     config.plugins.push(
       new webpack.optimize.UglifyJsPlugin({
         dropConsole: true
