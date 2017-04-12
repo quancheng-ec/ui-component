@@ -47,6 +47,7 @@
 
 <script>
 import { find } from 'lodash'
+import FkMixin from '../mixins/FkMixin.vue'
 import Vue from 'vue'
 const labelMap = {
   structure: '部门',
@@ -65,6 +66,7 @@ export default {
       eventBus: new Vue()
     }
   },
+  mixins: [FkMixin],
   props: {
     items: {
       type: Array,
