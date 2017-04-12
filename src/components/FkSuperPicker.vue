@@ -117,7 +117,7 @@ export default {
   },
   methods: {
     loadData() {
-      return this.$http.get(this.url, {
+      return this.$http.get(this.remote_domain + '/api/enterprise/pickerData', {
         params: {
           items: this.items.join(',')
         },
