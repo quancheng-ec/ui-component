@@ -9,7 +9,7 @@
   
       </button>
       <div class="dd-handle"
-           @click="chooseItem(departmentData,type)">
+           @click="chooseItem(departmentData,type === 'account'?'structure':type)">
         <i class="fa fa-sitemap"></i> {{departmentData.name}}
   
       </div>
