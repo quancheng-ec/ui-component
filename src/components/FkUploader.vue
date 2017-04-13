@@ -13,7 +13,7 @@
             <span class="fileinput-filename"> {{currentFile && currentFile.name}}</span>
           </div>
           <span class="input-group-addon btn btn-default btn-file">
-                                                                                                                                                                                                                            <span class="fileinput-new" v-if="!currentFile">选择文件</span>
+                                                                                                                                                                                                                                        <span class="fileinput-new" v-if="!currentFile">选择文件</span>
           <span v-else>更换文件</span>
           <input type="file"
                  name="..."
@@ -37,6 +37,7 @@
 <script>
 import loadScript from 'load-script'
 import FkMixin from '../mixins/FkMixin.vue'
+import md5 from 'md5'
 
 export default {
   props: {
@@ -118,17 +119,17 @@ export default {
       this.getToken()
         .then(({ client, accountId, companyId }) => {
           client.multipartUpload(
-            this.makeFileName(companyId, accountId, this.currentFile.name),
+            this.makeFileName(companyId, accountId, md5(this.currentFile.name + '' + new Date())),
             this.currentFile
           ).then(res => {
+            console.log(res)
             this.isUploading = false
-            this.removeFile()
             this.$emit('uploaded', {
               name: res.name,
               originalName: this.currentFile.name,
-              url: res.url,
               s_url: client.signatureUrl(res.name, { expiration: 3600 })
             })
+            this.removeFile()
           })
         })
         .catch(e => {
