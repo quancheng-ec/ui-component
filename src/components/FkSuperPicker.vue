@@ -141,7 +141,7 @@ export default {
     onChosen(item) {
       console.log(item)
       const { type, data } = item
-      const result = { type }
+      const result = { type, data }
       if (type === 'account') {
         result.id = data.accountId
       } else {
