@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { find } from 'lodash'
+import { find, remove } from 'lodash'
 import FkMixin from '../mixins/FkMixin.vue'
 import Vue from 'vue'
 const labelMap = {
@@ -88,6 +88,10 @@ export default {
     },
     companyId: {
       default: '20170113105245001'
+    },
+    single: {
+      type: Boolean,
+      default: false
     },
     onSave: {},
     onCancel: {},
@@ -144,12 +148,16 @@ export default {
         result.id = data.departmentId || data.groupId
       }
       result.name = data.cnName || data.name
+
       if (find(this.chosenList, { id: result.id })) {
         return this.$toastBox({
           content: '重复',
           size: 'sm',
           type: 'danger'
         })
+      }
+      if (this.single) {
+        remove(this.chosenList, item => item.type === result.type)
       }
       this.chosenList.push(result)
     },

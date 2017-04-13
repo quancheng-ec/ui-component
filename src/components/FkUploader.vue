@@ -13,7 +13,7 @@
             <span class="fileinput-filename"> {{currentFile && currentFile.name}}</span>
           </div>
           <span class="input-group-addon btn btn-default btn-file">
-                                                                                                                                                                                                                          <span class="fileinput-new" v-if="!currentFile">选择文件</span>
+                                                                                                                                                                                                                            <span class="fileinput-new" v-if="!currentFile">选择文件</span>
           <span v-else>更换文件</span>
           <input type="file"
                  name="..."
@@ -125,6 +125,7 @@ export default {
             this.removeFile()
             this.$emit('uploaded', {
               name: res.name,
+              originalName: this.currentFile.name,
               url: res.url,
               s_url: client.signatureUrl(res.name, { expiration: 3600 })
             })
