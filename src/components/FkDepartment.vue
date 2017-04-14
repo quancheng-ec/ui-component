@@ -43,9 +43,11 @@
 </template>
 
 <script>
+import FkMixin from '../mixins/FkMixin.vue'
 import draggable from 'vuedraggable'
 export default {
   name: 'fk-department',
+  mixins: [FkMixin],
   data() {
     return {
       accounts: []
@@ -92,7 +94,7 @@ export default {
     loadAccountofGroup() {
       if (!this.needAccount) return
       //  if (!this.departmentData.isCollapsed) {
-      this.$http.get(this.url, {
+      this.$http.get(this.remote_domain + '/api/enterprise/pickerData', {
         params: {
           groupId: this.departmentData.departmentId,
           accountOnly: true

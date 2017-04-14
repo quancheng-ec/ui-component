@@ -19,6 +19,7 @@ import UiSwitcher from './components/UiSwitcher'
 import UiCheckbox from './components/UiCheckbox'
 import UiRadio from './components/UiRadio'
 import UiDropdown from './components/UiDropdown.vue'
+import UiPicker from './components/UiPicker.vue'
 
 import FkMixin from './mixins/FkMixin.vue'
 import FkDepartment from './components/FkDepartment.vue'
@@ -27,6 +28,8 @@ import FkTreeSelect from './components/FkTreeSelect.vue'
 import FkUploader from './components/FkUploader.vue'
 import FkAccountPicker from './components/FkAccountPicker.vue'
 import FkLayout from './components/FkLayout.vue'
+
+import Validator from './libs/validation'
 
 const QCUI = {
   UiButton,
@@ -53,6 +56,8 @@ const QCUI = {
   FkUploader,
   FkAccountPicker,
   FkLayout,
+  Validator,
+  UiPicker,
   install(Vue) {
     Vue.component('UiButton', UiButton)
     Vue.component('UiGridGroup', UiGridGroup)
@@ -78,7 +83,13 @@ const QCUI = {
     Vue.component('FkUploader', FkUploader)
     Vue.component('FkAccountPicker', FkAccountPicker)
     Vue.component('FkLayout', FkLayout)
+    Vue.component('UiPicker', UiPicker)
     Object.defineProperties(Vue.prototype, {
+      $validator: {
+        get() {
+          return Validator
+        }
+      },
       $confirmBox: {
         get() {
           return UiConfirm.bind(this)

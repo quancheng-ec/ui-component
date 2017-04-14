@@ -2,9 +2,9 @@
   <div class="form-group"
        :class="{'has-error':!valid}">
     <label v-if="label"
-           :class="{'col-sm-3 control-label':horizontal}">{{label}}</label>
-    <span class="icon-require"
-          v-if="required">*</span>
+           :class="{'col-sm-3 control-label':horizontal}">{{label}}
+      <span class="icon-require"
+            v-if="required">*</span></label>
     <div :class="{'input-group':$slots.addon,'col-sm-9':horizontal}">
       <span class="input-group-addon"
             :class="fontSize"
@@ -14,7 +14,8 @@
              :class="inputSize"
              @click="triggerClick">
           <template v-if="value">{{value}}</template>
-          <span v-if="!value" class="text-placeholder">{{placeHolder}}</span>
+          <span v-if="!value"
+                class="text-placeholder">{{placeHolder}}</span>
         </div>
       </template>
       <div class="form-control"

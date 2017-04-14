@@ -1,100 +1,124 @@
 <script>
-  import Validator from 'validatorjs'
-  import uuid from 'uuid'
-  Validator.useLang('zh');
-  export default {
-    data(){
-      return {
-        uid: 0,
-        parentEventBus: null,
-        valid: true,
-        validationErrors: []
-      }
-    },
-    created(){
-      this.uid = uuid.v1();
+import Validator from 'validatorjs'
+import uuid from 'uuid'
+Validator.useLang('zh')
+
+export default {
+  data() {
+    return {
+      uid: 0,
+      parentEventBus: null,
+      valid: true,
+      validationErrors: []
+    }
+  },
+  created() {
+    if (this.validationRules) {
+      this.uid = uuid.v1()
       let parent = this.$parent
-      while (parent && !parent.eventBus) {
+      while (parent && (!parent.eventBus || parent.eventBus.name !== 'validateEventBus')) {
         parent = parent.$parent
       }
-      if (!parent.eventBus) return
+      if (!parent.eventBus || parent.eventBus.name !== 'validateEventBus') return
       this.parentEventBus = parent.eventBus
       this.parentEventBus.$on('form:validate', this.validateValue)
+      this.parentEventBus.registeredElements.push(this.uid)
+    }
+  },
+  destroyed() {
+    if (this.parentEventBus) {
+      this.parentEventBus.$off('form:validate', this.validateValue)
+      const index = this.parentEventBus.registeredElements.indexOf(this.uid)
+      this.parentEventBus.registeredElements.splice(index, 1)
+    }
+  },
+  props: {
+    name: {
+      type: String
     },
-    destroyed(){
-      this.parentEventBus && this.parentEventBus.$off('form:validate', this.validateValue)
+    eventBus: {},
+    validationRules: {
+      type: String
     },
-    props: {
-      name: {
-        type: String
-      },
-      eventBus: {},
-      validationRules: {
-        type: String
-      },
-      validationMessages: {
-        type: Object
-      },
-      horizontal: {
-        type: Boolean,
-        default: false
-      },
-      size: {
-        type: String
-      },
-      autoFocus: {
-        type: Boolean,
-        default: false
-      },
-      required: {
-        type: Boolean,
-        default: false
+    validationMessages: {
+      type: Object
+    },
+    horizontal: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: String
+    },
+    autoFocus: {
+      type: Boolean,
+      default: false
+    },
+    required: {
+      type: Boolean,
+      default: false
+    }
+  },
+  mounted() {
+    if (this.autoFocus) {
+      this.$nextTick(() => {
+        this.$refs.input.focus()
+      })
+    }
+  },
+  computed: {
+    inputSize() {
+      return this.size ? 'input-' + this.size : ''
+    },
+    fontSize() {
+      if (!this.size) return ''
+      const map = {
+        'sm': 'font-12'
       }
+      return map[this.size] || ''
+    }
+  },
+  watch: {
+    'value'() {
+      this.validateValue()
+    }
+  },
+  methods: {
+    updateValue(value) {
+      this.$emit('input', value)
     },
-    mounted(){
-      if (this.autoFocus) {
-        this.$nextTick(() => {
-          this.$refs.input.focus()
+    createValidator(value) {
+      return new Validator({ [this.name || this.label || 'field']: value }, {
+        [this.name || this.label || 'field']: this.validationRules
+      })
+    },
+    validateValue(batchId) {
+      if (this.validationRules) {
+        const validation = this.createValidator(this.value)
+        validation.passes(() => {
+          this.validationErrors = []
+          this.valid = true
+          if (batchId) {
+            this.parentEventBus.$emit('validate:invalid', {
+              batchId: batchId,
+              id: this.uid,
+              errors: this.validationErrors
+            })
+          }
         })
-      }
-    },
-    computed: {
-      inputSize(){
-        return this.size ? 'input-' + this.size : ''
-      },
-      fontSize(){
-        if (!this.size) return ''
-        const map = {
-          'sm': 'font-12'
-        }
-        return map[this.size] || ''
-      }
-    },
-    watch: {
-      'value'(){
-        this.validateValue()
-      }
-    },
-    methods: {
-      updateValue(value) {
-        this.$emit('input', value)
-      },
-      createValidator(value){
-        return new Validator({ [this.name || this.label || 'field']: value }, {
-          [this.name || this.label || 'field']: this.validationRules
-        })
-      },
-      validateValue(){
-        if (this.validationRules) {
-          const validation = this.createValidator(this.value)
-          this.valid = validation.passes()
+        validation.fails(() => {
           this.validationErrors = validation.errors.get(this.name || this.label || 'field')
-          this.parentEventBus.$emit('validate:invalid', {
-            id: this.uid, errors: this.validationErrors
-          })
-        }
-        return this.valid
+          this.valid = false
+          if (batchId) {
+            this.parentEventBus.$emit('validate:invalid', {
+              batchId: batchId,
+              id: this.uid,
+              errors: this.validationErrors
+            })
+          }
+        })
       }
     }
   }
+}
 </script>

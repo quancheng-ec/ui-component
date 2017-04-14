@@ -3,6 +3,8 @@
     <ui-picker :text="chosenNames"
                :options="options"
                :multiple="options.multiple"
+               :required="required"
+               :validation-rules="validationRules"
                @list-show="loadAccount"
                ref="picker">
       <form role="search"
@@ -16,6 +18,9 @@
            class="active"><i class="fa fa-search"></i></a>
       </form>
       <div class="list-group">
+        <a @click="choseItem(null)"
+           v-if="!required"
+           class="list-group-item">无直属上级</a>
         <a v-for="account in accounts"
            class="list-group-item"
            @click="choseItem(account)">
@@ -30,10 +35,14 @@
 <script>
 import UiPicker from './UiPicker.vue'
 import FkMixin from '../mixins/FkMixin.vue'
-import { debounce, isArray, includes } from 'lodash'
+import { debounce } from 'lodash'
 export default {
   mixins: [FkMixin],
   props: {
+    required: {
+      type: Boolean
+    },
+    validationRules: {},
     value: {
       type: [String, Array],
       require: true
@@ -48,6 +57,7 @@ export default {
   components: { UiPicker },
   computed: {
     chosenNames() {
+      if (!this.value) return (this.required ? '' : (this.options.noSelect || '无选择'))
       if (this.options.multiple) {
         return this.chosenList.map(a => a.cnName).join(',')
       }
@@ -92,14 +102,18 @@ export default {
       }).then(res => this.accounts = res.data.data.accounts)
     }, 300),
     choseItem(account) {
-      if (this.options.multiple) {
-        if (this.chosenList.filter(a => a.accountId === account.accountId).length) return
-        this.chosenList.push(account)
-        return this.$emit('input', this.chosenList.map(a => a.accountId).join(','))
+      if (account) {
+        if (this.options.multiple) {
+          if (this.chosenList.filter(a => a.accountId === account.accountId).length) return
+          this.chosenList.push(account)
+          return this.$emit('input', this.chosenList.map(a => a.accountId).join(','))
+        }
+        this.chosen = account
+        this.$refs.picker.listShow = false
+        return this.$emit('input', account.accountId)
       }
-      this.chosen = account
       this.$refs.picker.listShow = false
-      this.$emit('input', account.accountId)
+      return this.$emit('input', '')
     }
   }
 }

@@ -4,7 +4,9 @@
     <ui-text-box v-model="text"
                  :horizontal="options.horizontal"
                  :place-holder="options.placeholder"
+                 :validation-rules="validationRules"
                  :label="options.label"
+                 :required="required"
                  :editable="false"
                  @click="listShow = true">
       <div v-if="listShow"
@@ -34,7 +36,11 @@ export default {
       type: Boolean,
       default: false
     },
+    validationRules: {},
     text: {},
+    required: {
+      type: Boolean
+    },
     options: {
       type: Object,
       default: () => {
@@ -47,8 +53,7 @@ export default {
       if (val) this.$emit('list-show')
     }
   },
-  created() {
-    if (!document) return
+  mounted() {
     this._closeEvent = EventListener.listen(document, 'click', e => {
       if (this.listShow === false) return
       if (!this.$el.contains(e.target)) {

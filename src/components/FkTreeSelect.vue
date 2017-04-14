@@ -1,7 +1,9 @@
 <template>
   <div>
     <ui-picker :text="text"
+               :required="required"
                :options="{horizontal,label,placeholder:'请选择'}"
+               :validation-rules="validationRules"
                ref="picker">
       <div class="tree-panel">
         <fk-department :department-data="groupTree"
@@ -31,11 +33,15 @@ export default {
     }
   },
   props: {
+    required: {
+      type: Boolean
+    },
     tree: {},
     value: {},
     type: { default: 'structure' }, // structure,project,costcenter,account
     horizontal: {},
     label: {},
+    validationRules: {},
     options: {
       default: () => {
         return {}

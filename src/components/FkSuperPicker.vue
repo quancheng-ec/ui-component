@@ -6,6 +6,7 @@
               showCloseButton
               bgColor="blue"
               textPosition="center"
+              :append-el="appendEl"
               @input="updateShow">
       <ui-grid-group slot="content">
         <ui-grid-item :space="6">
@@ -45,7 +46,8 @@
 </template>
 
 <script>
-import _ from 'lodash'
+import { find, remove } from 'lodash'
+import FkMixin from '../mixins/FkMixin.vue'
 import Vue from 'vue'
 const labelMap = {
   structure: '部门',
@@ -64,6 +66,7 @@ export default {
       eventBus: new Vue()
     }
   },
+  mixins: [FkMixin],
   props: {
     items: {
       type: Array,
@@ -86,8 +89,13 @@ export default {
     companyId: {
       default: '20170113105245001'
     },
+    single: {
+      type: Boolean,
+      default: false
+    },
     onSave: {},
-    onCancel: {}
+    onCancel: {},
+    appendEl: {}
   },
   computed: {
     show: {
@@ -103,16 +111,27 @@ export default {
     this.eventBus.$on('item:chosen', this.onChosen)
   },
   mounted() {
-    this.$http.get(this.url, {
-      params: {
-        items: this.items.join(',')
-      },
-      headers: {
-        companyid: this.companyId
-      }
-    }).then(this.setData)
+    this.loadData()
+  },
+  watch: {
+    items() {
+      this.loadData()
+    },
+    companyId() {
+      this.loadData()
+    }
   },
   methods: {
+    loadData() {
+      return this.$http.get(this.remote_domain + '/api/enterprise/pickerData', {
+        params: {
+          items: this.items.join(',')
+        },
+        headers: {
+          companyid: this.companyId
+        }
+      }).then(this.setData)
+    },
     updateShow(s) {
       this.$emit('input', s)
     },
@@ -122,19 +141,23 @@ export default {
     onChosen(item) {
       console.log(item)
       const { type, data } = item
-      const result = { type }
+      const result = { type, data }
       if (type === 'account') {
         result.id = data.accountId
       } else {
         result.id = data.departmentId || data.groupId
       }
       result.name = data.cnName || data.name
-      if (_.find(this.chosenList, { id: result.id })) {
+
+      if (find(this.chosenList, { id: result.id })) {
         return this.$toastBox({
           content: '重复',
           size: 'sm',
           type: 'danger'
         })
+      }
+      if (this.single) {
+        remove(this.chosenList, item => item.type === result.type)
       }
       this.chosenList.push(result)
     },

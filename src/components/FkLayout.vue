@@ -3,12 +3,16 @@
     <nav class="navbar navbar-default navbar-static-top m-b-0">
       <div class="navbar-header">
         <div class="top-left-part">
-          <a class="logo"
-             href="index.html">
-            <b><img src="//cdn.u-booking.cn/sparta/web_icon/logo.png" alt="home"></b>
-            <span class="hidden-xs"><img src="//cdn.u-booking.cn/sparta/web_icon/logo_text.png" alt="home"></span>
+          <a class="logo">
+            <b><img src="//qc-style.oss-cn-hangzhou.aliyuncs.com/sparta/web_icon/logo.png" alt="home"></b>
+            <span class="hidden-xs"><img src="//qc-style.oss-cn-hangzhou.aliyuncs.com/sparta/web_icon/logo_text.png" alt="home"></span>
           </a>
         </div>
+        <ul class="nav navbar-top-links navbar-left">
+          <li v-for="link in topbar">
+            <a :href="link.path">{{link.text}}</a>
+          </li>
+        </ul>
         <ul class="nav navbar-top-links navbar-right pull-right">
           <li class="dropdown"
               :class="{'open':showMenu}">
@@ -23,7 +27,8 @@
               <slot name="user-menu">
                 <li><a href="#"><i class="ti-user"></i> 账号设置</a></li>
               </slot>
-              <li><a :href="remote_domain + '/choosecompany/view'"><i class="ti-user"></i> 切换公司</a></li>
+              <li><a @click="setLang"><i class="ti-world"></i> 切换语言</a></li>
+              <li><a :href="remote_domain + '/choosecompany/view?target=' + currentUrl"><i class="ti-user"></i> 切换公司</a></li>
               <li><a @click="logout"><i class="fa fa-power-off"></i> 登出</a></li>
             </ul>
           </li>
@@ -93,14 +98,18 @@ export default {
   data() {
     return {
       sidebar: [],
+      topbar: [],
       showMenu: false,
+      currentUrl: '',
       account: {}
     }
   },
   mounted() {
+    this.currentUrl = location.href
     this.$http.get(this.remote_domain + '/api/layout/getLayout').then(res => {
       this.account = res.data.data.account
       this.sidebar = res.data.data.sidebar
+      this.topbar = res.data.data.topbar
     })
   },
   methods: {
@@ -112,6 +121,9 @@ export default {
         this.$http.post(this.remote_domain + '/api/login/logout')
           .then(res => location.reload())
       })
+    },
+    setLang() {
+      this.$http.post(this.remote_domain + '/api/chooselang/setLang').then(res => location.reload())
     }
   }
 }
@@ -120,6 +132,7 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
   .top-left-part
     width 245px
+    background none
   .navbar-header {
     width: 100%;
     background: #3484DF;
