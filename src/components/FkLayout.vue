@@ -10,7 +10,8 @@
         </div>
         <ul class="nav navbar-top-links navbar-left">
           <li v-for="link in topbar">
-            <a :href="link.path">{{link.text}}</a>
+            <a :href="link.path"
+               :class="{'active':link.active}">{{link.text}}</a>
           </li>
         </ul>
         <ul class="nav navbar-top-links navbar-right pull-right">
@@ -50,6 +51,13 @@
                        class="form-control"
                        placeholder="Search...">
                 <span class="input-group-btn"><button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>z </span>
+              </div>
+            </li>
+            <li>
+              <div style="padding:10px">
+                <ui-select :options="ouList"
+                           v-if="currentOuId"
+                           v-model="currentOuId"></ui-select>
               </div>
             </li>
             <li :class="{'active':!item.collapsed}"
@@ -101,18 +109,41 @@ export default {
       topbar: [],
       showMenu: false,
       currentUrl: '',
-      account: {}
+      ouList: [],
+      account: {},
+      currentOuId: ''
+    }
+  },
+  watch: {
+    currentOuId(ouId) {
+      console.log(ouId)
+      this.$http.post(this.remote_domain + '/api/ou/changeOU', {
+        ouId
+      })
+        .then(res => {
+          if (res.data.data.success) {
+
+          }
+        })
     }
   },
   mounted() {
     this.currentUrl = location.href
-    this.$http.get(this.remote_domain + '/api/layout/getLayout').then(res => {
-      this.account = res.data.data.account
-      this.sidebar = res.data.data.sidebar
-      this.topbar = res.data.data.topbar
-    })
+    this.getLayout()
   },
   methods: {
+    getLayout(ouId) {
+      return this.$http.get(this.remote_domain + '/api/layout/getLayout', {
+        params: { ouId }
+      }).then(res => {
+        this.appId = res.data.data.appId
+        this.currentOuId = res.data.data.currentOuId
+        this.account = res.data.data.account
+        this.sidebar = res.data.data.sidebar
+        this.topbar = res.data.data.topbar
+        this.ouList = res.data.data.ouList.map(ou => ({ text: ou.cnName, value: ou.companyId }))
+      })
+    },
     logout() {
       this.$confirmBox({
         size: 'sm',
@@ -129,7 +160,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .top-left-part
     width 245px
     background none
@@ -138,4 +169,8 @@ export default {
     background: #3484DF;
     border: 0;
   }
+  .form-group
+    margin-bottom 0
+  .navbar-top-links>li>a.active
+    background rgba(0,0,0,0.1)  
 </style>

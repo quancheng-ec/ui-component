@@ -2,7 +2,7 @@
   <div>
     <ui-picker :text="text"
                :required="required"
-               :options="{horizontal,label,placeholder:'请选择'}"
+               :options="{horizontal,label,placeholder:'请选择',labelAlign}"
                :validation-rules="validationRules"
                ref="picker">
       <div class="tree-panel">
@@ -32,6 +32,12 @@ export default {
       eventBus: new Vue()
     }
   },
+  watch: {
+    'value'(v) {
+      console.log(v)
+      if (v == '') this.text = ''
+    }
+  },
   props: {
     required: {
       type: Boolean
@@ -41,6 +47,7 @@ export default {
     type: { default: 'structure' }, // structure,project,costcenter,account
     horizontal: {},
     label: {},
+    labelAlign: {},
     validationRules: {},
     options: {
       default: () => {
