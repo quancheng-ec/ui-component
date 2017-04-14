@@ -210,4 +210,7 @@
     &:hover,&:focus
       background-color transparent !important
       cursor not-allowed
+  .dropdown-menu
+    max-height 300px
+    overflow auto
 </style>
