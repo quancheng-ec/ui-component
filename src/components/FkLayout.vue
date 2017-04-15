@@ -115,14 +115,14 @@ export default {
     }
   },
   watch: {
-    currentOuId(ouId) {
-      console.log(ouId)
+    currentOuId(ouId, old) {
+      if (!old) return
       this.$http.post(this.remote_domain + '/api/ou/changeOU', {
         ouId
       })
         .then(res => {
           if (res.data.data.success) {
-
+            location.reload()
           }
         })
     }

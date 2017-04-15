@@ -90,7 +90,7 @@ export default {
   mounted() {
     if (this.appendEl === 'body') {
       this.$el.parentNode.removeChild(this.$el)
-      document.body.append(this.$el)
+      document.body.appendChild(this.$el)
     }
   },
   watch: {
