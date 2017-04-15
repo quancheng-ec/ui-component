@@ -57,11 +57,13 @@ const labelMap = {
 }
 export default {
   data() {
-    const trees = {}
-    this.items.map(item => trees[item] = { children: [] })
-
     return {
-      trees: trees,
+      trees: {
+        structure: { children: [] },
+        account: { children: [] },
+        project: { children: [] },
+        costcenter: { children: [] }
+      },
       labelMap,
       eventBus: new Vue()
     }
@@ -114,10 +116,13 @@ export default {
     this.loadData()
   },
   watch: {
-    items() {
+    items(newVal, oldVal) {
+      if (newVal.join(',') === oldVal.join(',')) return
+      console.log('trigger items watcher')
       this.loadData()
     },
     companyId() {
+      console.log('trigger companyId watcher')
       this.loadData()
     }
   },

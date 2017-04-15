@@ -109,7 +109,7 @@ export default {
       if (!type) console.log(item)
       this.eventBus.$emit('item:chosen', {
         type,
-        data: item
+        data: JSON.parse(JSON.stringify(item))
       })
     },
     chooseDepartment(group) {
