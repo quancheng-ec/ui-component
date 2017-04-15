@@ -61,7 +61,8 @@
               </div>
             </li>
             <li :class="{'active':!item.collapsed}"
-                v-for="item in sidebar">
+                v-for="item in sidebar"
+                v-if="item.visible">
               <a class="waves-effect"
                  :class="{'active':item.active}"
                  @click="item.collapsed = !item.collapsed">
