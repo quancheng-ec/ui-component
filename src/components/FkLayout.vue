@@ -19,7 +19,7 @@
               :class="{'open':showMenu}">
             <a class="dropdown-toggle profile-pic waves-effect"
                data-toggle="dropdown"
-               @click="showMenu = !showMenu">
+               @click.stop.prevent="showMenu = !showMenu">
               <b class="hidden-xs"><i class="fa fa-user"></i> {{account.cnName}}</b>
             </a>
             <ul class="dropdown-menu dropdown-user animated flipInY"
