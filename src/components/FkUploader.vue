@@ -13,7 +13,7 @@
             <span class="fileinput-filename"> {{currentFile && currentFile.name}}</span>
           </div>
           <span class="input-group-addon btn btn-default btn-file">
-                                                                                                                                                                                                                                            <span class="fileinput-new" v-if="!currentFile">选择文件</span>
+                                                                                                                                                                                                                                              <span class="fileinput-new" v-if="!currentFile">选择文件</span>
           <span v-else>更换文件</span>
           <input type="file"
                  name="..."
@@ -74,7 +74,7 @@ export default {
     if (isScriptLoaded) {
       return this.initialized = true
     }
-    loadScript('http://gosspublic.alicdn.com/aliyun-oss-sdk.min.js', {
+    loadScript('//gosspublic.alicdn.com/aliyun-oss-sdk.min.js', {
       attrs: { 'data-id': 'aliyun-oss' }
     }, () => { this.initialized = true })
   },
