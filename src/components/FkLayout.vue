@@ -53,7 +53,7 @@
                 <span class="input-group-btn"><button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>z </span>
               </div>
             </li>
-            <li>
+            <li v-if="needOuList">
               <div style="padding:10px">
                 <ui-select :options="ouList"
                            v-if="currentOuId"
@@ -112,6 +112,7 @@ export default {
       currentUrl: '',
       ouList: [],
       account: {},
+      needOuList: false,
       currentOuId: ''
     }
   },
@@ -142,6 +143,7 @@ export default {
         this.account = res.data.data.account
         this.sidebar = res.data.data.sidebar
         this.topbar = res.data.data.topbar
+        this.needOuList = res.data.data.needOuList
         this.ouList = res.data.data.ouList.map(ou => ({ text: ou.cnName, value: ou.companyId }))
       })
     },
