@@ -535,6 +535,30 @@ ul[data-v-4f04f828] {
   border: 1px solid rgba(0,0,0,0.1);
 }
 
+.app-search[data-v-6e20651b] {
+  max-width: 100%;
+  width: 100%;
+  display: inline-block;
+}
+.app-search .form-control[data-v-6e20651b],
+.app-search .form-control[data-v-6e20651b]:focus {
+  margin-top: 0;
+  max-width: 100%;
+  width: 100%;
+  background: #edf1f5;
+}
+.app-search a[data-v-6e20651b] {
+  top: 5px;
+}
+.result-list[data-v-6e20651b] {
+  height: 260px;
+  overflow-y: auto;
+}
+.list-group-item[data-v-6e20651b] {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+}
+
 .app-search[data-v-3301a9ee] {
   max-width: 100%;
   width: 100%;

@@ -22,16 +22,33 @@
           </div>
         </ui-grid-item>
         <ui-grid-item :space="6">
-          <div class="tree-panel"
-               v-for="item in items">
-            <p>{{ labelMap[item] }}：</p>
-            <fk-department :department-data="trees[item]"
-                           :type="item"
-                           :level="1"
-                           :event-bus="eventBus"
-                           :url="url"
-                           :account-only="item === 'account'"
-                           :need-account="item === 'account'"></fk-department>
+          <div class="tree-panel">
+            <ul class="nav customtab nav-tabs"
+                role="tablist"
+                style="margin-bottom:10px">
+              <li role="presentation"
+                  :class="{'active':panelShow === item}"
+                  v-for="item in items"
+                  @click="panelShow = item">
+                <a role="tab"
+                   style="cursor:pointer"
+                   data-toggle="tab"
+                   aria-expanded="true">
+                  <span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs">{{labelMap[item]}}</span></a>
+              </li>
+            </ul>
+            <div v-for="item in items"
+                 v-if="item === panelShow">
+              <!--<fk-department :department-data="trees[item]"
+                                 v-if="item === 'account'"
+                                 :type="item"
+                                 :level="1"
+                                 :event-bus="eventBus"
+                                 :account-only="item === 'account'"
+                                 :need-account="item === 'account'"></fk-department>-->
+              <fk-tree :type="item"
+                       @item:change="onChosen"></fk-tree>
+            </div>
           </div>
         </ui-grid-item>
       </ui-grid-group>
@@ -58,6 +75,7 @@ const labelMap = {
 export default {
   data() {
     return {
+      panelShow: '',
       trees: {
         structure: { children: [] },
         account: { children: [] },
@@ -113,7 +131,8 @@ export default {
     this.eventBus.$on('item:chosen', this.onChosen)
   },
   mounted() {
-    this.loadData()
+    this.panelShow = this.items[0]
+    //this.loadData()
   },
   watch: {
     items(newVal, oldVal) {
