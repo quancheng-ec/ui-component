@@ -21,7 +21,7 @@
       <div v-else>
         <fk-department :department-data="remoteTree"
                        :event-bus="eventBus"
-                       v-if="!searchResult.length"
+                       v-if="!keyword"
                        :need-account="needAccount"
                        :level="deptLevel"></fk-department>
         <div v-else>
