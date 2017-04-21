@@ -68,10 +68,6 @@ export default {
   },
   watch: {
     'keyword'(kw) {
-      if (!kw) {
-        this.searchResult = []
-        return
-      }
       this.search()
     }
   },
@@ -102,6 +98,14 @@ export default {
         return this.$http.get(this.remote_domain + '/api/enterprise/resource', {
           params: {
             search: this.keyword
+          },
+          before(request) {
+            // abort previous request, if exists
+            if (this.previousRequest) {
+              this.previousRequest.abort()
+            }
+            // set previous request on Vue instance
+            this.previousRequest = request
           }
         }).then(res => {
           this.accounts = res.data.data.accounts

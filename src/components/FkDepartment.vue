@@ -24,7 +24,7 @@
           </li>
         </ol>
       </div>
-      <div v-if="departmentData.children.length && !departmentData.isCollapsed">
+      <div v-if="departmentData.children.length && !isCollapsed">
         <draggable :list="departmentData.children"
                    @change="onEnd">
           <fk-department :department-data="dept"
@@ -50,6 +50,7 @@ export default {
   mixins: [FkMixin],
   data() {
     return {
+      isCollapsed: true,
       accounts: []
     }
   },
@@ -79,21 +80,21 @@ export default {
   },
   computed: {
     collapsedType() {
-      return this.departmentData.isCollapsed ? 'expand' : 'collapse'
+      return this.isCollapsed ? 'expand' : 'collapse'
     }
   },
   mounted() {
-    console.log(1)
+    this.isCollapsed = this.level > 1
     this.loadAccountofGroup()
   },
   methods: {
     toggleCollapsed() {
-      this.departmentData.isCollapsed = !this.departmentData.isCollapsed
+      this.isCollapsed = !this.isCollapsed
       this.loadAccountofGroup()
     },
     loadAccountofGroup() {
       if (!this.needAccount) return
-      //  if (!this.departmentData.isCollapsed) {
+      //  if (!this.isCollapsed) {
       this.$http.get(this.remote_domain + '/api/enterprise/pickerData', {
         params: {
           groupId: this.departmentData.departmentId,
