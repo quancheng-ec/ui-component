@@ -22,6 +22,7 @@
         <fk-department :department-data="remoteTree"
                        :event-bus="eventBus"
                        v-if="!keyword"
+                       :type="type"
                        :need-account="needAccount"
                        :level="deptLevel"></fk-department>
         <div v-else>
@@ -52,6 +53,8 @@ export default {
     }
   },
   props: {
+    value: '',
+    needDefault: { type: Boolean, default: false },
     needAccount: { type: Boolean, default: false },
     type: { default: 'structure' },
     options: {
@@ -73,6 +76,11 @@ export default {
   },
   mounted() {
     this.loadTree()
+      .then(tree => {
+        if (this.needDefault) {
+          this.$emit('item:change', { type: this.type, data: tree })
+        }
+      })
   },
   methods: {
     loadTree() {
@@ -88,6 +96,7 @@ export default {
         }
       }).then(res => {
         this.remoteTree = res.data.data[this.type]
+        return res.data.data[this.type]
       })
     },
     setData(item) {
