@@ -54,6 +54,10 @@ export default {
         return {}
       }
     },
+    needDefault: {
+      type: Boolean,
+      default: false
+    },
     dataKey: {},
     url: {
       type: String,
@@ -84,11 +88,18 @@ export default {
       this.$emit('input', this.findKey(data))
     })
     this.eventBus.$on('drag:end', () => {
-      console.log(1)
+      console.log('drag:end')
     })
   },
   mounted() {
-    this.loadTree()
+    this.loadTree().then(tree => {
+      if (this.needDefault) {
+        console.log(tree)
+        this.text = tree.name || tree.cnName
+        this.$emit('item:change', { type: this.type, data: tree })
+        this.$emit('input', this.findKey(tree))
+      }
+    })
   },
   methods: {
     loadTree() {
@@ -109,6 +120,7 @@ export default {
         const resData = res.data.data
         this.text = resData.defaults.length ? resData.defaults[0].name : ''
         this.remoteTree = res.data.data[this.type]
+        return res.data.data[this.type]
       })
     },
     findKey(data) {

@@ -114,22 +114,3 @@ export default {
   }
 }
 </script>
-
-<style lang='stylus' rel='stylesheet/stylus' scoped>
-  .icon-require
-    color #ff0000
-    position relative
-    top 2px
-    left 3px
-  .text-placeholder
-    color #999  
-  .control-label
-    &.text-left
-      text-align left  
-
-    &.text-center
-      text-align center  
-
-    &.text-right
-      text-align right
-</style>
