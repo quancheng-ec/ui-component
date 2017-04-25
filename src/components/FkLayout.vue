@@ -11,6 +11,7 @@
         <ul class="nav navbar-top-links navbar-left">
           <li v-for="link in topbar">
             <a :href="link.path"
+               style="min-width:100px;text-align:center"
                :class="{'active':link.active}">{{link.text}}</a>
           </li>
         </ul>
