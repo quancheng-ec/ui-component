@@ -189,7 +189,6 @@ ul[data-v-4f04f828] {
 }
 .year-box[data-v-4f04f828],
 .month-box[data-v-4f04f828] {
-  -webkit-transition: all ease 0.1s;
   transition: all ease 0.1s;
   font-family: Roboto, sans-serif;
   -webkit-box-flex: 1;
@@ -217,7 +216,6 @@ ul[data-v-4f04f828] {
 .year-list li[data-v-4f04f828],
 .month-list li[data-v-4f04f828] {
   font-family: Roboto, sans-serif;
-  -webkit-transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   cursor: pointer;
   text-align: center;
@@ -256,7 +254,6 @@ ul[data-v-4f04f828] {
   background-color: #eee;
 }
 .date-list li[data-v-4f04f828] {
-  -webkit-transition: all ease 0.1s;
   transition: all ease 0.1s;
   cursor: pointer;
   box-sizing: border-box;
@@ -299,7 +296,6 @@ ul[data-v-4f04f828] {
 .date-list li .message .bg[data-v-4f04f828] {
   height: 30px;
   width: 100%;
-  -webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   border-radius: 50%;
   position: absolute;
@@ -362,7 +358,6 @@ ul[data-v-4f04f828] {
 }
 .toggle-enter-active[data-v-4f04f828],
 .toggle-leave-active[data-v-4f04f828] {
-  -webkit-transition: all ease 0.2s;
   transition: all ease 0.2s;
 }
 
@@ -402,11 +397,9 @@ ul[data-v-4f04f828] {
 }
 
 .bg-transition {
-  -webkit-transition: border 0.4s, box-shadow 0.4s, background-color 1.2s;
   transition: border 0.4s, box-shadow 0.4s, background-color 1.2s;
 }
 .btn-transition {
-  -webkit-transition: background-color 0.4s, left 0.2s;
   transition: background-color 0.4s, left 0.2s;
 }
 
