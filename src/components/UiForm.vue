@@ -33,7 +33,6 @@ export default {
         }
       }
     })
-    console.log(this.eventBus)
     this.eventBus.$on('validate:invalid', this.addError)
   },
   destroyed() {
