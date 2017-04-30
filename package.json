@@ -1,6 +1,6 @@
 {
   "name": "qc-ui-component",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "",
   "main": "dist/main.js",
   "scripts": {
