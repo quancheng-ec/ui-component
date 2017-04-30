@@ -4,7 +4,7 @@
       <span class="icon-require" v-if="required">*</span></label>
     <div :class="{'input-group':$slots.addon,'col-sm-9':horizontal}">
       <span class="input-group-addon" :class="fontSize" v-if="$slots.addon"><slot name="addon"></slot></span>
-      <select class="form-control" :class="inputSize" ref="input" :value="value" :read-only="readOnly" @input="updateValue($event.target.value)">
+      <select class="form-control" :class="inputSize" ref="input" :value="value" :read-only="readOnly" @change="updateValue($event.target.value)">
         <option v-for="option in options" :value="option.value" :disabled="option.disabled">
           {{option.text}}
         </option>
