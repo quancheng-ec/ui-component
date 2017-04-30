@@ -65,12 +65,18 @@ export default {
   mixins: [FkMixin],
   beforeMount() {
     let isScriptLoaded = false
-    for (const script of document.scripts) {
+    Array.prototype.forEach.call(document.scripts,script=>{
       if (script.getAttribute('data-id') === 'aliyun-oss') {
         isScriptLoaded = true
-        break
+        return
       }
-    }
+    })
+    // for (const script of document.scripts) {
+    //   if (script.getAttribute('data-id') === 'aliyun-oss') {
+    //     isScriptLoaded = true
+    //     break
+    //   }
+    // }
     if (isScriptLoaded) {
       return this.initialized = true
     }

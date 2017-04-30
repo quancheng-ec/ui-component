@@ -5,7 +5,7 @@
   "main": "dist/main.js",
   "scripts": {
     "example-dev": "webpack-dev-server --env.dev --env.example --config config/webpack.conf.babel.js --inline --hot",
-    "build": "NODE_ENV=production webpack --config config/webpack.conf.babel.js",
+    "build": "cross-env NODE_ENV=production webpack --config config/webpack.conf.babel.js",
     "build-watch": "webpack --config config/webpack.conf.babel.js --watch"
   },
   "author": "zephyr",
@@ -28,6 +28,7 @@
     "babel-preset-latest": "^6.16.0",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
+    "cross-env": "^4.0.0",
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "2.0.0-beta.4",
     "file-loader": "^0.9.0",
