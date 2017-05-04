@@ -13,7 +13,7 @@
             <span class="fileinput-filename"> {{currentFile && currentFile.name}}</span>
           </div>
           <span class="input-group-addon btn btn-default btn-file">
-                                                                                                                                                                                                                                              <span class="fileinput-new" v-if="!currentFile">选择文件</span>
+                                                                                                                                                                                                                                                <span class="fileinput-new" v-if="!currentFile">选择文件</span>
           <span v-else>更换文件</span>
           <input type="file"
                  name="..."
@@ -65,7 +65,7 @@ export default {
   mixins: [FkMixin],
   beforeMount() {
     let isScriptLoaded = false
-    Array.prototype.forEach.call(document.scripts,script=>{
+    Array.prototype.forEach.call(document.scripts, script => {
       if (script.getAttribute('data-id') === 'aliyun-oss') {
         isScriptLoaded = true
         return
@@ -106,7 +106,8 @@ export default {
               accessKeyId: accessKeyId,
               accessKeySecret: accessKeySecret,
               stsToken: securityToken,
-              bucket: bucket
+              bucket: bucket,
+              secure: true
             }),
             accountId: res.data.data.accountId,
             companyId: res.data.data.companyId
