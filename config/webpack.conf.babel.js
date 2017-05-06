@@ -4,7 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
-export default function(options = {}) {
+export default function (options = {}) {
   const { dev, example } = options
 
   const config = {
@@ -83,6 +83,7 @@ export default function(options = {}) {
         }
       })
     ],
+    externals: ['vue'],
     devServer: {
       contentBase: './example-src',
       historyApiFallback: true,

@@ -112,4 +112,8 @@ const QCUI = {
   }
 }
 
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(QCUI)
+}
+
 module.exports = QCUI
