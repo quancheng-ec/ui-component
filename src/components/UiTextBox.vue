@@ -2,13 +2,17 @@
   <div class="form-group"
        :class="{'has-error':!valid}">
     <label v-if="label"
-           :class="labelClass">{{label}}
+           :class="labelClass">
+      <slot name="label"></slot>{{label}}
       <span class="icon-require"
-            v-if="required">*</span></label>
+            v-if="required">*</span>
+    </label>
     <div :class="{'input-group':$slots.addon,'col-sm-9':horizontal}">
       <span class="input-group-addon"
             :class="fontSize"
-            v-if="$slots.addon"><slot name="addon"></slot></span>
+            v-if="$slots.addon">
+        <slot name="addon"></slot>
+      </span>
       <template v-if="type == 'date'">
         <div class="form-control"
              :class="inputSize"
@@ -47,7 +51,9 @@
       </template>
       <span class="input-group-addon"
             :class="fontSize"
-            v-if="$slots.otherAddon"> <slot name="otherAddon"></slot></span>
+            v-if="$slots.otherAddon">
+        <slot name="otherAddon"></slot>
+      </span>
       <slot></slot>
       <span class="help-block text-danger"
             v-for="error in validationErrors">{{error}}</span>
