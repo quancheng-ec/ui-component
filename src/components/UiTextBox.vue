@@ -2,7 +2,7 @@
   <div class="form-group"
        :class="{'has-error':!valid}">
     <label v-if="label"
-           :class="{'col-sm-3 control-label':horizontal}">{{label}}
+           :class="labelClass">{{label}}
       <span class="icon-require"
             v-if="required">*</span></label>
     <div :class="{'input-group':$slots.addon,'col-sm-9':horizontal}">
@@ -63,6 +63,9 @@ export default {
     label: {
       type: String
     },
+    labelAlign: {
+      type: String
+    },
     size: {
       type: String
     },
@@ -97,6 +100,13 @@ export default {
       default: false
     }
   },
+  computed: {
+    labelClass() {
+      let className = this.labelAlign ? 'text-' + this.labelAlign : ''
+      if (this.horizontal) className += ' col-sm-3 control-label'
+      return className
+    }
+  },
   methods: {
     triggerClick() {
       this.$emit('click')
@@ -104,13 +114,3 @@ export default {
   }
 }
 </script>
-
-<style lang='stylus' rel='stylesheet/stylus'>
-  .icon-require
-    color #ff0000
-    position relative
-    top 2px
-    left 3px
-  .text-placeholder
-    color #999
-</style>

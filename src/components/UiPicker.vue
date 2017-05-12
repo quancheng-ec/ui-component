@@ -6,6 +6,7 @@
                  :place-holder="options.placeholder"
                  :validation-rules="validationRules"
                  :label="options.label"
+                 :labelAlign="options.labelAlign"
                  :required="required"
                  :editable="false"
                  @click="listShow = true">

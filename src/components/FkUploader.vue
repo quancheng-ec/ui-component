@@ -13,7 +13,7 @@
             <span class="fileinput-filename"> {{currentFile && currentFile.name}}</span>
           </div>
           <span class="input-group-addon btn btn-default btn-file">
-                                                                                                                                                                                                                                        <span class="fileinput-new" v-if="!currentFile">选择文件</span>
+                                                                                                                                                                                                                                                <span class="fileinput-new" v-if="!currentFile">选择文件</span>
           <span v-else>更换文件</span>
           <input type="file"
                  name="..."
@@ -65,16 +65,22 @@ export default {
   mixins: [FkMixin],
   beforeMount() {
     let isScriptLoaded = false
-    for (const script of document.scripts) {
+    Array.prototype.forEach.call(document.scripts, script => {
       if (script.getAttribute('data-id') === 'aliyun-oss') {
         isScriptLoaded = true
-        break
+        return
       }
-    }
+    })
+    // for (const script of document.scripts) {
+    //   if (script.getAttribute('data-id') === 'aliyun-oss') {
+    //     isScriptLoaded = true
+    //     break
+    //   }
+    // }
     if (isScriptLoaded) {
       return this.initialized = true
     }
-    loadScript('http://gosspublic.alicdn.com/aliyun-oss-sdk.min.js', {
+    loadScript('//gosspublic.alicdn.com/aliyun-oss-sdk.min.js', {
       attrs: { 'data-id': 'aliyun-oss' }
     }, () => { this.initialized = true })
   },
@@ -100,7 +106,8 @@ export default {
               accessKeyId: accessKeyId,
               accessKeySecret: accessKeySecret,
               stsToken: securityToken,
-              bucket: bucket
+              bucket: bucket,
+              secure: true
             }),
             accountId: res.data.data.accountId,
             companyId: res.data.data.companyId
@@ -119,7 +126,7 @@ export default {
       this.getToken()
         .then(({ client, accountId, companyId }) => {
           client.multipartUpload(
-            this.makeFileName(companyId, accountId, md5(this.currentFile.name + '' + new Date())),
+            this.makeFileName(companyId, accountId, md5(this.currentFile.name + '' + new Date()) + '.' + this.currentFile.name.split('.').pop()),
             this.currentFile
           ).then(res => {
             console.log(res)

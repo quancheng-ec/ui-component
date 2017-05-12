@@ -4,7 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
-export default function(options = {}) {
+export default function (options = {}) {
   const { dev, example } = options
 
   const config = {
@@ -83,6 +83,7 @@ export default function(options = {}) {
         }
       })
     ],
+    externals: ['vue'],
     devServer: {
       contentBase: './example-src',
       historyApiFallback: true,
@@ -96,7 +97,11 @@ export default function(options = {}) {
   if (process.env.NODE_ENV === 'production') {
     config.plugins.push(
       new webpack.optimize.UglifyJsPlugin({
-        dropConsole: true
+        compress: {
+          warnings: false,
+          drop_console: true,
+          drop_debugger: true
+        }
       }))
   }
   return config

@@ -25,6 +25,7 @@ import FkMixin from './mixins/FkMixin.vue'
 import FkDepartment from './components/FkDepartment.vue'
 import FkSuperPicker from './components/FkSuperPicker.vue'
 import FkTreeSelect from './components/FkTreeSelect.vue'
+import FkTree from './components/FkTree.vue'
 import FkUploader from './components/FkUploader.vue'
 import FkAccountPicker from './components/FkAccountPicker.vue'
 import FkLayout from './components/FkLayout.vue'
@@ -52,6 +53,7 @@ const QCUI = {
   FkMixin,
   FkDepartment,
   FkSuperPicker,
+  FkTree,
   FkTreeSelect,
   FkUploader,
   FkAccountPicker,
@@ -79,6 +81,7 @@ const QCUI = {
     Vue.component('UiDropdown', UiDropdown)
     Vue.component('FkDepartment', FkDepartment)
     Vue.component('FkSuperPicker', FkSuperPicker)
+    Vue.component('FkTree', FkTree)
     Vue.component('FkTreeSelect', FkTreeSelect)
     Vue.component('FkUploader', FkUploader)
     Vue.component('FkAccountPicker', FkAccountPicker)
@@ -107,6 +110,10 @@ const QCUI = {
       }
     })
   }
+}
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(QCUI)
 }
 
 module.exports = QCUI

@@ -2,7 +2,7 @@
   <div>
     <ui-picker :text="text"
                :required="required"
-               :options="{horizontal,label,placeholder:'请选择'}"
+               :options="{horizontal,label,placeholder:'请选择',labelAlign}"
                :validation-rules="validationRules"
                ref="picker">
       <div class="tree-panel">
@@ -32,6 +32,12 @@ export default {
       eventBus: new Vue()
     }
   },
+  watch: {
+    'value'(v) {
+      console.log(v)
+      if (v == '') this.text = ''
+    }
+  },
   props: {
     required: {
       type: Boolean
@@ -41,11 +47,16 @@ export default {
     type: { default: 'structure' }, // structure,project,costcenter,account
     horizontal: {},
     label: {},
+    labelAlign: {},
     validationRules: {},
     options: {
       default: () => {
         return {}
       }
+    },
+    needDefault: {
+      type: Boolean,
+      default: false
     },
     dataKey: {},
     url: {
@@ -77,11 +88,18 @@ export default {
       this.$emit('input', this.findKey(data))
     })
     this.eventBus.$on('drag:end', () => {
-      console.log(1)
+      console.log('drag:end')
     })
   },
   mounted() {
-    this.loadTree()
+    this.loadTree().then(tree => {
+      if (this.needDefault) {
+        console.log(tree)
+        this.text = tree.name || tree.cnName
+        this.$emit('item:change', { type: this.type, data: tree })
+        this.$emit('input', this.findKey(tree))
+      }
+    })
   },
   methods: {
     loadTree() {
@@ -102,6 +120,7 @@ export default {
         const resData = res.data.data
         this.text = resData.defaults.length ? resData.defaults[0].name : ''
         this.remoteTree = res.data.data[this.type]
+        return res.data.data[this.type]
       })
     },
     findKey(data) {
