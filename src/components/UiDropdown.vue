@@ -134,7 +134,7 @@
           }
           this.$emit('input', value, e)
         }
-        this.$emit('no-click', item, e)
+        this.$emit('on-select', item, e)
       },
       _value(item) {
         return this.returnObject ? item : item[this.valueKey]
