@@ -68,7 +68,7 @@ export default {
         this.eventBus.$on('validate_back:' + batchId, id => {
           this.eventBus.validateQeuery.push(id)
           if (this.eventBus.validateQeuery.length === this.eventBus.registeredElements.length) {
-            if (_isEmpty(this.errors)) resolve()
+            if (_isEmpty(this.errors)) resolve(true)
             reject(this.errors)
           }
         })
