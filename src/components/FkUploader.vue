@@ -13,16 +13,19 @@
             <span class="fileinput-filename"> {{currentFile && currentFile.name}}</span>
           </div>
           <span class="input-group-addon btn btn-default btn-file">
-                                                                                                                                                                                                                                                <span class="fileinput-new" v-if="!currentFile">选择文件</span>
-          <span v-else>更换文件</span>
-          <input type="file"
-                 name="..."
-                 ref="fileInput"
-                 @change="setFile">
+            <span class="fileinput-new"
+                  v-if="!currentFile">选择文件</span>
+            <span v-else>更换文件</span>
+            <input type="file"
+                   :accept="accept"
+                   name="..."
+                   ref="fileInput"
+                   @change="setFile">
           </span>
           <template v-if="currentFile">
             <span class="input-group-addon btn btn-info"
-                  v-if="isUploading"><i class="fa fa-spin fa-spinner"></i>上传中...</span>
+                  v-if="isUploading">
+              <i class="fa fa-spin fa-spinner"></i>上传中...</span>
             <a class="input-group-addon btn btn-info"
                style="color:#fff"
                v-else
@@ -42,6 +45,14 @@ import md5 from 'md5'
 export default {
   props: {
     label: {},
+    accept: {
+      default: '*',
+      type: String
+    },
+    autoUpload: {
+      default: false,
+      type: Boolean
+    },
     url: {
       default: '/api/oss/getToken'
     },
@@ -87,6 +98,9 @@ export default {
   methods: {
     setFile(e) {
       this.currentFile = e.target.files[0]
+      if (this.autoUpload) {
+        this.uploadFile()
+      }
     },
     removeFile() {
       this.currentFile = null

@@ -7,6 +7,10 @@ import { routeConfig } from './pages'
 
 import './assets/style.styl'
 
+QCUI.FkMixin.data = () => ({
+  remote_domain: '//fkadmin.dev.quancheng-ec.com'
+})
+
 Vue.use(VueRouter)
 Vue.use(QCUI)
 Vue.use(VueResource)
