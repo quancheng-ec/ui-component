@@ -3,7 +3,7 @@ import Vue from 'vue'
 
 const UiConfirm = {
   components: { UiModal },
-  data() {
+  data () {
     return {
       show: true,
       title: 'alert',
@@ -11,18 +11,18 @@ const UiConfirm = {
     }
   },
   methods: {
-    confirm() {
+    confirm () {
       this.show = false
       this.$nextTick(() => {
         this.$emit('ui-confirm:chosen', 'confirm')
       })
     }
   },
-  render(h) {
+  render (h) {
     return (
       <ui-modal
         title={this.title}
-        show={this.show}
+        value={this.show}
         size='sm'
       >
         <div slot='content'>{this.content}</div>
@@ -36,7 +36,7 @@ const UiConfirm = {
   }
 }
 
-export default function $confirm(opts = {}) {
+export default function $confirm (opts = {}) {
   const { title, content } = opts
   const confirmContainer = document.createElement('div')
   document.body.appendChild(confirmContainer)
@@ -54,7 +54,7 @@ export default function $confirm(opts = {}) {
     })
   })
 
-  function remove() {
+  function remove () {
     confirm.$el.parentNode.removeChild(confirm.$el)
     confirm.$destroy()
   }
