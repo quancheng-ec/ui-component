@@ -4,11 +4,11 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
-export default function (options = {}) {
+export default function(options = {}) {
   const { dev, example } = options
 
   const config = {
-    entry: example ? './example-src/index' : './src/index',
+    entry: './src/index',
     output: {
       path: resolve(__dirname, './../dist'),
       publicPath: '/',
@@ -92,6 +92,19 @@ export default function (options = {}) {
     devtool: dev
       ? 'cheap-module-eval-source-map'
       : 'hidden-source-map'
+  }
+
+  if (example) {
+    config.entry = {
+      'main': './example-src/index',
+      'vendor': 'vue'
+    }
+    config.plugins.push(
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor' // Specify the common bundle's name.
+      })
+    )
+    config.externals = []
   }
 
   if (process.env.NODE_ENV === 'production') {
