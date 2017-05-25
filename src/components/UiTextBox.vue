@@ -15,6 +15,7 @@
       </span>
       <template v-if="type == 'date'">
         <div class="form-control"
+             style="min-width:140px"
              :class="inputSize"
              @click="triggerClick">
           <template v-if="value">{{value}}</template>

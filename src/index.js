@@ -30,6 +30,8 @@ import FkUploader from './components/FkUploader.vue'
 import FkAccountPicker from './components/FkAccountPicker.vue'
 import FkLayout from './components/FkLayout.vue'
 
+import SytLayout from './components/SytLayout.vue'
+
 import Validator from './libs/validation'
 import UiTimePicker from './components/UiTimePicker.vue'
 
@@ -61,8 +63,9 @@ const QCUI = {
   FkLayout,
   Validator,
   UiPicker,
+  SytLayout,
   UiTimePicker,
-  install (Vue) {
+  install(Vue) {
     Vue.component('UiButton', UiButton)
     Vue.component('UiTimePicker', UiTimePicker)
     Vue.component('UiGridGroup', UiGridGroup)
@@ -89,25 +92,26 @@ const QCUI = {
     Vue.component('FkUploader', FkUploader)
     Vue.component('FkAccountPicker', FkAccountPicker)
     Vue.component('FkLayout', FkLayout)
+    Vue.component('SytLayout', SytLayout)
     Vue.component('UiPicker', UiPicker)
     Object.defineProperties(Vue.prototype, {
       $validator: {
-        get () {
+        get() {
           return Validator
         }
       },
       $confirmBox: {
-        get () {
+        get() {
           return UiConfirm.bind(this)
         }
       },
       $alertBox: {
-        get () {
+        get() {
           return UiAlert.bind(this)
         }
       },
       $toastBox: {
-        get () {
+        get() {
           return UiToast.bind(this)
         }
       }
