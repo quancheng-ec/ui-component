@@ -273,23 +273,19 @@
     height: 20px;
     text-align: center;
     line-height: 20px;
-    top: 5px;
     margin: 0;
-}
-
-.ant-time-picker-panel-clear-btn:after {
-    font-size: 12px;
-    color: rgba(0, 0, 0, 0.25);
     display: inline-block;
-    line-height: 1;
-    width: 20px;
-    transition: color 0.3s ease;
-    font-family: 'anticon';
-    text-rendering: optimizeLegibility;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    content: "\e62e";
 }
+
+.ant-time-picker-panel-clear-btn:before {
+    content: "x";
+}
+
 
 .ant-time-picker-panel-clear-btn:hover:after {
     color: rgba(0, 0, 0, 0.43);
