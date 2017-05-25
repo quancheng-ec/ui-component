@@ -31,6 +31,7 @@ import FkAccountPicker from './components/FkAccountPicker.vue'
 import FkLayout from './components/FkLayout.vue'
 
 import Validator from './libs/validation'
+import UiTimePicker from './components/UiTimePicker.vue'
 
 const QCUI = {
   UiButton,
@@ -60,8 +61,10 @@ const QCUI = {
   FkLayout,
   Validator,
   UiPicker,
-  install(Vue) {
+  UiTimePicker,
+  install (Vue) {
     Vue.component('UiButton', UiButton)
+    Vue.component('UiTimePicker', UiTimePicker)
     Vue.component('UiGridGroup', UiGridGroup)
     Vue.component('UiGridItem', UiGridItem)
     Vue.component('UiHeading', UiHeading)
@@ -89,22 +92,22 @@ const QCUI = {
     Vue.component('UiPicker', UiPicker)
     Object.defineProperties(Vue.prototype, {
       $validator: {
-        get() {
+        get () {
           return Validator
         }
       },
       $confirmBox: {
-        get() {
+        get () {
           return UiConfirm.bind(this)
         }
       },
       $alertBox: {
-        get() {
+        get () {
           return UiAlert.bind(this)
         }
       },
       $toastBox: {
-        get() {
+        get () {
           return UiToast.bind(this)
         }
       }
