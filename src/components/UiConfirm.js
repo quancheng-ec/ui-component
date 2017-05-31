@@ -26,10 +26,10 @@ const UiConfirm = {
         <div slot="content">{{opts.content}}</div>
         <div slot="foot-btn">
           <button type="button" class="btn btn-info waves-effect" data-dismiss="modal"
-                  @click="confirm">确认
+                  @click="confirm">{{opts.yes || '确认'}}
           </button>
           <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal"
-                  @click="cancel">取消
+                  @click="cancel">{{opts.cancel || '取消'}}
           </button>
         </div>
       </ui-modal>`

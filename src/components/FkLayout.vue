@@ -37,20 +37,20 @@
               <slot name="user-menu">
                 <li>
                   <a href="#">
-                    <i class="ti-user"></i> 账号设置</a>
+                    <i class="ti-user"></i> {{i18nText[language].SETTINGS}}</a>
                 </li>
               </slot>
               <li>
                 <a @click="setLang">
-                  <i class="ti-world"></i> 切换语言</a>
+                  <i class="ti-world"></i> {{i18nText[language].LANGUAGE}}</a>
               </li>
               <li>
                 <a :href="remote_domain + '/choosecompany/view?target=' + currentUrl">
-                  <i class="ti-user"></i> 切换公司</a>
+                  <i class="ti-user"></i> {{i18nText[language].SWITCH_COMPANY}}</a>
               </li>
               <li>
                 <a @click="logout">
-                  <i class="fa fa-power-off"></i> 登出</a>
+                  <i class="fa fa-power-off"></i> {{i18nText[language].LOGOUT}}</a>
               </li>
             </ul>
           </li>
@@ -145,6 +145,27 @@ export default {
   },
   data() {
     return {
+      language: 'zh',
+      i18nText: {
+        zh: {
+          SETTINGS: '账号设置',
+          LANGUAGE: '切换语言',
+          SWITCH_COMPANY: '切换公司',
+          LOGOUT: '登出',
+          COMFIRM_LOGOUT: '确认要登出当前帐号？',
+          COMFIRM_LOGOUT_YES: '确认',
+          COMFIRM_LOGOUT_CANCEL: '取消'
+        },
+        en: {
+          SETTINGS: 'SETTINGS',
+          LANGUAGE: 'LANGUAGE',
+          SWITCH_COMPANY: 'SWITCH COMPANY',
+          LOGOUT: 'LOGOUT',
+          COMFIRM_LOGOUT: 'Are you sure  you want to log out?',
+          COMFIRM_LOGOUT_YES: 'Log out',
+          COMFIRM_LOGOUT_CANCEL: 'Cancel'
+        }
+      },
       sidebar: [],
       topbar: [],
       showMenu: false,
@@ -177,6 +198,7 @@ export default {
       return this.$http.get(this.remote_domain + '/api/layout/getLayout', {
         params: { ouId }
       }).then(res => {
+        this.language = res.data.data.language
         this.appId = res.data.data.appId
         this.currentOuId = res.data.data.currentOuId
         this.account = res.data.data.account
@@ -189,7 +211,9 @@ export default {
     logout() {
       this.$confirmBox({
         size: 'sm',
-        content: '确认要登出当前账号？'
+        content: this.i18nText[this.language].COMFIRM_LOGOUT,
+        yes: this.i18nText[this.language].COMFIRM_LOGOUT_YES,
+        cancel: this.i18nText[this.language].COMFIRM_LOGOUT_CANCEL
       }).then(res => {
         this.$http.post(this.remote_domain + '/api/login/logout')
           .then(res => location.reload())
