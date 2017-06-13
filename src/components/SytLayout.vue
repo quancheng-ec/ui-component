@@ -10,8 +10,7 @@
                    alt="home">
             </b>
             <span class="hidden-xs">
-              <img src="//qc-style.oss-cn-hangzhou.aliyuncs.com/sparta/web_icon/logo_text.png"
-                   alt="home">
+              {{appName}}
             </span>
           </a>
         </div>
@@ -145,6 +144,7 @@ export default {
   data() {
     return {
       sidebar: [],
+      appName: '',
       topbar: [],
       showMenu: false,
       currentUrl: '',
@@ -172,6 +172,7 @@ export default {
     if (this.layout) {
       this.topbar = this.layout.topbar
       this.sidebar = this.layout.sidebar
+      this.appName = this.layout.appName
       return
     }
     this.getLayout()
