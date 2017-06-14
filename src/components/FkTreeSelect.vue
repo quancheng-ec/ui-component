@@ -2,7 +2,7 @@
   <div>
     <ui-picker :text="text"
                :required="required"
-               :options="{horizontal,label,placeholder:'请选择',labelAlign}"
+               :options="{horizontal,label,placeholder:globalLang === 'zh'?'请选择':'Select One...',labelAlign}"
                :validation-rules="validationRules"
                ref="picker">
       <div class="tree-panel">

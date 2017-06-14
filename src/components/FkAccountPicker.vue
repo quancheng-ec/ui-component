@@ -11,21 +11,24 @@
             class="app-search hidden-xs"
             @submit.prevent>
         <input v-model="search"
-               placeholder="搜索员工"
+               :placeholder="globalLang === 'zh'?'搜索员工':'Search Employee'"
                class="form-control"
                ref="input">
         <a @click="loadAccount"
-           class="active"><i class="fa fa-search"></i></a>
+           class="active">
+          <i class="fa fa-search"></i>
+        </a>
       </form>
       <div class="list-group">
         <a @click="choseItem(null)"
            v-if="!required"
-           class="list-group-item">无直属上级</a>
+           class="list-group-item">{{globalLang === 'zh'?'无直属上级':'No Higher-up'}}</a>
         <a v-for="account in accounts"
            class="list-group-item"
            @click="choseItem(account)">
           <i class="fa fa-user"></i> {{account.cnName}}
-          <br> <small class="text-muted">{{account._departmentName}}</small>
+          <br>
+          <small class="text-muted">{{account._departmentName}}</small>
         </a>
       </div>
     </ui-picker>

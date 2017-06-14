@@ -1,13 +1,8 @@
 <script>
 export default {
-  props: {
-    globalLang: {
-      type: String,
-      default: 'zh'
-    }
-  },
   data() {
     return {
+      globalLang: 'zh',
       remote_domain: ''
     }
   }

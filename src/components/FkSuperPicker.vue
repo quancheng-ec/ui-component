@@ -18,7 +18,10 @@
           </slot>
           <div class="label-group">
             <span class="label label-rounded label-info label-outline"
-                  v-for="chosen,index in chosenList">{{chosen.name}} <i class="fa fa-remove" @click="chosenList.splice(index,1)"></i></span>
+                  v-for="chosen,index in chosenList">{{chosen.name}}
+              <i class="fa fa-remove"
+                 @click="chosenList.splice(index,1)"></i>
+            </span>
           </div>
         </ui-grid-item>
         <ui-grid-item :space="6">
@@ -34,18 +37,22 @@
                    style="cursor:pointer"
                    data-toggle="tab"
                    aria-expanded="true">
-                  <span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs">{{labelMap[item]}}</span></a>
+                  <span class="visible-xs">
+                    <i class="ti-home"></i>
+                  </span>
+                  <span class="hidden-xs">{{labelMap[item]}}</span>
+                </a>
               </li>
             </ul>
             <div v-for="item in items"
                  v-if="item === panelShow">
               <!--<fk-department :department-data="trees[item]"
-                                 v-if="item === 'account'"
-                                 :type="item"
-                                 :level="1"
-                                 :event-bus="eventBus"
-                                 :account-only="item === 'account'"
-                                 :need-account="item === 'account'"></fk-department>-->
+                                   v-if="item === 'account'"
+                                   :type="item"
+                                   :level="1"
+                                   :event-bus="eventBus"
+                                   :account-only="item === 'account'"
+                                   :need-account="item === 'account'"></fk-department>-->
               <fk-tree :type="item"
                        @item:change="onChosen"></fk-tree>
             </div>
@@ -54,9 +61,9 @@
       </ui-grid-group>
       <div slot="foot-btn">
         <ui-button type="info"
-                   @click.native="closeModal('save')">保存</ui-button>
+                   @click.native="closeModal('save')">{{globalLang === 'zh'?'保存':'Save'}}</ui-button>
         <ui-button type="info outline"
-                   @click.native="closeModal('cancel')">取消</ui-button>
+                   @click.native="closeModal('cancel')">{{globalLang === 'zh'?'取消':'Cancel'}}</ui-button>
       </div>
     </ui-modal>
   </div>

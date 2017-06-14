@@ -4,11 +4,13 @@
           class="app-search hidden-xs"
           @submit.prevent>
       <input v-model="keyword"
-             placeholder="搜索"
+             :placeholder="globalLang === 'zh'?'搜索':'Search'"
              class="form-control"
              ref="input">
       <a @click="search"
-         class="active"><i class="fa fa-search"></i></a>
+         class="active">
+        <i class="fa fa-search"></i>
+      </a>
     </form>
     <div class="result-list">
       <div v-if="type === 'account'">
