@@ -14,8 +14,8 @@
           </div>
           <span class="input-group-addon btn btn-default btn-file">
             <span class="fileinput-new"
-                  v-if="!currentFile">选择文件</span>
-            <span v-else>更换文件</span>
+                  v-if="!currentFile">{{globalLang === 'zh'?'选择文件':'Choose File'}}</span>
+            <span v-else>{{globalLang === 'zh'?'更换文件':'Change File'}}</span>
             <input type="file"
                    :accept="accept"
                    name="..."
@@ -25,11 +25,11 @@
           <template v-if="currentFile">
             <span class="input-group-addon btn btn-info"
                   v-if="isUploading">
-              <i class="fa fa-spin fa-spinner"></i>上传中...</span>
+              <i class="fa fa-spin fa-spinner"></i>{{globalLang === 'zh'?'上传中...':'Uploading...'}}</span>
             <a class="input-group-addon btn btn-info"
                style="color:#fff"
                v-else
-               @click="uploadFile">上传</a>
+               @click="uploadFile">{{globalLang === 'zh'?'上传':'Upload'}}</a>
           </template>
         </div>
       </div>
