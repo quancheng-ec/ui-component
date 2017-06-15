@@ -47,12 +47,12 @@
             <div v-for="item in items"
                  v-if="item === panelShow">
               <!--<fk-department :department-data="trees[item]"
-                                   v-if="item === 'account'"
-                                   :type="item"
-                                   :level="1"
-                                   :event-bus="eventBus"
-                                   :account-only="item === 'account'"
-                                   :need-account="item === 'account'"></fk-department>-->
+                                           v-if="item === 'account'"
+                                           :type="item"
+                                           :level="1"
+                                           :event-bus="eventBus"
+                                           :account-only="item === 'account'"
+                                           :need-account="item === 'account'"></fk-department>-->
               <fk-tree :type="item"
                        @item:change="onChosen"></fk-tree>
             </div>
@@ -74,10 +74,22 @@ import { find, remove } from 'lodash'
 import FkMixin from '../mixins/FkMixin.vue'
 import Vue from 'vue'
 const labelMap = {
-  structure: '部门',
-  costcenter: '成本中心',
-  project: '项目',
-  account: '员工'
+  structure: {
+    zh: '部门',
+    en: 'Departments'
+  },
+  costcenter: {
+    zh: '成本中心',
+    en: 'Costcenters'
+  },
+  project: {
+    zh: '项目',
+    en: 'Projects'
+  },
+  account: {
+    zh: '员工',
+    en: 'Employees'
+  }
 }
 export default {
   data() {
@@ -182,7 +194,7 @@ export default {
 
       if (find(this.chosenList, { id: result.id })) {
         return this.$toastBox({
-          content: '重复',
+          content: this.golbalLang === 'zh' ? '重复' : 'Duplicated',
           size: 'sm',
           type: 'danger'
         })

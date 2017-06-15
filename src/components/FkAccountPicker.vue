@@ -60,7 +60,7 @@ export default {
   components: { UiPicker },
   computed: {
     chosenNames() {
-      if (!this.value) return (this.required ? '' : (this.options.noSelect || '无选择'))
+      if (!this.value) return (this.required ? '' : (this.options.noSelect || (this.golbalLang === 'zh' ? '无选择' : 'No Selected')))
       if (this.options.multiple) {
         return this.chosenList.map(a => a.cnName).join(',')
       }
