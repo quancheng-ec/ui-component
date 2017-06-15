@@ -40,7 +40,7 @@
                   <span class="visible-xs">
                     <i class="ti-home"></i>
                   </span>
-                  <span class="hidden-xs">{{labelMap[item]}}</span>
+                  <span class="hidden-xs">{{labelMap[item][globalLang]}}</span>
                 </a>
               </li>
             </ul>
