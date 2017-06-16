@@ -14,8 +14,8 @@
           </div>
           <span class="input-group-addon btn btn-default btn-file">
             <span class="fileinput-new"
-                  v-if="!currentFile">{{globalLang === 'zh'?'选择文件':'Choose File'}}</span>
-            <span v-else>{{globalLang === 'zh'?'更换文件':'Change File'}}</span>
+                  v-if="!currentFile">{{globalLang === 'zh'?'选择文件':'Select File'}}</span>
+            <span v-else>{{globalLang === 'zh'?'更换文件':'Select File'}}</span>
             <input type="file"
                    :accept="accept"
                    name="..."

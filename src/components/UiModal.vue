@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     closeModal(event) {
-      if(event ==='backdrop' && this.backdrop) return;
+      if(event ==='backdrop' && this.backdrop) return
       this.active = false
       this.$emit('uiModalClose')
     }
