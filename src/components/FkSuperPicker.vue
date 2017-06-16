@@ -194,7 +194,7 @@ export default {
 
       if (find(this.chosenList, { id: result.id })) {
         return this.$toastBox({
-          content: this.golbalLang === 'zh' ? '重复' : 'Duplicated',
+          content: this.globalLang === 'zh' ? '重复' : 'Duplicated',
           size: 'sm',
           type: 'danger'
         })
