@@ -3,7 +3,7 @@
        :class="{'in':active}"
        v-if="value">
     <div class="modal-shadow"
-         @click="closeModal"></div>
+         @click="closeModal('backdrop')"></div>
     <div class="modal-dialog"
          :class="modalSize">
       <div class="modal-content">
@@ -66,6 +66,10 @@ export default {
       type: Boolean,
       default: false
     },
+    backdrop: {
+      type: Boolean,
+      default: false
+    },
     size: {
       type: String
     },
@@ -82,7 +86,8 @@ export default {
     }
   },
   methods: {
-    closeModal() {
+    closeModal(backdrop) {
+      if(backdrop && this.backdrop) return;
       this.active = false
       this.$emit('uiModalClose')
     }
