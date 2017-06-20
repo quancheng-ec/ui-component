@@ -36,6 +36,7 @@ import Validator from './libs/validation'
 import UiTimePicker from './components/UiTimePicker.vue'
 
 const QCUI = {
+  globalLang: 'zh',
   UiButton,
   UiGridGroup,
   UiGridItem,
@@ -102,17 +103,17 @@ const QCUI = {
       },
       $confirmBox: {
         get() {
-          return UiConfirm.bind(this)
+          return UiConfirm.bind(QCUI)
         }
       },
       $alertBox: {
         get() {
-          return UiAlert.bind(this)
+          return UiAlert.bind(QCUI)
         }
       },
       $toastBox: {
         get() {
-          return UiToast.bind(this)
+          return UiToast.bind(QCUI)
         }
       }
     })

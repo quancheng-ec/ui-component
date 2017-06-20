@@ -1,24 +1,33 @@
 import UiModal from './UiModal.vue'
 import Vue from 'vue'
 
+const localeDict = {
+  yes: {
+    zh: '确认',
+    en: 'ok'
+  }
+}
+
 const UiConfirm = {
   components: { UiModal },
-  data () {
+  data() {
     return {
       show: true,
       title: 'alert',
-      content: 'xxx'
+      content: 'xxx',
+      localeDict
     }
   },
+  props: ['opts'],
   methods: {
-    confirm () {
+    confirm() {
       this.show = false
       this.$nextTick(() => {
         this.$emit('ui-confirm:chosen', 'confirm')
       })
     }
   },
-  render (h) {
+  render(h) {
     return (
       <ui-modal
         title={this.title}
@@ -28,7 +37,8 @@ const UiConfirm = {
         <div slot='content'>{this.content}</div>
         <div slot='foot-btn'>
           <button type='button' class='btn btn-info waves-effect' data-dismiss='modal'
-            onClick={this.confirm}>确认
+            onClick={this.confirm}>
+            {this.localeDict.yes[this.opts.locale || 'zh']}
           </button>
         </div>
       </ui-modal>
@@ -36,12 +46,18 @@ const UiConfirm = {
   }
 }
 
-export default function $confirm (opts = {}) {
+export default function $confirm(opts = {}) {
   const { title, content } = opts
+  opts.locale = this.globalLang
   const confirmContainer = document.createElement('div')
   document.body.appendChild(confirmContainer)
 
-  const confirm = new Vue(UiConfirm)
+  const confirm = new Vue(Object.assign(UiConfirm, {
+    propsData: {
+      opts
+    }
+  }))
+
   confirm.title = title
   confirm.content = content
 
@@ -54,7 +70,7 @@ export default function $confirm (opts = {}) {
     })
   })
 
-  function remove () {
+  function remove() {
     confirm.$el.parentNode.removeChild(confirm.$el)
     confirm.$destroy()
   }

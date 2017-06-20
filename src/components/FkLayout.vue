@@ -202,6 +202,10 @@ export default {
         this.appId = res.data.data.appId
         this.currentOuId = res.data.data.currentOuId
         this.account = res.data.data.account
+
+        if (res.data.data.sidebar.length === 1) {
+          res.data.data.sidebar[0].collapsed = false
+        }
         this.sidebar = res.data.data.sidebar
         this.topbar = res.data.data.topbar
         this.needOuList = res.data.data.needOuList

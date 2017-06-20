@@ -1,17 +1,33 @@
 import UiModal from './UiModal.vue'
 import Vue from 'vue'
 
+const localeDict = {
+  yes: {
+    zh: '确认',
+    en: 'ok'
+  },
+  cancel: {
+    zh: '取消',
+    en: 'Cancel'
+  }
+}
+
 const UiConfirm = {
   components: { UiModal },
+  data () {
+    return {
+      localeDict
+    }
+  },
   props: ['opts'],
   methods: {
-    confirm() {
+    confirm () {
       this.show = false
       this.$nextTick(() => {
         this.$emit('ui-confirm:chosen', 'confirm')
       })
     },
-    cancel() {
+    cancel () {
       this.show = false
       this.$nextTick(() => {
         this.$emit('ui-confirm:chosen', 'cancel')
@@ -25,18 +41,20 @@ const UiConfirm = {
       >
         <div slot="content">{{opts.content}}</div>
         <div slot="foot-btn">
+        {{$locale}}
           <button type="button" class="btn btn-info waves-effect" data-dismiss="modal"
-                  @click="confirm">{{opts.yes || '确认'}}
+                  @click="confirm">{{opts.yes || localeDict.yes[opts.locale||'zh']}}
           </button>
           <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal"
-                  @click="cancel">{{opts.cancel || '取消'}}
+                  @click="cancel">{{opts.cancel || localeDict.cancel[opts.locale||'zh']}}
           </button>
         </div>
       </ui-modal>`
 }
 
-export default function $confirm(opts = {}) {
+export default function $confirm (opts = {}) {
   opts.show = true
+  opts.locale = this.globalLang
   opts.type = 'sm'
   const confirmContainer = document.createElement('div')
   document.body.appendChild(confirmContainer)
@@ -57,7 +75,7 @@ export default function $confirm(opts = {}) {
     })
   })
 
-  function remove() {
+  function remove () {
     confirm.$el.parentNode.removeChild(confirm.$el)
     confirm.$destroy()
   }
