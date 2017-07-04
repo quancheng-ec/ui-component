@@ -14,20 +14,20 @@ const localeDict = {
 
 const UiConfirm = {
   components: { UiModal },
-  data () {
+  data() {
     return {
       localeDict
     }
   },
   props: ['opts'],
   methods: {
-    confirm () {
+    confirm() {
       this.show = false
       this.$nextTick(() => {
         this.$emit('ui-confirm:chosen', 'confirm')
       })
     },
-    cancel () {
+    cancel() {
       this.show = false
       this.$nextTick(() => {
         this.$emit('ui-confirm:chosen', 'cancel')
@@ -41,7 +41,6 @@ const UiConfirm = {
       >
         <div slot="content">{{opts.content}}</div>
         <div slot="foot-btn">
-        {{$locale}}
           <button type="button" class="btn btn-info waves-effect" data-dismiss="modal"
                   @click="confirm">{{opts.yes || localeDict.yes[opts.locale||'zh']}}
           </button>
@@ -52,7 +51,7 @@ const UiConfirm = {
       </ui-modal>`
 }
 
-export default function $confirm (opts = {}) {
+export default function $confirm(opts = {}) {
   opts.show = true
   opts.locale = this.globalLang
   opts.type = 'sm'
@@ -75,7 +74,7 @@ export default function $confirm (opts = {}) {
     })
   })
 
-  function remove () {
+  function remove() {
     confirm.$el.parentNode.removeChild(confirm.$el)
     confirm.$destroy()
   }
