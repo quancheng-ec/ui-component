@@ -476,6 +476,14 @@ ul[data-v-1a9df73e] {
   border: 1px solid rgba(0,0,0,0.1);
 }
 
+.app-search[data-v-3bf513a0] {
+  width: 100%;
+}
+.app-search .form-control[data-v-3bf513a0],
+.app-search .form-control[data-v-3bf513a0]:focus {
+  width: 100%;
+}
+
 .app-search[data-v-d4175fd8] {
   max-width: 100%;
   width: 100%;

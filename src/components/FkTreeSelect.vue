@@ -6,11 +6,33 @@
                :validation-rules="validationRules"
                ref="picker">
       <div class="tree-panel">
+        <form role="search"
+              class="app-search hidden-xs"
+              @submit.prevent>
+          <input v-model="search"
+                 :placeholder="globalLang === 'zh'?'搜索'+searchHint:'Search Employee'"
+                 class="form-control"
+                 ref="input">
+          <a class="active"
+             @click="searchGroup">
+            <i class="fa fa-search"></i>
+          </a>
+        </form>
         <fk-department :department-data="groupTree"
                        :event-bus="eventBus"
                        :level="deptLevel"
+                       v-if="!search"
                        :need-account="type === 'account'"
                        :url="url"></fk-department>
+        <div class="list-group">
+          <a class="list-group-item"
+             v-for="item in searchList"
+             :key="item.groupId"
+             @click="choseItem(item)">
+            <i class="fa fa-sitemap"></i>
+            {{item.name}}
+          </a>
+        </div>
       </div>
     </ui-picker>
   </div>
@@ -20,9 +42,12 @@
 import UiPicker from './UiPicker.vue'
 import FkMixin from '../mixins/FkMixin.vue'
 import Vue from 'vue'
+import { debounce } from 'lodash'
 export default {
   data() {
     return {
+      search: '',
+      searchList: [],
       treePanel: {
         show: false
       },
@@ -36,6 +61,12 @@ export default {
     'value'(v) {
       console.log(v)
       if (v == '') this.text = ''
+    },
+    'search'(kw) {
+      if (kw == '') {
+        return this.searchList = []
+      }
+      this.searchGroup()
     }
   },
   props: {
@@ -77,6 +108,18 @@ export default {
   computed: {
     groupTree() {
       return this.tree || this.remoteTree
+    },
+    searchHint() {
+      switch (this.type) {
+        case 'structure':
+          return '部门'
+        case 'project':
+          return '项目'
+        case 'costcenter':
+          return '成本中心'
+        default:
+          return ''
+      }
     }
   },
   created() {
@@ -102,7 +145,35 @@ export default {
     })
   },
   methods: {
+    choseItem(item) {
+      this.eventBus.$emit('item:chosen', {
+        type: this.type,
+        data: item
+      })
+    },
+    searchGroup: debounce(function() {
+      return this.$http.get(this.remote_domain + '/api/group/get', {
+        params: {
+          type: this.type,
+          search: this.search,
+          companyId: this.options.companyId
+        }
+      }).then(res => {
+        this.searchList = res.data.data.groups
+      })
+    }, 300),
     loadTree() {
+      if (this.search) {
+        return this.$http.get(this.remote_domain + '/api/group/get', {
+          params: {
+            type: this.type,
+            search: this.search,
+            companyId: this.options.companyId
+          }
+        }).then(res => {
+          this.searchList = res.data.data.groups
+        })
+      }
       const defaults = []
       if (this.value) {
         defaults.push({
@@ -136,3 +207,13 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.app-search {
+  width: 100%;
+
+  .form-control, .form-control:focus {
+    width: 100%;
+  }
+}
+</style>

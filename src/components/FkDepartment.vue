@@ -6,12 +6,12 @@
               @click="toggleCollapsed"
               v-if="departmentData.children.length">
         Collapse
-  
+
       </button>
       <div class="dd-handle"
            @click="chooseItem(departmentData,type === 'account'?'structure':type)">
         <i class="fa fa-sitemap"></i> {{departmentData.name}}
-  
+
       </div>
       <div v-for="account in accounts">
         <ol class="dd-list">
@@ -19,7 +19,7 @@
             <div class="dd-handle"
                  @click="chooseItem(account,'account')">
               <i class="fa fa-user"></i> {{account.cnName}}
-  
+
             </div>
           </li>
         </ol>

@@ -97,7 +97,7 @@ export default {
     }
   },
   methods: {
-    loadAccount: debounce(function () {
+    loadAccount: debounce(function() {
       return this.$http.get(this.remote_domain + '/api/enterprise/resource', {
         params: {
           search: this.search
