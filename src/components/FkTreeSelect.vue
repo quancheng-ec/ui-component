@@ -24,7 +24,8 @@
                        v-if="!search"
                        :need-account="type === 'account'"
                        :url="url"></fk-department>
-        <div class="list-group">
+        <div class="list-group"
+             v-else>
           <a class="list-group-item"
              v-for="item in searchList"
              :key="item.groupId"
