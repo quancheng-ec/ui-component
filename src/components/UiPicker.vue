@@ -52,6 +52,7 @@ export default {
   watch: {
     'listShow'(val) {
       if (val) this.$emit('list-show')
+      if (!val) this.$emit('list:hide')
     }
   },
   mounted() {
@@ -69,21 +70,23 @@ export default {
 </script>
 
 <style lang="stylus">
+.dropdown-list {
+  position: absolute;
+  width: 100%;
+  padding-right: 15px;
+}
 
-  .dropdown-list
-    position absolute
-    width 100%
-    padding-right 15px
-  .dropdown-content
-    width 100%
-    padding 10px
-    background #fff
-    border 1px solid #e6e6e6
-    box-shadow 3px 5px 10px 1px rgba(0,0,0,0.1)
-    overflow auto
-    max-height 200px
-    .list-group
-      margin-top 10px
-    //   overflow auto
-    //   max-height 200px
+.dropdown-content {
+  width: 100%;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  box-shadow: 3px 5px 10px 1px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  max-height: 200px;
+
+  .list-group {
+    margin-top: 10px;
+  }
+}
 </style>

@@ -4,6 +4,7 @@
                :required="required"
                :options="{horizontal,label,placeholder:globalLang === 'zh'?'请选择':'Select One...',labelAlign}"
                :validation-rules="validationRules"
+               @list:hide="search = ''"
                ref="picker">
       <div class="tree-panel">
         <form role="search"
