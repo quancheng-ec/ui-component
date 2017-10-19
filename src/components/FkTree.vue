@@ -13,11 +13,16 @@
       </a>
     </form>
     <div class="result-list">
-      <div v-if="type === 'account'">
-        <div class="list-group">
+      <div v-if="notTree.indexOf(type) != -1">
+        <div class="list-group" v-if="!keyword">
           <a class="list-group-item"
-             v-for="item in accounts"
-             @click="setData(item)">{{item.cnName}}</a>
+             v-for="item in (type=='account'?accounts: remoteTree)" 
+             @click="setData(item)">{{type=='account'?item.cnName:item.name}}</a>
+        </div>
+        <div v-else class="list-group">
+          <a class="list-group-item"
+              v-for="item in searchResult"
+              @click="setData(item)">{{item.name}}</a>
         </div>
       </div>
       <div v-else>
@@ -36,6 +41,7 @@
         </div>
       </div>
     </div>
+    <div v-if="!keyword && notTree.indexOf(type) != -1" class="select-all"><span @click="selectAll" class="link-text">全选</span></div>
   </div>
 </template>
 
@@ -51,7 +57,9 @@ export default {
       searchResult: [],
       deptLevel: 1,
       eventBus: new Vue(),
-      accounts: []
+      accounts: [],
+      notTree: ['account', 'rank', 'city'], //不需要tree结构的type类型
+      localSearch: ['rank', 'city'], //本地搜索的类型
     }
   },
   props: {
@@ -69,6 +77,9 @@ export default {
   created() {
     this.eventBus.$on('item:chosen', ({ type, data }) => {
       this.$emit('item:change', { type, data })
+    })
+    this.eventBus.$on('item:all', (all) => {
+      this.$emit('item:all', all)
     })
   },
   watch: {
@@ -122,6 +133,16 @@ export default {
           this.accounts = res.data.data.accounts
         })
       }
+      if(this.localSearch.indexOf[this.type] != -1 && this.remoteTree){
+        let searchResult = [];
+        this.remoteTree.map(item=>{
+          if(item.name && item.name.indexOf(this.keyword) != -1){
+            searchResult.push(item);
+          }
+        });
+        this.searchResult = searchResult;
+        return ;
+      }
       this.$http.get(this.remote_domain + '/api/group/get', {
         params: {
           search: this.keyword,
@@ -140,6 +161,14 @@ export default {
         }
       }
       return result
+    },
+    selectAll(){
+      let all = [];
+      this.remoteTree&&this.remoteTree.map(item=>{
+        all.push({ type: this.type, data: item });
+      });
+      console.log('tree',all);
+      this.$emit('item:all', all);
     }
   }
 }
@@ -150,11 +179,16 @@ export default {
     max-width 100%
     width 100%
     display inline-block
+    
     .form-control, .form-control:focus
       margin-top 0
       max-width 100%
       width 100%
-      background #edf1f5
+      background #fff
+      border-radius 0
+      border 1px solid #ddd
+      height 36px
+      margin-bottom -1px
     a
       top 5px
   .result-list
@@ -163,5 +197,7 @@ export default {
   .list-group-item
     padding 10px 15px
     border 1px solid #ddd
-
+  .select-all
+    text-align right 
+    padding-top 10px
 </style>
