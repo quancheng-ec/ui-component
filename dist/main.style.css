@@ -479,6 +479,14 @@ ul[data-v-78d7e820] {
 .label-rouded,
 .label-rounded {
   padding: 6px 16px 6px;
+  background-color: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  color: #3e3a3a;
+}
+.label-rouded .fa-remove,
+.label-rounded .fa-remove {
+  color: #ff3f3f;
+  cursor: pointer;
 }
 .tree-panel {
   margin-bottom: 10px;

@@ -101,6 +101,10 @@ const labelMap = {
   city: {
     zh: '城市级别',
     en: 'City Leve'
+  },
+  company: {
+    zh: '公司实体',
+    en: 'Company'
   }
 }
 export default {
@@ -112,11 +116,21 @@ export default {
         account: { children: [] },
         project: { children: [] },
         costcenter: { children: [] },
-        ranks: { children: [] },
-        city: { children: [] }
+        rank: { children: [] },
+        city: { children: [] },
+        company: { children: [] }
       },
       labelMap,
-      eventBus: new Vue()
+      eventBus: new Vue(),
+      ID_MAP: {
+        account: 'accountId',
+        project: 'groupId',
+        structure: 'departmentId',
+        costcenter: 'groupId',
+        rank: 'rankId',
+        city: 'id',
+        company: 'companyId',
+      }
     }
   },
   mixins: [FkMixin],
@@ -218,11 +232,13 @@ export default {
     formatItem(item){
       let { type, data } = item
       let result = { type, data }
-      if (type === 'account') {
-        result.id = data.accountId
-      } else {
-        result.id = data.departmentId || data.groupId || data.rankId  || data.id
-      }
+
+      // if (type === 'account') {
+      //   result.id = data.accountId
+      // } else {
+      //   result.id = data.departmentId || data.groupId || data.rankId || data.companyId || data.id
+      // }
+      result.id = data[this.ID_MAP[type] || id];
       result.name = data.cnName || data.name
       return result;
     },
@@ -271,6 +287,12 @@ export default {
       margin 5px
   .label-rouded, .label-rounded
     padding 6px 16px 6px
+    background-color #f5f5f5
+    border 1px solid #e5e5e5
+    color #3E3A3A
+    .fa-remove
+      color #ff3f3f
+      cursor pointer
   .tree-panel
     margin-bottom 10px
     padding 10px

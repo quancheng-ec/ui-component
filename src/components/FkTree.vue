@@ -17,12 +17,12 @@
         <div class="list-group" v-if="!keyword">
           <a class="list-group-item"
              v-for="item in (type=='account'?accounts: remoteTree)" 
-             @click="setData(item)">{{type=='account'?item.cnName:item.name}}</a>
+             @click="setData(item)">{{(type=='account' || type=='company')?item.cnName:item.name}}</a>
         </div>
         <div v-else class="list-group">
           <a class="list-group-item"
-              v-for="item in searchResult"
-              @click="setData(item)">{{item.name}}</a>
+              v-for="item in (type=='account'?accounts:searchResult)"
+              @click="setData(item)">{{(type=='account' || type=='company')?item.cnName:item.name}}</a>
         </div>
       </div>
       <div v-else>
@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!keyword && notTree.indexOf(type) != -1" class="select-all"><span @click="selectAll" class="link-text">全选</span></div>
+    <div v-if="!keyword && type!='account' && notTree.indexOf(type) != -1" class="select-all"><span @click="selectAll" class="link-text">全选</span></div>
   </div>
 </template>
 
@@ -58,8 +58,8 @@ export default {
       deptLevel: 1,
       eventBus: new Vue(),
       accounts: [],
-      notTree: ['account', 'rank', 'city'], //不需要tree结构的type类型
-      localSearch: ['rank', 'city'], //本地搜索的类型
+      notTree: ['account', 'rank', 'city', 'company'], //不需要tree结构的type类型
+      localSearch: ['rank', 'city', 'company'], //本地搜索的类型
     }
   },
   props: {
@@ -136,7 +136,8 @@ export default {
       if(this.localSearch.indexOf[this.type] != -1 && this.remoteTree){
         let searchResult = [];
         this.remoteTree.map(item=>{
-          if(item.name && item.name.indexOf(this.keyword) != -1){
+          let name = this.type=='company'?item.cnName:item.name;
+          if(name && name.indexOf(this.keyword) != -1){
             searchResult.push(item);
           }
         });
