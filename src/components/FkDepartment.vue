@@ -11,7 +11,7 @@
       <div class="dd-handle"
            @click="chooseItem(departmentData,type === 'account'?'structure':type)">
         <i class="fa fa-sitemap"></i> {{departmentData.name}}
-
+        <i v-if="departmentData.children.length" @click="selectAll($event,departmentData,type === 'account'?'structure':type)" class="fa-select-all fa fa-plus-square"></i>
       </div>
       <div v-for="account in accounts">
         <ol class="dd-list">
@@ -122,7 +122,44 @@ export default {
     onEnd(evt) {
       console.log(evt)
       this.eventBus.$emit('drag:end', evt)
+    },
+    selectAll(event, item, type){
+      event.stopPropagation();
+      if (this.accountOnly && type !== 'account') return
+      if (!type) console.log(item)
+      let all = [{
+        type,
+        data: JSON.parse(JSON.stringify(item))
+      }]
+      var f = function(children){
+        if(children.children && children.children.length){
+          children.children.map(child=>{
+            all.push({
+              type,
+              data: JSON.parse(JSON.stringify(child))
+            });
+            f(child)
+          });
+        }
+      }
+      if(item.children && item.children.length){
+        item.children.map(child =>{
+          all.push({
+            type,
+            data: JSON.parse(JSON.stringify(child))
+          });
+          f(child)
+        })
+      }
+      this.eventBus.$emit('item:all', all)
     }
   }
 }
 </script>
+<style scoped>
+  .fa-select-all{
+    float:right;
+    font-size:15px;
+    cursor: pointer;
+  }
+</style>

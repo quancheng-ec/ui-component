@@ -2,27 +2,30 @@
   <div>
     <ui-modal v-model="show"
               size="lg"
-              :title="title"
+              :title="title || showPickTitle()"
               showCloseButton
               bgColor="blue"
               textPosition="center"
               :append-el="appendEl"
+              :modal-class="modalClass"
               @input="updateShow">
       <ui-grid-group slot="content">
         <ui-grid-item :space="6">
-          <slot name="desc">
-            <p>
-              以下范围内的分公司，部门，项目，员工可看到该费用类型
-            </p>
-            <p class="text-muted">默认全部员工可见，需要修改请从右边选择部门，项目和人员</p>
-          </slot>
-          <div class="label-group">
-            <span class="label label-rounded label-info label-outline"
-                  v-for="chosen,index in chosenList">{{chosen.name}}
-              <i class="fa fa-remove"
-                 @click="chosenList.splice(index,1)"></i>
-            </span>
+          <div class="tree-panel">
+            <slot name="desc">
+              <p>
+                {{ globalLang == 'zh' ? '请从右侧选择':'Select from right side'}}{{showPickTitle()}}
+              </p>
+            </slot>
+            <div class="label-group">
+              <span class="label label-rounded label-info label-outline"
+                    v-for="chosen,index in chosenList">{{chosen.name}}
+                <i class="fa fa-remove"
+                  @click="chosenList.splice(index,1)"></i>
+              </span>
+            </div>
           </div>
+          
         </ui-grid-item>
         <ui-grid-item :space="6">
           <div class="tree-panel">
@@ -40,7 +43,7 @@
                   <span class="visible-xs">
                     <i class="ti-home"></i>
                   </span>
-                  <span class="hidden-xs">{{labelMap[item][globalLang]}}</span>
+                  <span class="hidden-xs">{{labelMap[item]?labelMap[item][globalLang]:''}}</span>
                 </a>
               </li>
             </ul>
@@ -54,6 +57,7 @@
                                            :account-only="item === 'account'"
                                            :need-account="item === 'account'"></fk-department>-->
               <fk-tree :type="item"
+                       @item:all="selectAll"
                        @item:change="onChosen"></fk-tree>
             </div>
           </div>
@@ -89,6 +93,18 @@ const labelMap = {
   account: {
     zh: '员工',
     en: 'Employees'
+  },
+  rank: {
+    zh: '职级',
+    en: 'Rank'
+  },
+  city: {
+    zh: '城市级别',
+    en: 'City Leve'
+  },
+  company: {
+    zh: '公司实体',
+    en: 'Company'
   }
 }
 export default {
@@ -99,10 +115,22 @@ export default {
         structure: { children: [] },
         account: { children: [] },
         project: { children: [] },
-        costcenter: { children: [] }
+        costcenter: { children: [] },
+        rank: { children: [] },
+        city: { children: [] },
+        company: { children: [] }
       },
       labelMap,
-      eventBus: new Vue()
+      eventBus: new Vue(),
+      ID_MAP: {
+        account: 'accountId',
+        project: 'groupId',
+        structure: 'departmentId',
+        costcenter: 'groupId',
+        rank: 'rankId',
+        city: 'id',
+        company: 'companyId',
+      }
     }
   },
   mixins: [FkMixin],
@@ -134,7 +162,10 @@ export default {
     },
     onSave: {},
     onCancel: {},
-    appendEl: {}
+    appendEl: {},
+    modalClass: {
+      type: String 
+    }
   },
   computed: {
     show: {
@@ -157,6 +188,7 @@ export default {
     items(newVal, oldVal) {
       if (newVal.join(',') === oldVal.join(',')) return
       console.log('trigger items watcher')
+      this.panelShow = this.items[0]
       this.loadData()
     },
     companyId() {
@@ -183,14 +215,7 @@ export default {
     },
     onChosen(item) {
       console.log(item)
-      const { type, data } = item
-      const result = { type, data }
-      if (type === 'account') {
-        result.id = data.accountId
-      } else {
-        result.id = data.departmentId || data.groupId
-      }
-      result.name = data.cnName || data.name
+      const result = this.formatItem(item)
 
       if (find(this.chosenList, { id: result.id })) {
         return this.$toastBox({
@@ -204,6 +229,28 @@ export default {
       }
       this.chosenList.push(result)
     },
+    formatItem(item){
+      let { type, data } = item
+      let result = { type, data }
+
+      // if (type === 'account') {
+      //   result.id = data.accountId
+      // } else {
+      //   result.id = data.departmentId || data.groupId || data.rankId || data.companyId || data.id
+      // }
+      result.id = data[this.ID_MAP[type] || id];
+      result.name = data.cnName || data.name
+      return result;
+    },
+    selectAll(items){
+      console.log(items);
+      items&&items.length&&items.map(item=>{
+        let result = this.formatItem(item);
+        if (!find(this.chosenList, { id: result.id })) {
+          this.chosenList.push(result)
+        }
+      })
+    },
     closeModal(type) {
       if (type) {
         const method = `on${firstUpperCase(type)}`
@@ -212,7 +259,7 @@ export default {
           if (this[method] instanceof Promise) {
             return this[method]().then(() => this.show = false)
           }
-          this[method]()
+          this[method](this.chosenList)
           return this.show = false
         }
       }
@@ -221,6 +268,13 @@ export default {
       function firstUpperCase(str) {
         return str.toLowerCase().replace(/( |^)[a-z]/g, L => L.toUpperCase())
       }
+    },
+    showPickTitle(){
+      let labels = [];
+      (this.items || []).map(ty=>{
+        labels.push(this.labelMap[ty]?this.labelMap[ty][this.globalLang]:'');
+      })
+      return labels.join('、')
     }
   }
 }
@@ -231,9 +285,17 @@ export default {
     .label
       display inline-block
       margin 5px
-
+  .label-rouded, .label-rounded
+    padding 6px 16px 6px
+    background-color #f5f5f5
+    border 1px solid #e5e5e5
+    color #3E3A3A
+    .fa-remove
+      color #ff3f3f
+      cursor pointer
   .tree-panel
     margin-bottom 10px
     padding 10px
     border 1px solid rgba(0, 0, 0, 0.1)
+    min-height 400px
 </style>

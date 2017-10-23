@@ -1,6 +1,6 @@
 <template>
   <div class="modal fade"
-       :class="{'in':active}"
+       :class="rootClass"
        v-if="value">
     <div class="modal-shadow"
          @click="closeModal('backdrop')"></div>
@@ -51,6 +51,11 @@ export default {
       set(bool) {
         this.$emit('input', bool)
       }
+    },
+    rootClass(){
+      let className = { 'in' : this.active };
+      if(this.modalClass) className[this.modalClass] = true;
+      return className;
     }
   },
   props: {
@@ -82,6 +87,9 @@ export default {
       default: 'left'
     },
     appendEl: {
+      type: String
+    },
+    modalClass: {
       type: String
     }
   },
