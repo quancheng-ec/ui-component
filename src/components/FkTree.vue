@@ -133,7 +133,7 @@ export default {
           this.accounts = res.data.data.accounts
         })
       }
-      if(this.localSearch.indexOf[this.type] != -1 && this.remoteTree){
+      if(this.localSearch.indexOf(this.type) != -1 && this.remoteTree){
         let searchResult = [];
         this.remoteTree.map(item=>{
           let name = this.type=='company'?item.cnName:item.name;
