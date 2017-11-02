@@ -133,8 +133,8 @@ export default {
           this.accounts = res.data.data.accounts
         })
       }
+      let searchResult = [];
       if(this.localSearch.indexOf(this.type) != -1 && this.remoteTree){
-        let searchResult = [];
         this.remoteTree.map(item=>{
           let name = this.type=='company'?item.cnName:item.name;
           if(name && name.indexOf(this.keyword) != -1){

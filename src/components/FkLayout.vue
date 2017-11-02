@@ -80,10 +80,19 @@
               </div>
             </li>
             <li v-if="needOuList">
-              <div style="padding:10px">
-                <ui-select :options="ouList"
+              <div style="padding:5px">
+                <!-- <ui-select :options="ouList"
                            v-if="currentOuId"
-                           v-model="currentOuId"></ui-select>
+                           v-model="currentOuId"></ui-select> -->
+                <ui-dropdown v-model="currentOuId" 
+                             v-if="currentOuId"
+                             placeHolder=""
+                             class="menu-ou-select" 
+                             :list="ouList" 
+                             text-key="text" 
+                             value-key="value" 
+                             select>
+              </ui-dropdown>
               </div>
             </li>
             <li :class="{'active':!item.collapsed}"
@@ -184,7 +193,8 @@ export default {
       })
         .then(res => {
           if (res.data.data.success) {
-            location.replace(res.data.data.redirectUrl)
+            // location.replace(res.data.data.redirectUrl)
+            location.replace(location.origin)
           }
         })
     }
@@ -230,7 +240,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus" scoped>
+<style lang="stylus" rel="stylesheet/stylus">
   .top-left-part
     width 245px
     background none
@@ -239,8 +249,29 @@ export default {
     background: #3484DF;
     border: 0;
   }
-  .form-group
-    margin-bottom 0
+  
   .navbar-top-links>li>a.active
     background rgba(0,0,0,0.1)  
+  #side-menu > li > a.active
+    background-color #ebf3fe
+  #side-menu ul > li > a.active
+    color #609fe6
+    background #fafafa
+  #side-menu .form-group
+    margin-bottom 0
+  #side-menu .menu-ou-select
+    width 100% 
+    & > button.dropdown-toggle
+      text-align left
+      position relative
+      overflow hidden
+      text-overflow ellipsis
+      width 100% 
+      height 38px 
+      .caret
+        position absolute
+        right 6px
+        top 16px
+    .dropdown-menu
+      width 100%
 </style>
