@@ -194,7 +194,17 @@ export default {
         .then(res => {
           if (res.data.data.success) {
             // location.replace(res.data.data.redirectUrl)
-            location.replace(location.origin)
+            // location.replace(location.origin)
+            //跳转至当前激活的菜单地址
+            let redirectUrl = res.data.data.redirectUrl
+            for(let link of this.topbar){
+              if(link.active){
+                redirectUrl = link.path
+                break
+              }
+              
+            }
+            location.replace(redirectUrl)
           }
         })
     }
