@@ -21100,8 +21100,6 @@ exports.default = {
 //
 //
 //
-//
-//
 
 /***/ }),
 /* 67 */
@@ -30249,7 +30247,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "role": "navigation"
     }
-  }, [_c('div', {
+  }, [(_vm.needOuList) ? _c('div', {
+    staticStyle: {
+      "padding": "5px"
+    }
+  }, [(_vm.currentOuId) ? _c('ui-dropdown', {
+    staticClass: "menu-ou-select",
+    attrs: {
+      "placeHolder": "",
+      "list": _vm.ouList,
+      "text-key": "text",
+      "value-key": "value",
+      "select": ""
+    },
+    model: {
+      value: (_vm.currentOuId),
+      callback: function($$v) {
+        _vm.currentOuId = $$v
+      },
+      expression: "currentOuId"
+    }
+  }) : _vm._e()], 1) : _vm._e(), _c('div', {
     staticClass: "slimScrollDiv",
     staticStyle: {
       "position": "relative",
@@ -30270,27 +30288,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "side-menu"
     }
-  }, [_vm._m(1), (_vm.needOuList) ? _c('li', [_c('div', {
-    staticStyle: {
-      "padding": "5px"
-    }
-  }, [(_vm.currentOuId) ? _c('ui-dropdown', {
-    staticClass: "menu-ou-select",
-    attrs: {
-      "placeHolder": "",
-      "list": _vm.ouList,
-      "text-key": "text",
-      "value-key": "value",
-      "select": ""
-    },
-    model: {
-      value: (_vm.currentOuId),
-      callback: function($$v) {
-        _vm.currentOuId = $$v
-      },
-      expression: "currentOuId"
-    }
-  }) : _vm._e()], 1)]) : _vm._e(), _vm._l((_vm.sidebar), function(item) {
+  }, [_vm._m(1), _vm._l((_vm.sidebar), function(item) {
     return (item.visible) ? _c('li', {
       class: {
         'active': !item.collapsed

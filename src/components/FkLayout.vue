@@ -61,6 +61,20 @@
          role="navigation"
          style="overflow: visible;"
          v-if="!sidebarHidden">
+      <div v-if="needOuList" style="padding:5px">
+          <!-- <ui-select :options="ouList"
+                      v-if="currentOuId"
+                      v-model="currentOuId"></ui-select> -->
+          <ui-dropdown v-model="currentOuId" 
+                        v-if="currentOuId"
+                        placeHolder=""
+                        class="menu-ou-select" 
+                        :list="ouList" 
+                        text-key="text" 
+                        value-key="value" 
+                        select>
+        </ui-dropdown>
+      </div>
       <div class="slimScrollDiv"
            style="position: relative; overflow: visible; width: auto; height: 100%;">
         <div class="sidebar-nav navbar-collapse slimscrollsidebar active"
@@ -77,22 +91,6 @@
                           type="button">
                     <i class="fa fa-search"></i>
                   </button>z </span>
-              </div>
-            </li>
-            <li v-if="needOuList">
-              <div style="padding:5px">
-                <!-- <ui-select :options="ouList"
-                           v-if="currentOuId"
-                           v-model="currentOuId"></ui-select> -->
-                <ui-dropdown v-model="currentOuId" 
-                             v-if="currentOuId"
-                             placeHolder=""
-                             class="menu-ou-select" 
-                             :list="ouList" 
-                             text-key="text" 
-                             value-key="value" 
-                             select>
-              </ui-dropdown>
               </div>
             </li>
             <li :class="{'active':!item.collapsed}"
@@ -269,8 +267,8 @@ export default {
     background #fafafa
   #side-menu .form-group
     margin-bottom 0
-  #side-menu .menu-ou-select
-    width 100% 
+  .sidebar .menu-ou-select
+    width 100%
     & > button.dropdown-toggle
       text-align left
       position relative
@@ -283,5 +281,5 @@ export default {
         right 6px
         top 16px
     .dropdown-menu
-      width 100%
+      min-width 210px  
 </style>

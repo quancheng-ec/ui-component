@@ -573,10 +573,10 @@ ul[data-v-78d7e820] {
 #side-menu .form-group {
   margin-bottom: 0;
 }
-#side-menu .menu-ou-select {
+.sidebar .menu-ou-select {
   width: 100%;
 }
-#side-menu .menu-ou-select > button.dropdown-toggle {
+.sidebar .menu-ou-select > button.dropdown-toggle {
   text-align: left;
   position: relative;
   overflow: hidden;
@@ -584,13 +584,13 @@ ul[data-v-78d7e820] {
   width: 100%;
   height: 38px;
 }
-#side-menu .menu-ou-select > button.dropdown-toggle .caret {
+.sidebar .menu-ou-select > button.dropdown-toggle .caret {
   position: absolute;
   right: 6px;
   top: 16px;
 }
-#side-menu .menu-ou-select .dropdown-menu {
-  width: 100%;
+.sidebar .menu-ou-select .dropdown-menu {
+  min-width: 210px;
 }
 
 .top-left-part[data-v-a17fa990] {
