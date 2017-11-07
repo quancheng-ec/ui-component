@@ -575,6 +575,7 @@ ul[data-v-78d7e820] {
   bottom: 0;
   height: auto;
   padding: 0;
+  overflow: inherit;
 }
 .fk-layout--content {
   position: fixed;

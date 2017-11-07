@@ -272,6 +272,7 @@ export default {
     bottom 0
     height auto 
     padding 0 
+    overflow inherit
   .fk-layout--content  
     position fixed 
     top 60px
