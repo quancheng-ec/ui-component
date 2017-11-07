@@ -21100,6 +21100,7 @@ exports.default = {
 //
 //
 //
+//
 
 /***/ }),
 /* 67 */
@@ -30167,7 +30168,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [(!_vm.navHidden) ? _c('nav', {
-    staticClass: "navbar navbar-default navbar-static-top m-b-0"
+    staticClass: "navbar navbar-default navbar-static-top m-b-0 fk-layout--header"
   }, [_c('div', {
     staticClass: "navbar-header"
   }, [_vm._m(0), _c('ul', {
@@ -30240,13 +30241,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('i', {
     staticClass: "fa fa-power-off"
   }), _vm._v(" " + _vm._s(_vm.i18nText[_vm.language].LOGOUT))])])], 2) : _vm._e()])])])]) : _vm._e(), (!_vm.sidebarHidden) ? _c('div', {
-    staticClass: "navbar-default sidebar",
-    staticStyle: {
-      "overflow": "visible"
-    },
-    attrs: {
-      "role": "navigation"
-    }
+    staticClass: "navbar-default sidebar fk-layout--menu"
   }, [(_vm.needOuList) ? _c('div', {
     staticStyle: {
       "padding": "5px"
@@ -30267,28 +30262,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "currentOuId"
     }
-  }) : _vm._e()], 1) : _vm._e(), _c('div', {
-    staticClass: "slimScrollDiv",
-    staticStyle: {
-      "position": "relative",
-      "overflow": "visible",
-      "width": "auto",
-      "height": "100%"
-    }
-  }, [_c('div', {
-    staticClass: "sidebar-nav navbar-collapse slimscrollsidebar active",
-    staticStyle: {
-      "overflow-x": "visible",
-      "overflow-y": "auto",
-      "width": "auto",
-      "height": "100%"
-    }
-  }, [_c('ul', {
+  }) : _vm._e()], 1) : _vm._e(), _c('ul', {
     staticClass: "nav in",
+    style: ({
+      top: _vm.needOuList ? '45px' : '0'
+    }),
     attrs: {
       "id": "side-menu"
     }
-  }, [_vm._m(1), _vm._l((_vm.sidebar), function(item) {
+  }, _vm._l((_vm.sidebar), function(item) {
     return (item.visible) ? _c('li', {
       class: {
         'active': !item.collapsed
@@ -30310,7 +30292,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }), _c('span', {
       staticClass: "hide-menu"
-    }, [_vm._v(" " + _vm._s(item.text) + "\n                "), _c('span', {
+    }, [_vm._v(" " + _vm._s(item.text) + "\n            "), _c('span', {
       staticClass: "fa arrow"
     })])]), (!item.collapsed) ? _c('ul', {
       staticClass: "nav nav-second-level collapse in",
@@ -30327,35 +30309,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }, [_vm._v(_vm._s(i.text))])
     }))]) : _vm._e()]) : _vm._e()
-  })], 2)]), _c('div', {
-    staticClass: "slimScrollBar",
-    staticStyle: {
-      "background": "rgb(220, 220, 220)",
-      "width": "0px",
-      "position": "absolute",
-      "top": "0px",
-      "opacity": "0.4",
-      "display": "none",
-      "border-radius": "7px",
-      "z-index": "99",
-      "right": "1px",
-      "height": "1454px"
-    }
-  }), _c('div', {
-    staticClass: "slimScrollRail",
-    staticStyle: {
-      "width": "0px",
-      "height": "100%",
-      "position": "absolute",
-      "top": "0px",
-      "display": "none",
-      "border-radius": "7px",
-      "background": "rgb(51, 51, 51)",
-      "opacity": "0.2",
-      "z-index": "90",
-      "right": "1px"
-    }
-  })])]) : _vm._e(), _c('div', {
+  }))]) : _vm._e(), _c('div', {
+    staticClass: "fk-layout--content",
     style: ({
       marginLeft: _vm.sidebarHidden ? '0px' : '220px',
       minHeight: '100%'
@@ -30387,27 +30342,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "alt": "home"
     }
   })])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', {
-    staticClass: "sidebar-search hidden-sm hidden-md hidden-lg"
-  }, [_c('div', {
-    staticClass: "input-group custom-search-form"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "Search..."
-    }
-  }), _c('span', {
-    staticClass: "input-group-btn"
-  }, [_c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "button"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-search"
-  })]), _vm._v("z ")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

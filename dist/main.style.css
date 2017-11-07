@@ -560,8 +560,38 @@ ul[data-v-78d7e820] {
   background: #3484df;
   border: 0;
 }
+.fk-layout--header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+}
+.fk-layout--menu {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 220px;
+  bottom: 0;
+  height: auto;
+  padding: 0;
+}
+.fk-layout--content {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 .navbar-top-links>li>a.active {
   background: rgba(0,0,0,0.1);
+}
+#side-menu {
+  position: absolute;
+  top: 0;
+  bottom: 5px;
+  overflow: auto;
+  width: 100%;
 }
 #side-menu > li > a.active {
   background-color: #ebf3fe;

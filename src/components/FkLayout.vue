@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-default navbar-static-top m-b-0"
+    <nav class="navbar navbar-default navbar-static-top m-b-0 fk-layout--header"
          v-if="!navHidden">
       <div class="navbar-header">
         <div class="top-left-part">
@@ -57,9 +57,7 @@
         </ul>
       </div>
     </nav>
-    <div class="navbar-default sidebar"
-         role="navigation"
-         style="overflow: visible;"
+    <div class="navbar-default sidebar fk-layout--menu"
          v-if="!sidebarHidden">
       <div v-if="needOuList" style="padding:5px">
           <!-- <ui-select :options="ouList"
@@ -75,55 +73,58 @@
                         select>
         </ui-dropdown>
       </div>
-      <div class="slimScrollDiv"
+       <ul class="nav in"
+           :style="{top: needOuList?'45px':'0'}"
+          id="side-menu">
+        <!-- <li class="sidebar-search hidden-sm hidden-md hidden-lg">
+          <div class="input-group custom-search-form">
+            <input type="text"
+                    class="form-control"
+                    placeholder="Search...">
+            <span class="input-group-btn">
+              <button class="btn btn-default"
+                      type="button">
+                <i class="fa fa-search"></i>
+              </button>z </span>
+          </div>
+        </li> -->
+        <li :class="{'active':!item.collapsed}"
+            v-for="item in sidebar"
+            v-if="item.visible">
+          <a class="waves-effect"
+              :class="{'active':item.active}"
+              @click="item.collapsed = !item.collapsed">
+            <i class="linea-icon linea-basic fa-fw"
+                :data-icon="item.icon"></i>
+            <span class="hide-menu"> {{item.text}}
+              <span class="fa arrow"></span>
+            </span>
+          </a>
+          <ul class="nav nav-second-level collapse in"
+              aria-expanded="true"
+              v-if="!item.collapsed">
+            <li>
+              <a :href="i.path"
+                  :class="{'active':i.active}"
+                  v-for="i in item.children">{{i.text}}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <!-- <div class="slimScrollDiv"
            style="position: relative; overflow: visible; width: auto; height: 100%;">
         <div class="sidebar-nav navbar-collapse slimscrollsidebar active"
              style="overflow-x: visible; overflow-y: auto; width: auto; height: 100%;">
-          <ul class="nav in"
-              id="side-menu">
-            <li class="sidebar-search hidden-sm hidden-md hidden-lg">
-              <div class="input-group custom-search-form">
-                <input type="text"
-                       class="form-control"
-                       placeholder="Search...">
-                <span class="input-group-btn">
-                  <button class="btn btn-default"
-                          type="button">
-                    <i class="fa fa-search"></i>
-                  </button>z </span>
-              </div>
-            </li>
-            <li :class="{'active':!item.collapsed}"
-                v-for="item in sidebar"
-                v-if="item.visible">
-              <a class="waves-effect"
-                 :class="{'active':item.active}"
-                 @click="item.collapsed = !item.collapsed">
-                <i class="linea-icon linea-basic fa-fw"
-                   :data-icon="item.icon"></i>
-                <span class="hide-menu"> {{item.text}}
-                  <span class="fa arrow"></span>
-                </span>
-              </a>
-              <ul class="nav nav-second-level collapse in"
-                  aria-expanded="true"
-                  v-if="!item.collapsed">
-                <li>
-                  <a :href="i.path"
-                     :class="{'active':i.active}"
-                     v-for="i in item.children">{{i.text}}</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+         
         </div>
         <div class="slimScrollBar"
              style="background: rgb(220, 220, 220); width: 0px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 1454px;"></div>
         <div class="slimScrollRail"
              style="width: 0px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
-      </div>
+      </div> -->
     </div>
     <div id="page-wrapper"
+         class="fk-layout--content"
          :style="{marginLeft: sidebarHidden?'0px':'220px',minHeight: '100%'}">
       <div class="container-fluid"
            style="position:relative">
@@ -257,9 +258,34 @@ export default {
     background: #3484DF;
     border: 0;
   }
-  
+  .fk-layout--header   
+    position fixed 
+    top 0 
+    left 0 
+    right 0 
+    height 60px 
+  .fk-layout--menu 
+    position fixed 
+    top 60px
+    left 0 
+    right 220px 
+    bottom 0
+    height auto 
+    padding 0 
+  .fk-layout--content  
+    position fixed 
+    top 60px
+    left 0 
+    right 0 
+    bottom 0
   .navbar-top-links>li>a.active
     background rgba(0,0,0,0.1)  
+  #side-menu
+    position: absolute
+    top: 0
+    bottom 5px
+    overflow auto
+    width: 100%
   #side-menu > li > a.active
     background-color #ebf3fe
   #side-menu ul > li > a.active
