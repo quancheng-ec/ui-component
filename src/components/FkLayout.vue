@@ -124,8 +124,7 @@
       </div> -->
     </div>
     <div id="page-wrapper"
-         class="fk-layout--content"
-         :style="{marginLeft: sidebarHidden?'0px':'220px',minHeight: '100%'}">
+         :style="{marginLeft: sidebarHidden?'0px':'220px',minHeight: '100%', marginTop: '60px'}">
       <div class="container-fluid"
            style="position:relative">
         <slot></slot>
@@ -273,12 +272,6 @@ export default {
     height auto 
     padding 0 
     overflow inherit
-  .fk-layout--content  
-    position fixed 
-    top 60px
-    left 0 
-    right 0 
-    bottom 0
   .navbar-top-links>li>a.active
     background rgba(0,0,0,0.1)  
   #side-menu
