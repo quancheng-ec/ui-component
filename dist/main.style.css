@@ -577,13 +577,6 @@ ul[data-v-78d7e820] {
   padding: 0;
   overflow: inherit;
 }
-.fk-layout--content {
-  position: fixed;
-  top: 60px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
 .navbar-top-links>li>a.active {
   background: rgba(0,0,0,0.1);
 }

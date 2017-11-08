@@ -21100,7 +21100,6 @@ exports.default = {
 //
 //
 //
-//
 
 /***/ }),
 /* 67 */
@@ -30310,10 +30309,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }, [_vm._v(_vm._s(i.text))])
     }))]) : _vm._e()]) : _vm._e()
   }))]) : _vm._e(), _c('div', {
-    staticClass: "fk-layout--content",
     style: ({
       marginLeft: _vm.sidebarHidden ? '0px' : '220px',
-      minHeight: '100%'
+      minHeight: '100%',
+      marginTop: '60px'
     }),
     attrs: {
       "id": "page-wrapper"
