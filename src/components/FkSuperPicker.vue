@@ -238,7 +238,10 @@ export default {
       // } else {
       //   result.id = data.departmentId || data.groupId || data.rankId || data.companyId || data.id
       // }
-      result.id = data[this.ID_MAP[type] || id];
+      result.id = data[this.ID_MAP[type] || 'groupId' || 'id']
+      if(!data[this.ID_MAP[type]] && result.id){
+        data[this.ID_MAP[type]] = result.id
+      }
       result.name = data.cnName || data.name
       return result;
     },
