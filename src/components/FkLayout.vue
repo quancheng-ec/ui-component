@@ -34,19 +34,19 @@
             <ul class="dropdown-menu dropdown-user animated flipInY"
                 v-if="showMenu"
                 @click="showMenu = false">
-              <slot name="user-menu">
+              <!-- <slot name="user-menu">
                 <li>
                   <a href="#">
                     <i class="ti-user"></i> {{i18nText[language].SETTINGS}}</a>
                 </li>
-              </slot>
-              <li>
-                <a @click="setLang">
-                  <i class="ti-world"></i> {{i18nText[language].LANGUAGE}}</a>
-              </li>
+              </slot> -->
               <li>
                 <a :href="remote_domain + '/choosecompany/view?target=' + currentUrl">
                   <i class="ti-user"></i> {{i18nText[language].SWITCH_COMPANY}}</a>
+              </li>
+              <li>
+                <a @click="setLang">
+                  <i class="ti-world"></i> {{i18nText[language].LANGUAGE}}</a>
               </li>
               <li>
                 <a @click="logout">
@@ -156,7 +156,7 @@ export default {
       i18nText: {
         zh: {
           SETTINGS: '账号设置',
-          LANGUAGE: '切换语言',
+          LANGUAGE: 'English',
           SWITCH_COMPANY: '切换公司',
           LOGOUT: '登出',
           COMFIRM_LOGOUT: '确认要登出当前帐号？',
@@ -165,7 +165,7 @@ export default {
         },
         en: {
           SETTINGS: 'SETTINGS',
-          LANGUAGE: 'LANGUAGE',
+          LANGUAGE: '中文',
           SWITCH_COMPANY: 'SWITCH COMPANY',
           LOGOUT: 'LOGOUT',
           COMFIRM_LOGOUT: 'Are you sure  you want to log out?',
