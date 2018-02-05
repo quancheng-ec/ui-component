@@ -238,7 +238,7 @@ export default {
       // } else {
       //   result.id = data.departmentId || data.groupId || data.rankId || data.companyId || data.id
       // }
-      result.id = data[this.ID_MAP[type] || 'groupId' || 'id']
+      result.id = data[this.ID_MAP[type]] || data['groupId'] || data['id']
       if(!data[this.ID_MAP[type]] && result.id){
         data[this.ID_MAP[type]] = result.id
       }
