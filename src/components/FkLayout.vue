@@ -19,7 +19,10 @@
           <li v-for="link in topbar">
             <a :href="link.path"
                style="min-width:100px;text-align:center"
-               :class="{'active':link.active}">{{link.text}}</a>
+               :class="{'active':link.active}">{{link.text}}
+              <span style="display:inline-block;width:6px;height:6px;background:#FE463B;border-radius:50%;margin-top:-10px;margin-left:5px;position:absolute;top:50%"
+                    v-if="link.code === 'sparta-approve-topbar' && approveAmount.totalAmount"></span>
+            </a>
           </li>
         </ul>
         <ul class="nav navbar-top-links navbar-right pull-right">
@@ -59,22 +62,23 @@
     </nav>
     <div class="navbar-default sidebar fk-layout--menu"
          v-if="!sidebarHidden">
-      <div v-if="needOuList" style="padding:5px">
-          <!-- <ui-select :options="ouList"
+      <div v-if="needOuList"
+           style="padding:5px">
+        <!-- <ui-select :options="ouList"
                       v-if="currentOuId"
                       v-model="currentOuId"></ui-select> -->
-          <ui-dropdown v-model="currentOuId" 
-                        v-if="currentOuId"
-                        placeHolder=""
-                        class="menu-ou-select" 
-                        :list="ouList" 
-                        text-key="text" 
-                        value-key="value" 
-                        select>
+        <ui-dropdown v-model="currentOuId"
+                     v-if="currentOuId"
+                     placeHolder=""
+                     class="menu-ou-select"
+                     :list="ouList"
+                     text-key="text"
+                     value-key="value"
+                     select>
         </ui-dropdown>
       </div>
-       <ul class="nav in"
-           :style="{top: needOuList?'45px':'0'}"
+      <ul class="nav in"
+          :style="{top: needOuList?'45px':'0'}"
           id="side-menu">
         <!-- <li class="sidebar-search hidden-sm hidden-md hidden-lg">
           <div class="input-group custom-search-form">
@@ -92,10 +96,10 @@
             v-for="item in sidebar"
             v-if="item.visible">
           <a class="waves-effect"
-              :class="{'active':item.active}"
-              @click="item.collapsed = !item.collapsed">
+             :class="{'active':item.active}"
+             @click="item.collapsed = !item.collapsed">
             <i class="linea-icon linea-basic fa-fw"
-                :data-icon="item.icon"></i>
+               :data-icon="item.icon"></i>
             <span class="hide-menu"> {{item.text}}
               <span class="fa arrow"></span>
             </span>
@@ -105,8 +109,13 @@
               v-if="!item.collapsed">
             <li>
               <a :href="i.path"
-                  :class="{'active':i.active}"
-                  v-for="i in item.children">{{i.text}}</a>
+                 :class="{'active':i.active}"
+                 v-for="i in item.children">{{i.text}}
+                <span style="display: inline-block;margin-left: 5px;text-align: center;white-space: nowrap;color: #fff;padding: 0 3px;min-width: 24px;height: 24px;border-radius: 40px;background: #fe463b;font-size: 12px;line-height:24px"
+                      v-if="i.code === 'sparta-approve-work-business' && approveAmount.applyAmount">{{approveAmount.applyAmount}}</span>
+                <span style="display: inline-block;margin-left: 5px;text-align: center;white-space: nowrap;color: #fff;padding: 0 3px;min-width: 24px;height: 24px;border-radius: 40px;background: #fe463b;font-size: 12px;line-height:24px"
+                      v-if="i.code === 'sparta-approve-work-finance' && approveAmount.expenseAmount">{{approveAmount.expenseAmount > 99 ? '99+':approveAmount.expenseAmount}}</span>
+              </a>
             </li>
           </ul>
         </li>
@@ -140,12 +149,12 @@ import FkMixin from '../mixins/FkMixin.vue'
 export default {
   mixins: [FkMixin],
   props: {
-    'layout': {},
-    'navHidden': {
+    layout: {},
+    navHidden: {
       type: Boolean,
       default: false
     },
-    'sidebarHidden': {
+    sidebarHidden: {
       type: Boolean,
       default: false
     }
@@ -180,31 +189,45 @@ export default {
       ouList: [],
       account: {},
       needOuList: false,
-      currentOuId: ''
+      currentOuId: '',
+      approveAmount: {
+        applyAmount: 0,
+        expenseAmount: 0,
+        totalAmount: 0
+      }
     }
   },
   watch: {
     currentOuId(ouId, old) {
       if (!old) return
-      this.$http.post(this.remote_domain + '/api/ou/changeOU', {
-        ouId
-      })
+      this.$http
+        .post(this.remote_domain + '/api/ou/changeOU', {
+          ouId
+        })
         .then(res => {
           if (res.data.data.success) {
             // location.replace(res.data.data.redirectUrl)
             // location.replace(location.origin)
             //跳转至当前激活的菜单地址
             let redirectUrl = res.data.data.redirectUrl
-            for(let link of this.topbar){
-              if(link.active){
+            for (let link of this.topbar) {
+              if (link.active) {
                 redirectUrl = link.path
                 break
               }
-              
             }
             location.replace(redirectUrl)
           }
         })
+    }
+  },
+  created() {
+    if (this.$parent.context._uiLayout) {
+      this.setLayout({
+        data: {
+          data: this.$parent.context._uiLayout
+        }
+      })
     }
   },
   mounted() {
@@ -213,22 +236,29 @@ export default {
   },
   methods: {
     getLayout(ouId) {
-      return this.$http.get(this.remote_domain + '/api/layout/getLayout', {
-        params: { ouId }
-      }).then(res => {
-        this.language = res.data.data.language
-        this.appId = res.data.data.appId
-        this.currentOuId = res.data.data.currentOuId
-        this.account = res.data.data.account
+      return this.$http
+        .get(this.remote_domain + '/api/layout/getLayout', {
+          params: { ouId }
+        })
+        .then(this.setLayout)
+    },
+    setLayout(res) {
+      this.language = res.data.data.language
+      this.appId = res.data.data.appId
+      this.currentOuId = res.data.data.currentOuId
+      this.account = res.data.data.account
 
-        if (res.data.data.sidebar.length === 1) {
-          res.data.data.sidebar[0].collapsed = false
-        }
-        this.sidebar = res.data.data.sidebar
-        this.topbar = res.data.data.topbar
-        this.needOuList = res.data.data.needOuList
-        this.ouList = res.data.data.ouList.map(ou => ({ text: ou.cnName, value: ou.companyId }))
-      })
+      if (res.data.data.sidebar.length === 1) {
+        res.data.data.sidebar[0].collapsed = false
+      }
+      this.sidebar = res.data.data.sidebar
+      this.topbar = res.data.data.topbar
+      this.needOuList = res.data.data.needOuList
+      this.ouList = res.data.data.ouList.map(ou => ({
+        text: ou.cnName,
+        value: ou.companyId
+      }))
+      this.approveAmount = res.data.data.approveAmount
     },
     logout() {
       this.$confirmBox({
@@ -237,69 +267,83 @@ export default {
         yes: this.i18nText[this.language].COMFIRM_LOGOUT_YES,
         cancel: this.i18nText[this.language].COMFIRM_LOGOUT_CANCEL
       }).then(res => {
-        this.$http.post(this.remote_domain + '/api/login/logout')
+        this.$http
+          .post(this.remote_domain + '/api/login/logout')
           .then(res => location.reload())
       })
     },
     setLang() {
-      this.$http.post(this.remote_domain + '/api/chooselang/setLang').then(res => location.reload())
+      this.$http
+        .post(this.remote_domain + '/api/chooselang/setLang')
+        .then(res => location.reload())
     }
   }
 }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .top-left-part
-    width 245px
-    background none
-  .navbar-header {
-    width: 100%;
-    background: #3484DF;
-    border: 0;
-  }
-  .fk-layout--header   
-    position fixed 
-    top 0 
-    left 0 
-    right 0 
-    height 60px 
-  .fk-layout--menu 
-    position fixed 
-    top 60px
-    left 0 
-    right 220px 
-    bottom 0
-    height auto 
-    padding 0 
-    overflow inherit
-  .navbar-top-links>li>a.active
-    background rgba(0,0,0,0.1)  
-  #side-menu
-    position: absolute
-    top: 0
-    bottom 5px
-    overflow auto
-    width: 100%
-  #side-menu > li > a.active
-    background-color #ebf3fe
-  #side-menu ul > li > a.active
-    color #609fe6
-    background #fafafa
-  #side-menu .form-group
-    margin-bottom 0
-  .sidebar .menu-ou-select
+.top-left-part
+  width 245px
+  background none
+
+.navbar-header
+  width 100%
+  border 0
+  background #3484DF
+
+.fk-layout--header
+  position fixed
+  top 0
+  right 0
+  left 0
+  height 60px
+
+.fk-layout--menu
+  position fixed
+  top 60px
+  right 220px
+  bottom 0
+  left 0
+  overflow inherit
+  padding 0
+  height auto
+
+.navbar-top-links>li>a.active
+  background rgba(0, 0, 0, 0.1)
+
+#side-menu
+  position absolute
+  top 0
+  bottom 5px
+  overflow auto
+  width 100%
+
+#side-menu > li > a.active
+  background-color #ebf3fe
+
+#side-menu ul > li > a.active
+  background #fafafa
+  color #609fe6
+
+#side-menu .form-group
+  margin-bottom 0
+
+.sidebar .menu-ou-select
+  width 100%
+
+  & > button.dropdown-toggle
+    position relative
+    overflow hidden
     width 100%
-    & > button.dropdown-toggle
-      text-align left
-      position relative
-      overflow hidden
-      text-overflow ellipsis
-      width 100% 
-      height 38px 
-      .caret
-        position absolute
-        right 6px
-        top 16px
-    .dropdown-menu
-      min-width 210px  
+    height 38px
+    text-align left
+    text-overflow ellipsis
+
+    .caret
+      position absolute
+      top 16px
+      right 6px
+
+  .dropdown-menu
+    min-width 210px
 </style>
