@@ -232,7 +232,9 @@ export default {
   },
   mounted() {
     this.currentUrl = location.href
-    this.getLayout()
+    if (!this.$parent.context._uiLayout) {
+      this.getLayout()
+    }
   },
   methods: {
     getLayout(ouId) {
