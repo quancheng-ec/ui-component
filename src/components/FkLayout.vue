@@ -232,7 +232,7 @@ export default {
   },
   mounted() {
     this.currentUrl = location.href
-    if (!this.$parent.context._uiLayout) {
+    if (!(this.$parent.context && this.$parent.context._uiLayout)) {
       this.getLayout()
     }
   },
@@ -269,15 +269,11 @@ export default {
         yes: this.i18nText[this.language].COMFIRM_LOGOUT_YES,
         cancel: this.i18nText[this.language].COMFIRM_LOGOUT_CANCEL
       }).then(res => {
-        this.$http
-          .post(this.remote_domain + '/api/login/logout')
-          .then(res => location.reload())
+        this.$http.post(this.remote_domain + '/api/login/logout').then(res => location.reload())
       })
     },
     setLang() {
-      this.$http
-        .post(this.remote_domain + '/api/chooselang/setLang')
-        .then(res => location.reload())
+      this.$http.post(this.remote_domain + '/api/chooselang/setLang').then(res => location.reload())
     }
   }
 }
