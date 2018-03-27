@@ -222,7 +222,7 @@ export default {
     }
   },
   created() {
-    if (this.$parent.context._uiLayout) {
+    if (this.$parent.context && this.$parent.context._uiLayout) {
       this.setLayout({
         data: {
           data: this.$parent.context._uiLayout
